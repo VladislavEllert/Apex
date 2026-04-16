@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://dby0rtpl3pltc"]
+[gd_scene load_steps=5 format=4 uid="uid://dby0rtpl3pltc"]
 
 [ext_resource type="TileSet" uid="uid://cfb7klcx36akl" path="res://scenes_and_scripts/levels/base_tile_set.tres" id="1_0g2h5"]
 [ext_resource type="PackedScene" uid="uid://r3ggk8bsk8qe" path="res://scenes_and_scripts/ui_and_ux/parallax/parallax.tscn" id="1_u4nvq"]
 [ext_resource type="PackedScene" uid="uid://6e2qiufy6afh" path="res://scenes_and_scripts/player/phisics_ball.tscn" id="2_ei7td"]
+[ext_resource type="PackedScene" uid="uid://bxcym800wfi20" path="res://scenes_and_scripts/templates/flag/flags.tscn" id="5_u5n6l"]
 
 [node name="base_level" type="Node2D"]
 
@@ -24,8 +25,18 @@ tile_set = ExtResource("1_0g2h5")
 
 [node name="Objects" type="Node2D" parent="."]
 
+[node name="flags" type="Node2D" parent="Objects"]
+
+[node name="Flags" parent="Objects/flags" instance=ExtResource("5_u5n6l")]
+position = Vector2(288, 328)
+
+[node name="Flags2" parent="Objects/flags" instance=ExtResource("5_u5n6l")]
+position = Vector2(504, 392)
+
 [node name="Parallax" parent="." instance=ExtResource("1_u4nvq")]
+visible = false
 z_index = -5
+scroll_offset = Vector2(3, 0)
 
 [node name="phisics_ball" parent="." instance=ExtResource("2_ei7td")]
 position = Vector2(394, 366)
