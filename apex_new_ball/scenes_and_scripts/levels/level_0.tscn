@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=4 uid="uid://c2xy2wsnu1657"]
 
-[ext_resource type="Script" uid="uid://m0ux2dvcnnx1" path="res://scenes_and_scripts/levels/level_0.gd" id="1_a2ce2"]
+[ext_resource type="Script" uid="uid://m0ux2dvcnnx1" path="res://scenes_and_scripts/levels/level_scipt.gd" id="1_a2ce2"]
 [ext_resource type="PackedScene" uid="uid://6e2qiufy6afh" path="res://scenes_and_scripts/player/phisics_ball.tscn" id="3_jf3u8"]
 [ext_resource type="PackedScene" uid="uid://bxcym800wfi20" path="res://scenes_and_scripts/templates/flag/flags.tscn" id="3_w27l7"]
 [ext_resource type="PackedScene" uid="uid://bjrhudvlhxqe1" path="res://scenes_and_scripts/templates/spike/spikes.tscn" id="4_vm8fs"]

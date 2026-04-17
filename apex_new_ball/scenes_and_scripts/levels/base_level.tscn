@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://dby0rtpl3pltc"]
+
+[ext_resource type="PackedScene" uid="uid://r3ggk8bsk8qe" path="res://scenes_and_scripts/ui_and_ux/parallax/parallax.tscn" id="1_u4nvq"]
+[ext_resource type="TileSet" uid="uid://dyb1hqxfcbwpp" path="res://scenes_and_scripts/levels/resources/gameplay_tileset.tres" id="2_0g2h5"]
+[ext_resource type="PackedScene" uid="uid://6e2qiufy6afh" path="res://scenes_and_scripts/player/phisics_ball.tscn" id="2_ei7td"]
+
+[node name="base_level" type="Node2D"]
+
+[node name="Parallax" parent="." instance=ExtResource("1_u4nvq")]
+z_index = -5
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="GroundAndSceneTile0" type="TileMapLayer" parent="World"]
+tile_set = ExtResource("2_0g2h5")
+
+[node name="DecorBack-2" type="TileMapLayer" parent="World"]
+z_index = -2
+tile_set = ExtResource("2_0g2h5")
+
+[node name="DecorFront2" type="TileMapLayer" parent="World"]
+z_index = 2
+tile_set = ExtResource("2_0g2h5")
+
+[node name="phisics_ball" parent="." instance=ExtResource("2_ei7td")]
+position = Vector2(336, 376)
+
+[node name="Camera2D" type="Camera2D" parent="phisics_ball"]
+zoom = Vector2(1.9, 1.9)
+process_callback = 0
+limit_left = 0
+limit_top = -2000
+limit_right = 2400
+limit_bottom = 640
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_top_margin = 0.0
+drag_bottom_margin = 0.0
