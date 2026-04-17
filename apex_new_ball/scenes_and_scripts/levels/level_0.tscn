@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=4 uid="uid://c2xy2wsnu1657"]
 
-[ext_resource type="Script" uid="uid://m0ux2dvcnnx1" path="res://scenes_and_scripts/levels/level_0.gd" id="1_a2ce2"]
+[ext_resource type="Script" uid="uid://m0ux2dvcnnx1" path="res://scenes_and_scripts/levels/level_scipt.gd" id="1_a2ce2"]
 [ext_resource type="PackedScene" uid="uid://6e2qiufy6afh" path="res://scenes_and_scripts/player/phisics_ball.tscn" id="3_jf3u8"]
 [ext_resource type="PackedScene" uid="uid://bxcym800wfi20" path="res://scenes_and_scripts/templates/flag/flags.tscn" id="3_w27l7"]
 [ext_resource type="PackedScene" uid="uid://bjrhudvlhxqe1" path="res://scenes_and_scripts/templates/spike/spikes.tscn" id="4_vm8fs"]
@@ -527,3 +527,22 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_top_margin = 0.0
 drag_bottom_margin = 0.0
+
+[connection signal="body_entered" from="TileMapLayer/Flags" to="TileMapLayer/Flags" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@29927" to="TileMapLayer/@Area2D@29927" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@29928" to="TileMapLayer/@Area2D@29928" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@29929" to="TileMapLayer/@Area2D@29929" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@29930" to="TileMapLayer/@Area2D@29930" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@29931" to="TileMapLayer/@Area2D@29931" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@29932" to="TileMapLayer/@Area2D@29932" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@29933" to="TileMapLayer/@Area2D@29933" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@29934" to="TileMapLayer/@Area2D@29934" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@29935" to="TileMapLayer/@Area2D@29935" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@29936" to="TileMapLayer/@Area2D@29936" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@29937" to="TileMapLayer/@Area2D@29937" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@29938" to="TileMapLayer/@Area2D@29938" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@29939" to="TileMapLayer/@Area2D@29939" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@29940" to="TileMapLayer/@Area2D@29940" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@29941" to="TileMapLayer/@Area2D@29941" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/leftDoor" to="TileMapLayer/leftDoor" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/Spikes" to="TileMapLayer/Spikes" method="_on_body_entered"]
