@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://y5ire2d0yjpc"]
+
+[ext_resource type="Script" uid="uid://kbama6d8dxck" path="res://scenes_and_scripts/templates/door/door.gd" id="1_go478"]
+[ext_resource type="Texture2D" uid="uid://0ms30cj44xhw" path="res://assets/Tileset dungeon/door/door1_right_m.png" id="2_go478"]
+[ext_resource type="Texture2D" uid="uid://b1qtiwxvju6tg" path="res://assets/Tileset dungeon/door/door2_right_m.png" id="3_vy743"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2gb1c"]
+size = Vector2(14, 62)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2lgkm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_go478")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vy743")
+}],
+"loop": true,
+"name": &"static",
+"speed": 5.0
+}]
+
+[node name="leftDoor" type="Area2D"]
+z_index = -1
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_go478")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -7)
+shape = SubResource("RectangleShape2D_2gb1c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -7)
+sprite_frames = SubResource("SpriteFrames_2lgkm")
+animation = &"static"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
