@@ -26,17 +26,21 @@ func _reflow_menu() -> void:
 	var btn_w: float = clampf(317.0 * scale_ref, minf(260.0, w * 0.85), minf(420.0, w * 0.92))
 	var btn_h: float = clampf(66.0 * scale_ref, 44.0, 96.0)
 	var gap: float = clampf(15.0 * scale_ref, 8.0, 28.0)
-	var total_h: float = btn_h * 5.0 + gap * 4.0
+
+	var total_h: float = btn_h * 3.0 + gap * 2.0
 	var left_x: float = r.position.x + (w - btn_w) * 0.5
 	var top_y: float = r.position.y + (h - total_h) * 0.5
 	var font_size: int = int(clampf(30.0 * scale_ref, 18.0, 40.0))
+
 	var parallax: Parallax2D = $Parallax
 	var bottom_extent: float = parallax.get_anchor_bottom_extent()
 	parallax.position = Vector2(r.position.x, r.position.y + r.size.y - bottom_extent)
+
 	var c: Vector2 = r.position + r.size * 0.5
 	$black_canvas.position = c
 	$black_canvas.scale = Vector2(r.size.x, r.size.y)
-	var buttons: Array = [$Play1, $Play2, $Play3, $Settings, $Quit]
+
+	var buttons: Array = [$Play1, $Play2, $Play3]
 	var deletes: Array = [$Delete1, $Delete2, $Delete3]
 	
 	for i in range(buttons.size()):
@@ -50,20 +54,14 @@ func _reflow_menu() -> void:
 		d.position = Vector2(75 + left_x + btn_w - btn_h, top_y + i * (btn_h + gap))
 		d.size = Vector2(btn_h, btn_h)
 
+
+
 func _process(_delta):
 	if flag1 != true:
 		timer += 10
 		if timer >= 40 && $black_canvas.modulate.a > 0:
 			$black_canvas.modulate.a -= 0.02
 			timer = 0
-
-func _on_quit_pressed() -> void:
-	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
-	get_tree().quit()
-
-func _on_settings_pressed() -> void:
-	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
-	get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/settings_menu.tscn")
 
 func _on_play_1_pressed() -> void:
 	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
@@ -79,7 +77,6 @@ func _on_play_3_pressed() -> void:
 	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
 	SaveManager.slot_save = 2
 	Events.BUTTON_PLAY_PRESSED.emit(BUTTON_PLAY.Play3)
-
 
 func _on_delete_1_pressed() -> void:
 	SaveManager.slot_save = 0

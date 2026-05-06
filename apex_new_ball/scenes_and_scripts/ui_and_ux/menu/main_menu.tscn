@@ -1,38 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://dkv8txhwwysnj"]
+[gd_scene load_steps=10 format=3 uid="uid://dkv8txhwwysnj"]
 
 [ext_resource type="Script" uid="uid://dm4kk2btrcy5u" path="res://scenes_and_scripts/ui_and_ux/menu/main_menu.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://r3ggk8bsk8qe" path="res://scenes_and_scripts/ui_and_ux/parallax/parallax.tscn" id="2_parallax"]
-[ext_resource type="Texture2D" uid="uid://c427trmnic7jn" path="res://assets/UI/for_menu/btn_icons.png" id="3_icons"]
-[ext_resource type="Texture2D" uid="uid://dts1usbd0k0ys" path="res://assets/UI/for_menu/btn_click_icons.png" id="4_icons_pressed"]
-[ext_resource type="Texture2D" uid="uid://dmfhjca62fjq3" path="res://assets/UI/for_menu/game_name_for_menu.png" id="5_logo"]
-[ext_resource type="Texture2D" uid="uid://buk0tfd6mdisr" path="res://assets/UI/for_menu/play_btn_en.png" id="6_play"]
-[ext_resource type="Texture2D" uid="uid://wc3xv23d2dbx" path="res://assets/UI/for_menu/play_light_en.png" id="7_play_light"]
+[ext_resource type="Texture2D" uid="uid://deqblapn064j2" path="res://assets/UI/for_menu/game_name.png" id="3_as74d"]
+[ext_resource type="Texture2D" uid="uid://qtdvep23m6he" path="res://assets/UI/for_menu/buttons/play_ru.png" id="4_g35gh"]
+[ext_resource type="Texture2D" uid="uid://b53vjv1kp8mrm" path="res://assets/UI/for_menu/buttons/play_click_ru.png" id="5_epl2m"]
+[ext_resource type="Texture2D" uid="uid://c8nnnc38lwsek" path="res://assets/UI/for_menu/buttons/settings_ru.png" id="6_eal7q"]
+[ext_resource type="Texture2D" uid="uid://bydxltpxx1k0s" path="res://assets/UI/for_menu/buttons/settings_click_ru.png" id="7_fru8n"]
+[ext_resource type="Texture2D" uid="uid://6qswbssis1xa" path="res://assets/UI/for_menu/buttons/exit_ru.png" id="8_etpk0"]
+[ext_resource type="Texture2D" uid="uid://c07y44ug0a3ii" path="res://assets/UI/for_menu/buttons/exit_en.png" id="9_40ian"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_levels"]
-atlas = ExtResource("3_icons")
-region = Rect2(494, 0, 165, 162)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_levels_pressed"]
-atlas = ExtResource("4_icons_pressed")
-region = Rect2(494, 0, 165, 162)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_settings"]
-atlas = ExtResource("3_icons")
-region = Rect2(329, 0, 165, 162)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_settings_pressed"]
-atlas = ExtResource("4_icons_pressed")
-region = Rect2(329, 0, 165, 162)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_quit"]
-atlas = ExtResource("3_icons")
-region = Rect2(329, 162, 165, 162)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_quit_pressed"]
-atlas = ExtResource("4_icons_pressed")
-region = Rect2(329, 162, 165, 162)
-
-[node name="MainMenu" type="Control"]
+[node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,98 +19,55 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Background" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.0823529, 0.105882, 0.145098, 1)
-
 [node name="Parallax" parent="." instance=ExtResource("2_parallax")]
-autoscroll_surfaces = true
+scroll_offset = Vector2(0, 78)
 
-[node name="Shade" type="ColorRect" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0.14)
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
 
-[node name="SafeArea" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="MainStack" type="VBoxContainer" parent="SafeArea"]
-layout_mode = 1
-theme_override_constants/separation = 18
-alignment = 1
-
-[node name="Logo" type="TextureRect" parent="SafeArea/MainStack"]
-custom_minimum_size = Vector2(520, 180)
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-texture = ExtResource("5_logo")
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(820, 280)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("3_as74d")
 expand_mode = 1
-stretch_mode = 5
 
-[node name="PlayButton" type="TextureButton" parent="SafeArea/MainStack"]
-custom_minimum_size = Vector2(460, 216)
+[node name="Buttons" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-tooltip_text = "Play"
-texture_normal = ExtResource("6_play")
-texture_pressed = ExtResource("7_play_light")
-texture_hover = ExtResource("7_play_light")
+
+[node name="Play" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+texture_normal = ExtResource("4_g35gh")
+texture_pressed = ExtResource("5_epl2m")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="IconRow" type="HBoxContainer" parent="SafeArea/MainStack"]
-custom_minimum_size = Vector2(520, 96)
+[node name="Settings" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-theme_override_constants/separation = 24
-alignment = 1
-
-[node name="LevelsButton" type="TextureButton" parent="SafeArea/MainStack/IconRow"]
-custom_minimum_size = Vector2(92, 92)
-layout_mode = 2
-tooltip_text = "Level Select"
-texture_normal = SubResource("AtlasTexture_levels")
-texture_pressed = SubResource("AtlasTexture_levels_pressed")
-texture_hover = SubResource("AtlasTexture_levels")
-texture_disabled = SubResource("AtlasTexture_levels_pressed")
+texture_normal = ExtResource("6_eal7q")
+texture_pressed = ExtResource("7_fru8n")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="SettingsButton" type="TextureButton" parent="SafeArea/MainStack/IconRow"]
-custom_minimum_size = Vector2(92, 92)
+[node name="Exit" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-tooltip_text = "Settings"
-texture_normal = SubResource("AtlasTexture_settings")
-texture_pressed = SubResource("AtlasTexture_settings_pressed")
-texture_hover = SubResource("AtlasTexture_settings")
+texture_normal = ExtResource("8_etpk0")
+texture_pressed = ExtResource("9_40ian")
 ignore_texture_size = true
 stretch_mode = 5
-
-[node name="QuitButton" type="TextureButton" parent="SafeArea/MainStack/IconRow"]
-custom_minimum_size = Vector2(92, 92)
-layout_mode = 2
-tooltip_text = "Quit"
-texture_normal = SubResource("AtlasTexture_quit")
-texture_pressed = SubResource("AtlasTexture_quit_pressed")
-texture_hover = SubResource("AtlasTexture_quit")
-ignore_texture_size = true
-stretch_mode = 5
-
-[connection signal="pressed" from="SafeArea/MainStack/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="SafeArea/MainStack/IconRow/LevelsButton" to="." method="_on_levels_button_pressed"]
-[connection signal="pressed" from="SafeArea/MainStack/IconRow/SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="SafeArea/MainStack/IconRow/QuitButton" to="." method="_on_quit_button_pressed"]

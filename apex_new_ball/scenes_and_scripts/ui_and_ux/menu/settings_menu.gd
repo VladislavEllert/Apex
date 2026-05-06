@@ -85,4 +85,4 @@ func _on_sensitivity_slider_value_changed(value: float) -> void:
 
 func _on_back_button_pressed() -> void:
 	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
-	get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/menu.tscn")
+	get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/main_menu.tscn")
