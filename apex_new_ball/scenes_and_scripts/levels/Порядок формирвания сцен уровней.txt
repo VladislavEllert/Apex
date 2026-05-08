@@ -19,3 +19,16 @@
 	- Размещать траву, маленькие кустики, веточки на уровне DecorFront2
 	- На DecorBack-2 размещать таблички, деревья, коряги, большие кусты
 	- Не ставить маленькие дереввья
+
+
+
+
+
+Z-index:
+	Parallax: 					-5;
+	WallBack: 					-3;
+	DecorBack: 					-2;
+	GroundAndScene && Ball: 	0;
+	WallFront: 					1;
+	Decorfront: 				2;
+	
