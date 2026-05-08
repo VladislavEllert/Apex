@@ -16,14 +16,3 @@ metadata/_edit_group_ = true
 
 [node name="Camera2D" parent="phisics_ball" index="3"]
 limit_right = 5632
-
-[connection signal="body_entered" from="World/GroundAndSceneTile0/leftDoor" to="World/GroundAndSceneTile0/leftDoor" method="_on_body_entered"]
-[connection signal="body_entered" from="World/GroundAndSceneTile0/Flags" to="World/GroundAndSceneTile0/Flags" method="_on_body_entered"]
-[connection signal="body_entered" from="World/GroundAndSceneTile0/Coins" to="World/GroundAndSceneTile0/Coins" method="_on_body_entered"]
-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@23449" to="World/GroundAndSceneTile0/@Area2D@23449" method="_on_body_entered"]
-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@23450" to="World/GroundAndSceneTile0/@Area2D@23450" method="_on_body_entered"]
-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@23451" to="World/GroundAndSceneTile0/@Area2D@23451" method="_on_body_entered"]
-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@23452" to="World/GroundAndSceneTile0/@Area2D@23452" method="_on_body_entered"]
-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@23453" to="World/GroundAndSceneTile0/@Area2D@23453" method="_on_body_entered"]
-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@23454" to="World/GroundAndSceneTile0/@Area2D@23454" method="_on_body_entered"]
-[connection signal="body_entered" from="World/GroundAndSceneTile0/chest" to="World/GroundAndSceneTile0/chest" method="_on_body_entered"]
