@@ -58,6 +58,11 @@ func _on_quit_button_pressed() -> void:
 func _on_music_toggled(toggled_on: bool) -> void:
 	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
 	
+	# Убиваем возможный fade_tween, чтобы он не перезаписал громкость
+	if MusicManager.fade_tween:
+		MusicManager.fade_tween.kill()
+		MusicManager.fade_tween = null
+	
 	if toggled_on:
 		GameManager.set_music_volume_percent(0.0)
 	else:

@@ -95,11 +95,15 @@ func _on_quit_menu_pressed() -> void:
 	
 	get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/main_menu.tscn")
 
+func _sync_music_button() -> void:
+	music_btn.set_pressed_no_signal(GameManager.music_volume_percent <= 0)
+
 func _show_modal() -> void:
 	get_tree().paused = true
 	MusicManager.set_paused(true)
 	reload_btn.visible = false
 	play_btn.visible = true
+	_sync_music_button()
 	modal.visible = true
 
 func _lose_modal() -> void:
@@ -111,6 +115,7 @@ func _lose_modal() -> void:
 		reload_btn.visible = false
 	else:
 		reload_btn.visible = true
+	_sync_music_button()
 	modal.visible = true
 
 func _hide_modal() -> void:
@@ -120,6 +125,11 @@ func _hide_modal() -> void:
 
 func _on_music_toggled(toggled_on: bool) -> void:
 	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
+	
+	# Убиваем возможный fade_tween, чтобы он не перезаписал громкость
+	if MusicManager.fade_tween:
+		MusicManager.fade_tween.kill()
+		MusicManager.fade_tween = null
 	
 	if toggled_on:
 		# Кнопка перешла в нажатое состояние (показывает "Включить", music_on.png)
