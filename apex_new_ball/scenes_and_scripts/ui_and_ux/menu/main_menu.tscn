@@ -80,14 +80,14 @@ stretch_mode = 5
 [node name="BottomButtons" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 
-[node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/BottomButtons"]
+[node name="GirHub" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/BottomButtons"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture_normal = ExtResource("10_eal7q")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="TextureButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/BottomButtons"]
+[node name="About" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/BottomButtons"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture_normal = ExtResource("11_fru8n")
@@ -98,7 +98,7 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureButton3" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/BottomButtons"]
+[node name="LiderBoard" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/BottomButtons"]
 custom_minimum_size = Vector2(100, 100)
 layout_direction = 3
 layout_mode = 2
@@ -106,7 +106,7 @@ texture_normal = ExtResource("10_fru8n")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="TextureButton4" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/BottomButtons"]
+[node name="TonggleMusic" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/BottomButtons"]
 custom_minimum_size = Vector2(100, 100)
 layout_direction = 3
 layout_mode = 2
