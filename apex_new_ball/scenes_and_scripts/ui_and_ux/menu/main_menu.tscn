@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dkv8txhwwysnj"]
+[gd_scene load_steps=15 format=3 uid="uid://dkv8txhwwysnj"]
 
 [ext_resource type="Script" uid="uid://dm4kk2btrcy5u" path="res://scenes_and_scripts/ui_and_ux/menu/main_menu.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://r3ggk8bsk8qe" path="res://scenes_and_scripts/ui_and_ux/parallax/parallax.tscn" id="2_parallax"]
@@ -9,6 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://bydxltpxx1k0s" path="res://assets/UI/for_menu/buttons/settings_click_ru.png" id="7_fru8n"]
 [ext_resource type="Texture2D" uid="uid://6qswbssis1xa" path="res://assets/UI/for_menu/buttons/exit_ru.png" id="8_etpk0"]
 [ext_resource type="Texture2D" uid="uid://c07y44ug0a3ii" path="res://assets/UI/for_menu/buttons/exit_en.png" id="9_40ian"]
+[ext_resource type="Texture2D" uid="uid://c81c6hvi2y8yr" path="res://assets/UI/for_menu/buttons/github.png" id="10_eal7q"]
+[ext_resource type="Texture2D" uid="uid://brycy4u4odclw" path="res://assets/UI/for_menu/buttons/cup.png" id="10_fru8n"]
+[ext_resource type="Texture2D" uid="uid://d12vjm1r0ylv" path="res://assets/UI/for_menu/buttons/about.png" id="11_fru8n"]
+[ext_resource type="Texture2D" uid="uid://bqammavhp8vpw" path="res://assets/UI/for_menu/buttons/music_off.png" id="13_40ian"]
+[ext_resource type="Texture2D" uid="uid://bby1ty3sckx75" path="res://assets/UI/for_menu/buttons/music_on.png" id="14_76ar5"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -69,5 +74,44 @@ custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 texture_normal = ExtResource("8_etpk0")
 texture_pressed = ExtResource("9_40ian")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BottomButtons" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/BottomButtons"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture_normal = ExtResource("10_eal7q")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/BottomButtons"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture_normal = ExtResource("11_fru8n")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/Buttons/BottomButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureButton3" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/BottomButtons"]
+custom_minimum_size = Vector2(100, 100)
+layout_direction = 3
+layout_mode = 2
+texture_normal = ExtResource("10_fru8n")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureButton4" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/BottomButtons"]
+custom_minimum_size = Vector2(100, 100)
+layout_direction = 3
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("13_40ian")
+texture_pressed = ExtResource("14_76ar5")
 ignore_texture_size = true
 stretch_mode = 5
