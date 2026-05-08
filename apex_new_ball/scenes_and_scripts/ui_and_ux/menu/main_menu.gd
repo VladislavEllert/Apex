@@ -10,6 +10,7 @@ const _REF_H := 720.0
 @onready var _play_button: TextureButton = $MarginContainer/VBoxContainer/Buttons/Play
 @onready var _settings_button: TextureButton = $MarginContainer/VBoxContainer/Buttons/Settings
 @onready var _quit_button: TextureButton = $MarginContainer/VBoxContainer/Buttons/Exit
+@onready var _music_button: TextureButton = $MarginContainer/VBoxContainer/Buttons/BottomButtons/TonggleMusic
 
 func _ready() -> void:
 	get_tree().paused = false
@@ -24,6 +25,9 @@ func _ready() -> void:
 	_play_button.pressed.connect(_on_play_button_pressed)
 	_settings_button.pressed.connect(_on_settings_button_pressed)
 	_quit_button.pressed.connect(_on_quit_button_pressed)
+	_music_button.toggled.connect(_on_music_toggled)
+	
+	_music_button.set_pressed_no_signal(GameManager.music_volume_percent <= 0)
 
 	get_viewport().size_changed.connect(_apply_adaptive_layout)
 	call_deferred("_apply_adaptive_layout")
@@ -50,3 +54,11 @@ func _on_settings_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
+func _on_music_toggled(toggled_on: bool) -> void:
+	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
+	
+	if toggled_on:
+		GameManager.set_music_volume_percent(0.0)
+	else:
+		GameManager.set_music_volume_percent(75.0)
