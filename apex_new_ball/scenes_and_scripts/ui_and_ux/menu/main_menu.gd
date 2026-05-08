@@ -11,6 +11,7 @@ const _REF_H := 720.0
 @onready var _settings_button: TextureButton = $MarginContainer/VBoxContainer/Buttons/Settings
 @onready var _quit_button: TextureButton = $MarginContainer/VBoxContainer/Buttons/Exit
 @onready var _music_button: TextureButton = $MarginContainer/VBoxContainer/Buttons/BottomButtons/TonggleMusic
+@onready var _github_button: TextureButton = $MarginContainer/VBoxContainer/Buttons/BottomButtons/GitHub
 
 func _ready() -> void:
 	get_tree().paused = false
@@ -26,6 +27,7 @@ func _ready() -> void:
 	_settings_button.pressed.connect(_on_settings_button_pressed)
 	_quit_button.pressed.connect(_on_quit_button_pressed)
 	_music_button.toggled.connect(_on_music_toggled)
+	_github_button.pressed.connect(_on_github_button_pressed)
 	
 	_music_button.set_pressed_no_signal(GameManager.music_volume_percent <= 0)
 
@@ -67,3 +69,7 @@ func _on_music_toggled(toggled_on: bool) -> void:
 		GameManager.set_music_volume_percent(0.0)
 	else:
 		GameManager.set_music_volume_percent(75.0)
+
+func _on_github_button_pressed() -> void:
+	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
+	OS.shell_open("https://github.com/top-it-090304/Apex")
