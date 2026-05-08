@@ -87,4 +87,4 @@ func _on_screen_pressed() -> void:
 
 	tween.set_parallel(false)
 	tween.tween_callback(func():
-		get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/menu.tscn"))
+		get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/main_menu.tscn"))

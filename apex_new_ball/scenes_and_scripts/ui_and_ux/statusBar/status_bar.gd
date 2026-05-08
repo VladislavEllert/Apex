@@ -81,7 +81,7 @@ func _on_quit_menu_pressed() -> void:
 		SaveManager.delete_slot(SaveManager.slot_save)
 		print("Сейв удален (0 жизней)")
 	
-	get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/menu.tscn")
+	get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/main_menu.tscn")
 
 func _show_modal() -> void:
 	get_tree().paused = true

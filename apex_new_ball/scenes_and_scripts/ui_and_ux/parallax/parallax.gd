@@ -1,51 +1,45 @@
 extends Parallax2D
 
-## Только для меню: автопрокрутка слоёв. На уровнях оставлять выключенным.
-@export var autoscroll_surfaces: bool = false
+@export var autoscroll_surfaces: bool = false:
+	set(v):
+		autoscroll_surfaces = v
+		if is_node_ready(): _update_autoscroll()
 
-## На очень широких соотношениях сторон внутренний repeat у Parallax2D иногда не дорисовывает правый край —
-## добавляем физические копии спрайта по repeat_size.x (совпадает с шириной тайла 576*2).
 @export var extra_repeat_tiles: int = 2
-
-## Нижний край «земли»/деревьев в локальных координатах корня Parallax (нижняя граница слоёв Surface при scale=2).
-## Нужен меню и другим сценам, чтобы привязать фон к низу вьюпорта: position.y = viewport_bottom - anchor_bottom_extent.
 @export var anchor_bottom_extent: float = 648.0
 
 func get_anchor_bottom_extent() -> float:
 	return anchor_bottom_extent
 
 func _ready() -> void:
-	if autoscroll_surfaces:
-		$Surface1.autoscroll = Vector2(-10, 0)
-		$Surface2.autoscroll = Vector2(-12.5, 0)
-		$Surface3.autoscroll = Vector2(-25, 0)
-		$Surface4.autoscroll = Vector2(-45, 0)
-		$Surface5.autoscroll = Vector2(-50, 0)
-	else:
-		$Surface1.autoscroll = Vector2.ZERO
-		$Surface2.autoscroll = Vector2.ZERO
-		$Surface3.autoscroll = Vector2.ZERO
-		$Surface4.autoscroll = Vector2.ZERO
-		$Surface5.autoscroll = Vector2.ZERO
-
+	_update_autoscroll()
 	_add_extra_parallax_repeat_coverage()
 
+func _update_autoscroll() -> void:
+	var s = 1.0 if autoscroll_surfaces else 0.0
+
+	if has_node("Cloud1"): $Cloud1.autoscroll = Vector2(-20, 0) * s
+	if has_node("Cloud2"): $Cloud2.autoscroll = Vector2(-30, 0) * s
+	if has_node("Cloud3"): $Cloud3.autoscroll = Vector2(-40, 0) * s
+	if has_node("Cloud4"): $Cloud4.autoscroll = Vector2(-50, 0) * s
+
+	if has_node("Surface1"): $Surface1.autoscroll = Vector2(-10, 0) * s
+	if has_node("Surface2"): $Surface2.autoscroll = Vector2(-20, 0) * s
+	if has_node("Surface3"): $Surface3.autoscroll = Vector2(-30, 0) * s
+	if has_node("Surface4"): $Surface4.autoscroll = Vector2(-40, 0) * s
+	if has_node("Surface5"): $Surface5.autoscroll = Vector2(-50, 0) * s
+
 func _add_extra_parallax_repeat_coverage() -> void:
-	if extra_repeat_tiles <= 0:
-		return
+	if extra_repeat_tiles <= 0: return
 	for layer in get_children():
-		if not layer is Parallax2D:
-			continue
-		var rs: Vector2 = layer.repeat_size
-		if rs.x <= 0.0:
-			continue
-		var to_dup: Array[Sprite2D] = []
+		if not layer is Parallax2D: continue
+		var rs = layer.repeat_size
+		if rs.x <= 0: continue
+		var spr = []
 		for c in layer.get_children():
-			if c is Sprite2D:
-				to_dup.append(c as Sprite2D)
-		for base in to_dup:
+			if c is Sprite2D: spr.append(c)
+		for s in spr:
 			for i in range(1, extra_repeat_tiles + 1):
-				var copy := base.duplicate() as Sprite2D
-				copy.position = base.position + Vector2(rs.x * float(i), 0.0)
-				copy.name = "%s_wide_%d" % [base.name, i]
+				var copy = s.duplicate()
+				copy.position = s.position + Vector2(rs.x * i, 0)
 				layer.add_child(copy)
