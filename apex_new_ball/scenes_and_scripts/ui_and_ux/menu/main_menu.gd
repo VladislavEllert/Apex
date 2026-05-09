@@ -12,6 +12,13 @@ const _REF_H := 720.0
 @onready var _quit_button: TextureButton = $MarginContainer/VBoxContainer/Buttons/Exit
 @onready var _music_button: TextureButton = $MarginContainer/VBoxContainer/Buttons/BottomButtons/TonggleMusic
 @onready var _github_button: TextureButton = $MarginContainer/VBoxContainer/Buttons/BottomButtons/GitHub
+@onready var _about_button: TextureButton = $MarginContainer/VBoxContainer/Buttons/BottomButtons/About
+
+@onready var _about_window: CanvasLayer = $AboutWindow
+@onready var _about_color_rect: ColorRect = $AboutWindow/ColorRect
+@onready var _about_board: TextureRect = $AboutWindow/ModalCenter/BackgroundBoard
+@onready var _close_about_button: TextureButton = $AboutWindow/ModalCenter/BackgroundBoard/CloseButton
+@onready var _liderboard_button: TextureButton = $MarginContainer/VBoxContainer/Buttons/BottomButtons/LiderBoard
 
 func _ready() -> void:
 	get_tree().paused = false
@@ -28,6 +35,11 @@ func _ready() -> void:
 	_quit_button.pressed.connect(_on_quit_button_pressed)
 	_music_button.toggled.connect(_on_music_toggled)
 	_github_button.pressed.connect(_on_github_button_pressed)
+	_about_button.pressed.connect(_on_about_button_pressed)
+	
+	_close_about_button.pressed.connect(_on_close_about_pressed)
+	_liderboard_button.pressed.connect(_on_liderboard_button_pressed)
+	_about_window.visible = false
 	
 	_music_button.set_pressed_no_signal(GameManager.music_volume_percent <= 0)
 
@@ -73,3 +85,29 @@ func _on_music_toggled(toggled_on: bool) -> void:
 func _on_github_button_pressed() -> void:
 	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
 	OS.shell_open("https://github.com/top-it-090304/Apex")
+
+func _on_about_button_pressed() -> void:
+	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
+	_about_color_rect.modulate.a = 0.0
+	_about_board.modulate.a = 0.0
+	_about_window.visible = true
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(_about_color_rect, "modulate:a", 1.0, 0.3)
+	tween.tween_property(_about_board, "modulate:a", 1.0, 0.3)
+
+func _on_close_about_pressed() -> void:
+	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(_about_color_rect, "modulate:a", 0.0, 0.3)
+	tween.tween_property(_about_board, "modulate:a", 0.0, 0.3)
+	tween.set_parallel(false)
+	tween.tween_callback(func(): _about_window.visible = false)
+
+func _on_rich_text_label_meta_clicked(meta) -> void:
+	OS.shell_open(str(meta))
+
+func _on_liderboard_button_pressed() -> void:
+	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
+	print("LiderBoard button pressed!")
