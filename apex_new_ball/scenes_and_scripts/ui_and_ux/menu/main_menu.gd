@@ -1,7 +1,6 @@
 extends Control
 
 const SLOT_MENU_SCENE := "res://scenes_and_scripts/ui_and_ux/menu/menu.tscn"
-const SETTINGS_SCENE := "res://scenes_and_scripts/ui_and_ux/menu/settings_menu.tscn"
 
 const _REF_W := 1280.0
 const _REF_H := 720.0
@@ -19,6 +18,18 @@ const _REF_H := 720.0
 @onready var _about_board: TextureRect = $AboutWindow/ModalCenter/BackgroundBoard
 @onready var _close_about_button: TextureButton = $AboutWindow/ModalCenter/BackgroundBoard/CloseButton
 @onready var _liderboard_button: TextureButton = $MarginContainer/VBoxContainer/Buttons/BottomButtons/LiderBoard
+
+# SettingWindow
+@onready var _settings_window: CanvasLayer = $SettingWindow
+@onready var _settings_color_rect: ColorRect = $SettingWindow/ColorRect
+@onready var _settings_board: TextureRect = $SettingWindow/ModalCenter/BackgroundBoard
+@onready var _close_settings_button: TextureButton = $SettingWindow/ModalCenter/BackgroundBoard/CloseButton
+@onready var _music_slider: HSlider = $SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer/MusicRow/Controls/MusicSlider
+@onready var _music_value_label: Label = $SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer/MusicRow/Controls/MusicValue
+@onready var _sfx_slider: HSlider = $SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer/SfxRow/Controls/SfxSlider
+@onready var _sfx_value_label: Label = $SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer/SfxRow/Controls/SfxValue
+@onready var _sensitivity_slider: HSlider = $SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer/SensitivityRow/Controls/SensitivitySlider
+@onready var _sensitivity_value_label: Label = $SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer/SensitivityRow/Controls/SensitivityValue
 
 func _ready() -> void:
 	get_tree().paused = false
@@ -40,6 +51,21 @@ func _ready() -> void:
 	_close_about_button.pressed.connect(_on_close_about_pressed)
 	_liderboard_button.pressed.connect(_on_liderboard_button_pressed)
 	_about_window.visible = false
+	
+	# SettingWindow: подключаем сигналы
+	_close_settings_button.pressed.connect(_on_close_settings_pressed)
+	_music_slider.value_changed.connect(_on_music_slider_value_changed)
+	_sfx_slider.value_changed.connect(_on_sfx_slider_value_changed)
+	_sensitivity_slider.value_changed.connect(_on_sensitivity_slider_value_changed)
+	_settings_window.visible = false
+	
+	# Инициализируем слайдеры текущими значениями из GameManager
+	_music_slider.set_value_no_signal(GameManager.music_volume_percent)
+	_sfx_slider.set_value_no_signal(GameManager.sfx_volume_percent)
+	_sensitivity_slider.set_value_no_signal(GameManager.control_sensitivity)
+	_music_value_label.text = str(int(round(GameManager.music_volume_percent)))
+	_sfx_value_label.text = str(int(round(GameManager.sfx_volume_percent)))
+	_sensitivity_value_label.text = String.num(GameManager.control_sensitivity, 1)
 	
 	_music_button.set_pressed_no_signal(GameManager.music_volume_percent <= 0)
 
@@ -64,7 +90,14 @@ func _on_play_button_pressed() -> void:
 	get_tree().change_scene_to_file(SLOT_MENU_SCENE)
 
 func _on_settings_button_pressed() -> void:
-	get_tree().change_scene_to_file(SETTINGS_SCENE)
+	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
+	_settings_color_rect.modulate.a = 0.0
+	_settings_board.modulate.a = 0.0
+	_settings_window.visible = true
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(_settings_color_rect, "modulate:a", 1.0, 0.3)
+	tween.tween_property(_settings_board, "modulate:a", 1.0, 0.3)
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
@@ -111,3 +144,28 @@ func _on_rich_text_label_meta_clicked(meta) -> void:
 func _on_liderboard_button_pressed() -> void:
 	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
 	print("LiderBoard button pressed!")
+
+# ===== SettingWindow =====
+
+func _on_close_settings_pressed() -> void:
+	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(_settings_color_rect, "modulate:a", 0.0, 0.3)
+	tween.tween_property(_settings_board, "modulate:a", 0.0, 0.3)
+	tween.set_parallel(false)
+	tween.tween_callback(func(): _settings_window.visible = false)
+
+func _on_music_slider_value_changed(value: float) -> void:
+	GameManager.set_music_volume_percent(value)
+	_music_value_label.text = str(int(round(value)))
+	# Синхронизируем кнопку ToggleMusic
+	_music_button.set_pressed_no_signal(value <= 0)
+
+func _on_sfx_slider_value_changed(value: float) -> void:
+	GameManager.set_sfx_volume_percent(value)
+	_sfx_value_label.text = str(int(round(value)))
+
+func _on_sensitivity_slider_value_changed(value: float) -> void:
+	GameManager.set_control_sensitivity(value)
+	_sensitivity_value_label.text = String.num(value, 1)
