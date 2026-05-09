@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://r3ggk8bsk8qe" path="res://scenes_and_scripts/ui_and_ux/parallax/parallax.tscn" id="1_u4nvq"]
 [ext_resource type="TileSet" uid="uid://dyb1hqxfcbwpp" path="res://scenes_and_scripts/levels/resources/gameplay_tileset.tres" id="2_0g2h5"]
 [ext_resource type="PackedScene" uid="uid://6e2qiufy6afh" path="res://scenes_and_scripts/player/phisics_ball.tscn" id="2_ei7td"]
-[ext_resource type="TileSet" uid="uid://cghw56j8fp8ei" path="res://scenes_and_scripts/levels/resources/wall_back.tres" id="3_da8cx"]
+[ext_resource type="TileSet" uid="uid://dqt815a87x7j1" path="res://scenes_and_scripts/levels/resources/wall_back.tres" id="3_da8cx"]
 [ext_resource type="TileSet" uid="uid://b1ixu8tx6qtj2" path="res://scenes_and_scripts/levels/resources/decor_tileset.tres" id="3_twijq"]
 
 [node name="base_level2" type="Node2D"]
