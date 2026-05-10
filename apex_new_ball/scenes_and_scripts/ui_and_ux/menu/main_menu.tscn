@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dkv8txhwwysnj"]
+[gd_scene load_steps=12 format=3 uid="uid://dkv8txhwwysnj"]
 
 [ext_resource type="Script" uid="uid://dm4kk2btrcy5u" path="res://scenes_and_scripts/ui_and_ux/menu/main_menu.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://r3ggk8bsk8qe" path="res://scenes_and_scripts/ui_and_ux/parallax/parallax.tscn" id="2_parallax"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://qtdvep23m6he" path="res://assets/UI/for_menu/buttons/play_ru.png" id="4_g35gh"]
 [ext_resource type="Texture2D" uid="uid://b53vjv1kp8mrm" path="res://assets/UI/for_menu/buttons/play_click_ru.png" id="5_epl2m"]
 [ext_resource type="Texture2D" uid="uid://c8nnnc38lwsek" path="res://assets/UI/for_menu/buttons/settings_ru.png" id="6_eal7q"]
+[ext_resource type="Texture2D" uid="uid://kokns7hl2svu" path="res://assets/8 Button/continue.png" id="6_epl2m"]
+[ext_resource type="Texture2D" uid="uid://ca683dx2p55p5" path="res://assets/8 Button/restart.png" id="6_fru8n"]
 [ext_resource type="Texture2D" uid="uid://bydxltpxx1k0s" path="res://assets/UI/for_menu/buttons/settings_click_ru.png" id="7_fru8n"]
 [ext_resource type="Texture2D" uid="uid://6qswbssis1xa" path="res://assets/UI/for_menu/buttons/exit_ru.png" id="8_etpk0"]
 [ext_resource type="Texture2D" uid="uid://c07y44ug0a3ii" path="res://assets/UI/for_menu/buttons/exit_en.png" id="9_40ian"]
@@ -20,7 +22,7 @@ grow_vertical = 2
 script = ExtResource("1_script")
 
 [node name="Parallax" parent="." instance=ExtResource("2_parallax")]
-scroll_offset = Vector2(0, 78)
+scroll_offset = Vector2(-24, 73)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -36,7 +38,6 @@ theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 0
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(820, 280)
@@ -53,6 +54,28 @@ custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 texture_normal = ExtResource("4_g35gh")
 texture_pressed = ExtResource("5_epl2m")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ContinueRestartRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Continue" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/ContinueRestartRow"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("6_epl2m")
+texture_pressed = ExtResource("6_epl2m")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Delete" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/ContinueRestartRow"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("6_fru8n")
+texture_pressed = ExtResource("6_fru8n")
 ignore_texture_size = true
 stretch_mode = 5
 

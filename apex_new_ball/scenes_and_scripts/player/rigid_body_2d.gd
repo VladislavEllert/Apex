@@ -40,9 +40,8 @@ func _ready():
 	spawn_position = global_position
 	$AnimatedSprite2D.play()
 	print(global_position)
-	var loaded = SaveManager.load_slot(SaveManager.slot_save)
-	if loaded["level"]["checkpoint_position"]["x"] !=0 or loaded["level"]["checkpoint_position"]["y"] !=0:
-		var values = loaded["level"]["checkpoint_position"]
+	if GameManager.local_save["level"]["checkpoint_position"]["x"] !=0 or GameManager.local_save["level"]["checkpoint_position"]["y"] !=0:
+		var values = GameManager.local_save["level"]["checkpoint_position"]
 		global_position = Vector2(values["x"], values["y"])
 	$Camera2D.reset_smoothing()
 	_apply_adaptive_touch_ui()
@@ -165,9 +164,8 @@ func _respawn_checkpoint():
 	angular_velocity = 0
 	
 	var target: Vector2
-	var loads = SaveManager.load_slot(SaveManager.slot_save)
-	if loads["level"]["checkpoint_position"]["x"] != 0 or loads["level"]["checkpoint_position"]["y"] != 0:
-		var values = loads["level"]["checkpoint_position"]
+	if GameManager.local_save["level"]["checkpoint_position"]["x"] != 0 or GameManager.local_save["level"]["checkpoint_position"]["y"] != 0:
+		var values = GameManager.local_save["level"]["checkpoint_position"]
 		target = Vector2(values["x"], values["y"])
 	else: 
 		target = spawn_position

@@ -6,7 +6,7 @@ func _ready() -> void:
 	$AnimatedSprite2D.play()
 
 func _on_body_entered(_body: Node2D) -> void:
-	var loads = SaveManager.load_slot(SaveManager.slot_save)
+	var loads = GameManager.local_save
 	var total = loads["level"]["flags_total"]
 	var collected = loads["level"]["flags_collected"]
 	if int(total) == int(collected):
@@ -21,13 +21,13 @@ func _on_body_entered(_body: Node2D) -> void:
 		loads["level"]["coins_collected_coordinates_level"] = []
 		loads["level"]["chests_collected_coordinates_level"] = []
 		loads["level"]["current_scene"] = "res://scenes_and_scripts/levels/level_%d.tscn" % loads["level"]["scene_number"]
-		SaveManager.save_slot(SaveManager.slot_save, loads)
+		SaveManager.save(GameManager.local_save)
 		if loads["level"]["scene_number"] > 5:
-			get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/menu.tscn") 
+			get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/main_menu.tscn") 
 		else:
 			if ResourceLoader.exists(loads["level"]["current_scene"]):
 				get_tree().change_scene_to_file(loads["level"]["current_scene"])
 			else:
-				get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/menu.tscn")
+				get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/main_menu.tscn")
 		flag = true
 	pass
