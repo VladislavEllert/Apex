@@ -25,12 +25,6 @@ signal OPEN_THE_CHEST(sprite)
 signal OPEN_THE_DOOR(sprite)
 
 @warning_ignore("unused_signal")
-signal BUTTON_PLAY_PRESSED(button)
-
-@warning_ignore("unused_signal")
-signal BUTTON_DELETE_PRESSED(button)
-
-@warning_ignore("unused_signal")
 signal PLAYER_RESPAWN
 
 @warning_ignore("unused_signal")

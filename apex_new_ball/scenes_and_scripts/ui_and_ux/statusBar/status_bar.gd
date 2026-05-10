@@ -14,10 +14,9 @@ var flag = false
 
 func _ready() -> void:
 	#region Добавляем в статус бар информацию взятую из конфига о жизнях, флагах, и очках
-	var _loaded = SaveManager.load_slot(SaveManager.slot_save)
-	label1.text = "x " + str(_loaded["player"]["lives"])
-	label2.text = str(_loaded["level"]["flags_collected"]) + "/" + str(_loaded["level"]["flags_total"])
-	label3.text = str(_loaded["player"]["score"])
+	label1.text = "x " + str(GameManager.local_save["player"]["lives"])
+	label2.text = str(GameManager.local_save["level"]["flags_collected"]) + "/" + str(GameManager.local_save["level"]["flags_total"])
+	label3.text = str(GameManager.local_save["player"]["score"])
 	#endregion
 	
 	modal.visible = false
@@ -45,29 +44,25 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	#region Добавляем информацию о флагах в статус бар так как _ready() срабатывает быстрее прочтения .json 
 	if flag == false:
-		var _loaded = SaveManager.load_slot(SaveManager.slot_save)
-		label2.text = str(_loaded["level"]["flags_collected"]) + "/" + str(_loaded["level"]["flags_total"])
+		label2.text = str(GameManager.local_save["level"]["flags_collected"]) + "/" + str(GameManager.local_save["level"]["flags_total"])
 		flag = true
 	#endregion
 	
 	#region Обновляем очки счета каждый раз при срабатывании сигнала сбора
 	if GameManager.coin > 0:
-		var _loaded = SaveManager.load_slot(SaveManager.slot_save)
-		label3.text = str(_loaded["player"]["score"])
+		label3.text = str(GameManager.local_save["player"]["score"])
 		GameManager.coin -= 1
 	#endregion
 	
 	#region
 	if GameManager.flag > 0:
-		var _loaded = SaveManager.load_slot(SaveManager.slot_save)
-		label2.text = str(_loaded["level"]["flags_collected"]) + "/" + str(_loaded["level"]["flags_total"])
+		label2.text = str(GameManager.local_save["level"]["flags_collected"]) + "/" + str(GameManager.local_save["level"]["flags_total"])
 		GameManager.flag -= 1
 	#endregion
 	
 	#region
 	if GameManager.live > 0:
-		var _loaded = SaveManager.load_slot(SaveManager.slot_save)
-		label1.text = "x " + str(_loaded["player"]["lives"])
+		label1.text = "x " + str(GameManager.local_save["player"]["lives"])
 		GameManager.live -= 1
 	#endregion
 
@@ -87,11 +82,14 @@ func _on_continue_2_pressed() -> void:
 func _on_quit_menu_pressed() -> void:
 	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
 	_hide_modal()
-	
-	var _loaded = SaveManager.load_slot(SaveManager.slot_save)
-	if _loaded["player"]["lives"] < 1:
-		SaveManager.delete_slot(SaveManager.slot_save)
+		
+	if GameManager.local_save["player"]["lives"] < 1:
+		SaveManager.delete()
+		GameManager.local_save = SaveManager.get_default_data()
 		print("Сейв удален (0 жизней)")
+	else:
+		SaveManager.save(GameManager.local_save) #Сохраняю то что было сделано за ввремя игры в удаленный сейв.
+
 	
 	get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/main_menu.tscn")
 
@@ -110,8 +108,8 @@ func _lose_modal() -> void:
 	get_tree().paused = true
 	MusicManager.set_paused(true)
 	play_btn.visible = false
-	var _loaded = SaveManager.load_slot(SaveManager.slot_save)
-	if _loaded["player"]["lives"] < 1:
+	var GameManager.local_save = SaveManager.load(GameManager.local_save)
+	if GameManager.local_save["player"]["lives"] < 1:
 		reload_btn.visible = false
 	else:
 		reload_btn.visible = true

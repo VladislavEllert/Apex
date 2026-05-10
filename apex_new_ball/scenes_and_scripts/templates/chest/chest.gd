@@ -5,8 +5,7 @@ var flag = false
 func _ready() -> void:
 	$AnimatedSprite2D.play()
 	#region При запуске уровня проверяет был ли собран сундук, и не дает собрать его еще раз
-	var loaded0 = SaveManager.load_slot(SaveManager.slot_save)
-	var coords: Array = loaded0["level"]["chests_collected_coordinates_level"]
+	var coords: Array = GameManager.local_save["level"]["chests_collected_coordinates_level"]
 	for value in coords:
 		if value["x"] == position.x and value["y"] == position.y:
 			flag = true
@@ -19,12 +18,10 @@ func _on_body_entered(_body: Node2D) -> void:
 	if flag == false:
 		Events.OPEN_THE_CHEST.emit($AnimatedSprite2D)
 		SFXManager.play_sfx(SFXManager.DOOR, -10)
-		var loaded0 = SaveManager.load_slot(SaveManager.slot_save)
-		loaded0["player"]["score"] = loaded0["player"]["score"] + 500
-		loaded0["level"]["chests_collected_coordinates_level"].append({
+		GameManager.local_save["player"]["score"] = GameManager.local_save["player"]["score"] + 500
+		GameManager.local_save["level"]["chests_collected_coordinates_level"].append({
 			"x": position.x,
 			"y": position.y
 		})
-		SaveManager.save_slot(SaveManager.slot_save, loaded0)
 		flag = true
 	#endregion

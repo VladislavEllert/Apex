@@ -5,10 +5,9 @@ func _ready() -> void:
  
 func _on_body_entered(_body: Node2D) -> void:
 	SFXManager.play_sfx(SFXManager.DAMAGE, SFXManager.DAMAGE_VOLUME)
-	var loaded = SaveManager.load_slot(SaveManager.slot_save)
-	loaded["player"]["lives"] -= 1
-	SaveManager.save_slot(SaveManager.slot_save, loaded)
+	GameManager.local_save["player"]["lives"] -= 1
+	SaveManager.save(GameManager.local_save)
 	Events.GAME_ON_LOSE.emit()
 	GameManager.live += 1
-	if loaded["player"]["lives"] < 0:
+	if GameManager.local_save["player"]["lives"] < 0:
 		print("проиграл")

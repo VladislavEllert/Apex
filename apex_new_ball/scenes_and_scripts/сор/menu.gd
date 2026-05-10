@@ -1,20 +1,21 @@
 extends Node2D
 
-var timer = 0
-var flag1 = false
 enum BUTTON_PLAY {Play1, Play2, Play3}
 enum BUTTON_DELETE {Delete1, Delete2, Delete3}
 
 const _REF_W := 1280.0
 const _REF_H := 720.0
+const _FADE_DURATION := 1.5
 
 func _ready():
 	MusicManager.play_track("res://assets/sound/pixeltown_heroes.ogg")
 
-	print("=== MENU STARTED ===")
 	$black_canvas.modulate = Color.BLACK
 	get_viewport().size_changed.connect(_reflow_menu)
 	call_deferred("_reflow_menu")
+
+	var tween := create_tween()
+	tween.tween_property($black_canvas, "modulate:a", 0.0, _FADE_DURATION)
 
 func _reflow_menu() -> void:
 	var r := get_viewport().get_visible_rect()
@@ -55,13 +56,6 @@ func _reflow_menu() -> void:
 		d.size = Vector2(btn_h, btn_h)
 
 
-
-func _process(_delta):
-	if flag1 != true:
-		timer += 10
-		if timer >= 40 && $black_canvas.modulate.a > 0:
-			$black_canvas.modulate.a -= 0.02
-			timer = 0
 
 func _on_play_1_pressed() -> void:
 	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
