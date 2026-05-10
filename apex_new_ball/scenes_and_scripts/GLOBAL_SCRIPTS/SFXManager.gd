@@ -31,7 +31,7 @@ func get_volume_percent() -> float:
 	return _db_to_percent(sfx_volume_db)
 
 func play_sfx(path: String, volume: float = 0.0):
-	if not FileAccess.file_exists(path):
+	if not ResourceLoader.exists(path):
 		print("SFXManager: Файл не найден -> ", path)
 		return
 
