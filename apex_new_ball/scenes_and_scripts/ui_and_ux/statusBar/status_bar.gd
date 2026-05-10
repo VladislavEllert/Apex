@@ -108,7 +108,7 @@ func _lose_modal() -> void:
 	get_tree().paused = true
 	MusicManager.set_paused(true)
 	play_btn.visible = false
-	var GameManager.local_save = SaveManager.load(GameManager.local_save)
+	GameManager.local_save = SaveManager.load()
 	if GameManager.local_save["player"]["lives"] < 1:
 		reload_btn.visible = false
 	else:

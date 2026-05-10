@@ -145,7 +145,7 @@ func _on_settings_button_pressed() -> void:
 #region Кнопка выхода из игры
 func _on_quit_button_pressed() -> void:
 	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
-	if not GameManager.local_save.is_empty():
+	if SaveManager.exists():
 		SaveManager.save(GameManager.local_save)
 	get_tree().quit()
 #endregion
