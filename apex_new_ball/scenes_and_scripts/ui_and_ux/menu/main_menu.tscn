@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dkv8txhwwysnj"]
+[gd_scene load_steps=21 format=3 uid="uid://dkv8txhwwysnj"]
 
 [ext_resource type="Script" uid="uid://dm4kk2btrcy5u" path="res://scenes_and_scripts/ui_and_ux/menu/main_menu.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://r3ggk8bsk8qe" path="res://scenes_and_scripts/ui_and_ux/parallax/parallax.tscn" id="2_parallax"]
