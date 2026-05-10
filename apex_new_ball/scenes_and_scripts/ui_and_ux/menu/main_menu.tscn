@@ -195,8 +195,6 @@ theme_override_constants/margin_left = 90
 theme_override_constants/margin_top = 160
 theme_override_constants/margin_right = 90
 theme_override_constants/margin_bottom = 90
-mouse_filter = 1
-
 
 [node name="ColorRect" type="ColorRect" parent="AboutWindow/ModalCenter/BackgroundBoard/MarginContainer"]
 layout_mode = 2
@@ -206,23 +204,18 @@ color = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-mouse_filter = 1
-vertical_scroll_mode = 2
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="AboutWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 1
-mouse_filter = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="AboutWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
-size_flags_vertical = 1
-bbcode_enabled = true
 mouse_filter = 1
-
+bbcode_enabled = true
 text = "[center][color=#efe2ca][font_size=22]
 [font_size=30][b]Добро пожаловать в игру
 \"Путешествие мячика\"![/b][/font_size]
@@ -322,8 +315,6 @@ theme_override_constants/margin_left = 150
 theme_override_constants/margin_top = 160
 theme_override_constants/margin_right = 90
 theme_override_constants/margin_bottom = 90
-mouse_filter = 1
-
 
 [node name="ColorRect" type="ColorRect" parent="SettingWindow/ModalCenter/BackgroundBoard/MarginContainer"]
 layout_mode = 2
@@ -333,15 +324,12 @@ color = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-mouse_filter = 1
-vertical_scroll_mode = 2
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 1
-mouse_filter = 1
 
 [node name="MusicRow" type="VBoxContainer" parent="SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
