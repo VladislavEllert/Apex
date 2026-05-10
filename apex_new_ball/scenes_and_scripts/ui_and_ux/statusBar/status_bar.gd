@@ -5,8 +5,10 @@ extends Node
 @onready var label3 = $HBoxContainer2/PanelContainer2/MarginContainer/HBoxContainer/Label3
 
 @onready var modal = $modalWindow2
-@onready var continue1 = $modalWindow2/Continue
-@onready var continue2 = $modalWindow2/Continue2
+@onready var to_main_menu_btn = $modalWindow2/RowsButtons/ToMainMenu
+@onready var reload_btn = $modalWindow2/RowsButtons/Reload
+@onready var music_btn = $modalWindow2/RowsButtons/ToggleMusic
+@onready var play_btn = $modalWindow2/RowsButtons/Continue
 
 var flag = false
 
@@ -18,9 +20,19 @@ func _ready() -> void:
 	#endregion
 	
 	modal.visible = false
-	$modalWindow2/Continue.process_mode = Node.PROCESS_MODE_ALWAYS
-	$modalWindow2/Continue2.process_mode = Node.PROCESS_MODE_ALWAYS
-	$modalWindow2/QuitMenu.process_mode = Node.PROCESS_MODE_ALWAYS
+	to_main_menu_btn.process_mode = Node.PROCESS_MODE_ALWAYS
+	reload_btn.process_mode = Node.PROCESS_MODE_ALWAYS
+	music_btn.process_mode = Node.PROCESS_MODE_ALWAYS
+	play_btn.process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	to_main_menu_btn.pressed.connect(_on_quit_menu_pressed)
+	reload_btn.pressed.connect(_on_continue_2_pressed)
+	play_btn.pressed.connect(_on_continue_pressed)
+	music_btn.toggled.connect(_on_music_toggled)
+	
+	# Если громкость > 0 (музыка включена), показываем действие "Выключить" (music_off.png) -> кнопка НЕ нажата.
+	# Если громкость <= 0 (музыка выключена), показываем действие "Включить" (music_on.png) -> кнопка НАЖАТА.
+	music_btn.set_pressed_no_signal(GameManager.music_volume_percent <= 0)
 	
 	_apply_adaptive_layout()
 	get_viewport().size_changed.connect(_apply_adaptive_layout)
@@ -81,27 +93,50 @@ func _on_quit_menu_pressed() -> void:
 	
 	get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/main_menu.tscn")
 
+func _sync_music_button() -> void:
+	music_btn.set_pressed_no_signal(GameManager.music_volume_percent <= 0)
+
 func _show_modal() -> void:
 	get_tree().paused = true
 	MusicManager.set_paused(true)
-	continue2.visible = false
-	continue1.visible = true
+	reload_btn.visible = false
+	play_btn.visible = true
+	_sync_music_button()
 	modal.visible = true
 
 func _lose_modal() -> void:
 	get_tree().paused = true
 	MusicManager.set_paused(true)
-	continue1.visible = false
+	play_btn.visible = false
+	var GameManager.local_save = SaveManager.load(GameManager.local_save)
 	if GameManager.local_save["player"]["lives"] < 1:
-		continue2.visible = false
+		reload_btn.visible = false
 	else:
-		continue2.visible = true
+		reload_btn.visible = true
+	_sync_music_button()
 	modal.visible = true
 
 func _hide_modal() -> void:
 	get_tree().paused = false
 	MusicManager.set_paused(false)
 	modal.visible = false
+
+func _on_music_toggled(toggled_on: bool) -> void:
+	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
+	
+	# Убиваем возможный fade_tween, чтобы он не перезаписал громкость
+	if MusicManager.fade_tween:
+		MusicManager.fade_tween.kill()
+		MusicManager.fade_tween = null
+	
+	if toggled_on:
+		# Кнопка перешла в нажатое состояние (показывает "Включить", music_on.png)
+		# Значит, пользователь только что ВЫКЛЮЧИЛ музыку
+		GameManager.set_music_volume_percent(0.0)
+	else:
+		# Кнопка перешла в ненажатое состояние (показывает "Выключить", music_off.png)
+		# Значит, пользователь только что ВКЛЮЧИЛ музыку
+		GameManager.set_music_volume_percent(75.0)
 
 func _apply_adaptive_layout() -> void:
 	if not has_node("HBoxContainer") or not has_node("HBoxContainer2") or not has_node("HBoxContainer3"):
