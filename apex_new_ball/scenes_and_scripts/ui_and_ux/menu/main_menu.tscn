@@ -3,16 +3,16 @@
 [ext_resource type="Script" uid="uid://dm4kk2btrcy5u" path="res://scenes_and_scripts/ui_and_ux/menu/main_menu.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://r3ggk8bsk8qe" path="res://scenes_and_scripts/ui_and_ux/parallax/parallax.tscn" id="2_parallax"]
 [ext_resource type="Texture2D" uid="uid://deqblapn064j2" path="res://assets/UI/for_menu/game_name.png" id="3_as74d"]
-[ext_resource type="Texture2D" uid="uid://qtdvep23m6he" path="res://assets/UI/for_menu/buttons/play_ru.png" id="4_g35gh"]
-[ext_resource type="Texture2D" uid="uid://b53vjv1kp8mrm" path="res://assets/UI/for_menu/buttons/play_click_ru.png" id="5_epl2m"]
-[ext_resource type="Texture2D" uid="uid://7tobldiuqhby" path="res://assets/UI/for_menu/buttons/continue.png" id="6_2sa8q"]
+[ext_resource type="Texture2D" uid="uid://b5pixbl6q64uo" path="res://assets/UI/for_menu/buttons/new_game_ru.png" id="4_2sa8q"]
+[ext_resource type="Texture2D" uid="uid://c3rjnqvg6nias" path="res://assets/UI/for_menu/buttons/new_game_click_ru.png" id="5_h8p65"]
+[ext_resource type="Texture2D" uid="uid://dpgx2keavvy0u" path="res://assets/UI/for_menu/buttons/continue_ru.png" id="6_2sa8q"]
 [ext_resource type="Texture2D" uid="uid://c8nnnc38lwsek" path="res://assets/UI/for_menu/buttons/settings_ru.png" id="6_eal7q"]
 [ext_resource type="Texture2D" uid="uid://bydxltpxx1k0s" path="res://assets/UI/for_menu/buttons/settings_click_ru.png" id="7_fru8n"]
-[ext_resource type="Texture2D" uid="uid://dr88i5hyxr17n" path="res://assets/UI/for_menu/buttons/continue_click.png" id="7_h8p65"]
+[ext_resource type="Texture2D" uid="uid://4tn3xf1hc7j4" path="res://assets/UI/for_menu/buttons/continue_click_ru.png" id="7_h8p65"]
 [ext_resource type="Texture2D" uid="uid://6qswbssis1xa" path="res://assets/UI/for_menu/buttons/exit_ru.png" id="8_etpk0"]
-[ext_resource type="Texture2D" uid="uid://djqjehrx5171v" path="res://assets/UI/for_menu/buttons/new_game.png" id="8_i37wa"]
+[ext_resource type="Texture2D" uid="uid://chwwoil35xkq0" path="res://assets/UI/for_menu/buttons/trash.png" id="8_i37wa"]
 [ext_resource type="Texture2D" uid="uid://c07y44ug0a3ii" path="res://assets/UI/for_menu/buttons/exit_en.png" id="9_40ian"]
-[ext_resource type="Texture2D" uid="uid://qkqk8wn1l0tt" path="res://assets/UI/for_menu/buttons/new_game_click.png" id="9_d8s8i"]
+[ext_resource type="Texture2D" uid="uid://dpnw2vkmp0a8y" path="res://assets/UI/for_menu/buttons/trash_click.png" id="9_d8s8i"]
 [ext_resource type="Texture2D" uid="uid://c81c6hvi2y8yr" path="res://assets/UI/for_menu/buttons/github.png" id="10_eal7q"]
 [ext_resource type="Texture2D" uid="uid://brycy4u4odclw" path="res://assets/UI/for_menu/buttons/cup.png" id="10_fru8n"]
 [ext_resource type="Texture2D" uid="uid://d12vjm1r0ylv" path="res://assets/UI/for_menu/buttons/about.png" id="11_fru8n"]
@@ -63,17 +63,23 @@ layout_mode = 2
 [node name="Play" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-texture_normal = ExtResource("4_g35gh")
-texture_pressed = ExtResource("5_epl2m")
+texture_normal = ExtResource("4_2sa8q")
+texture_pressed = ExtResource("5_h8p65")
 ignore_texture_size = true
 stretch_mode = 5
 
 [node name="ContinueRestartRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/Buttons/ContinueRestartRow"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+size_flags_horizontal = 8
 
 [node name="Continue" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/ContinueRestartRow"]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
@@ -83,7 +89,7 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="Delete" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons/ContinueRestartRow"]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 2
 texture_normal = ExtResource("8_i37wa")

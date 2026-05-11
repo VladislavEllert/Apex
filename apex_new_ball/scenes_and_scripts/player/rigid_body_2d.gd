@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 @export var move_force = 3000
-@export var jump_impulse = 515.0
+@export var jump_impulse = 550.0
 @export var max_speed = 250.0
 @export var is_flappy_bird = false
 @export var air_rotation_speed = 6.0  # Максимальная скорость вращения при движении в воздухе
