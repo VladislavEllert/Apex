@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dkv8txhwwysnj"]
+[gd_scene load_steps=25 format=3 uid="uid://dkv8txhwwysnj"]
 
 [ext_resource type="Script" uid="uid://dm4kk2btrcy5u" path="res://scenes_and_scripts/ui_and_ux/menu/main_menu.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://r3ggk8bsk8qe" path="res://scenes_and_scripts/ui_and_ux/parallax/parallax.tscn" id="2_parallax"]
@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://bkpgf56i1haxu" path="res://assets/UI/for_menu/buttons/close.png" id="16_xbkko"]
 [ext_resource type="Texture2D" uid="uid://d03i7xd63hce0" path="res://assets/UI/for_menu/buttons/close_click.png" id="17_xbkko"]
 [ext_resource type="Texture2D" uid="uid://31foujms18bx" path="res://assets/UI/for_menu/setting_panel.png" id="18_v7o0r"]
+[ext_resource type="Texture2D" uid="uid://biuswxqwiljk1" path="res://assets/UI/for_menu/lider_board.png" id="23_i37wa"]
+[ext_resource type="Texture2D" uid="uid://cldyhm6kha3co" path="res://assets/UI/for_menu/wood_border.png" id="24_d8s8i"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -431,6 +433,144 @@ text = "5.0"
 horizontal_alignment = 1
 
 [node name="CloseButton" type="TextureButton" parent="SettingWindow/ModalCenter/BackgroundBoard"]
+custom_minimum_size = Vector2(250, 100)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("16_xbkko")
+texture_pressed = ExtResource("17_xbkko")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="LiderBoard" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="LiderBoard"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.52549)
+
+[node name="ModalCenter" type="Control" parent="LiderBoard"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundBoard" type="TextureRect" parent="LiderBoard/ModalCenter"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -376.0
+offset_top = -324.0
+offset_right = 377.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_i37wa")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="LiderBoard/ModalCenter/BackgroundBoard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 90
+
+[node name="ColorRect" type="ColorRect" parent="LiderBoard/ModalCenter/BackgroundBoard/MarginContainer"]
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LiderBoard/ModalCenter/BackgroundBoard/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Rows" type="VBoxContainer" parent="LiderBoard/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Line" type="PanelContainer" parent="LiderBoard/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/Rows"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="LiderBoard/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/Rows/Line"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+texture = ExtResource("24_d8s8i")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="LiderBoard/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/Rows/Line"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LiderBoard/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/Rows/Line/MarginContainer"]
+layout_mode = 2
+
+[node name="Position" type="PanelContainer" parent="LiderBoard/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/Rows/Line/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LiderBoard/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/Rows/Line/MarginContainer/HBoxContainer/Position"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="MarginContainer" parent="LiderBoard/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/Rows/Line/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="Label" type="Label" parent="LiderBoard/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/Rows/Line/MarginContainer/HBoxContainer/Name"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Name"
+
+[node name="Spacer" type="Control" parent="LiderBoard/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/Rows/Line/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Score" type="MarginContainer" parent="LiderBoard/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/Rows/Line/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Label" type="Label" parent="LiderBoard/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/Rows/Line/MarginContainer/HBoxContainer/Score"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "100"
+
+[node name="CloseButton" type="TextureButton" parent="LiderBoard/ModalCenter/BackgroundBoard"]
 custom_minimum_size = Vector2(250, 100)
 layout_mode = 1
 anchors_preset = 7

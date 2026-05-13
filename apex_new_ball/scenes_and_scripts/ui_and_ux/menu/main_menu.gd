@@ -20,6 +20,12 @@ const _REF_H := 720.0
 @onready var _close_about_button: TextureButton = $AboutWindow/ModalCenter/BackgroundBoard/CloseButton
 @onready var _liderboard_button: TextureButton = $MarginContainer/VBoxContainer/Buttons/BottomButtons/LiderBoard
 
+# LiderBoard Window
+@onready var _liderboard_window: CanvasLayer = $LiderBoard
+@onready var _liderboard_color_rect: ColorRect = $LiderBoard/ColorRect
+@onready var _liderboard_board: TextureRect = $LiderBoard/ModalCenter/BackgroundBoard
+@onready var _close_liderboard_button: TextureButton = $LiderBoard/ModalCenter/BackgroundBoard/CloseButton
+
 # SettingWindow
 @onready var _settings_window: CanvasLayer = $SettingWindow
 @onready var _settings_color_rect: ColorRect = $SettingWindow/ColorRect
@@ -54,6 +60,10 @@ func _ready() -> void:
 	_close_about_button.pressed.connect(_on_close_about_pressed)
 	_liderboard_button.pressed.connect(_on_liderboard_button_pressed)
 	_about_window.visible = false
+	
+	# LiderBoard Window
+	_close_liderboard_button.pressed.connect(_on_close_liderboard_pressed)
+	_liderboard_window.visible = false
 	
 	# SettingWindow: подключаем сигналы
 	_close_settings_button.pressed.connect(_on_close_settings_pressed)
@@ -191,7 +201,22 @@ func _on_rich_text_label_meta_clicked(meta) -> void:
 
 func _on_liderboard_button_pressed() -> void:
 	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
-	print("LiderBoard button pressed!")
+	_liderboard_color_rect.modulate.a = 0.0
+	_liderboard_board.modulate.a = 0.0
+	_liderboard_window.visible = true
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(_liderboard_color_rect, "modulate:a", 1.0, 0.3)
+	tween.tween_property(_liderboard_board, "modulate:a", 1.0, 0.3)
+
+func _on_close_liderboard_pressed() -> void:
+	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(_liderboard_color_rect, "modulate:a", 0.0, 0.3)
+	tween.tween_property(_liderboard_board, "modulate:a", 0.0, 0.3)
+	tween.set_parallel(false)
+	tween.tween_callback(func(): _liderboard_window.visible = false)
 
 # ===== SettingWindow =====
 
