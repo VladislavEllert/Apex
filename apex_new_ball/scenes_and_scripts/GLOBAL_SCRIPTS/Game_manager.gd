@@ -22,6 +22,7 @@ func _ready() -> void:
 	Events.TOUCHING_THE_FLAG.connect(_touch)
 	Events.COLLECTING_COINS.connect(_collect)
 	Events.OPEN_THE_CHEST.connect(_chest)
+	Events.HEALING.connect(_heal)
 	Events.OPEN_THE_DOOR.connect(_door)
 	Events.PLAYER_RESPAWN.connect(_respa)
 	
@@ -88,6 +89,12 @@ func _collect(sprite):
 func _chest(sprite):
 	sprite.animation = "chest"
 	coin += 1
+
+func _heal(sprite):
+	if sprite:
+		sprite.modulate.a = 0
+	live += 1
+	SaveManager.save(local_save)
 
 func _door(sprite):
 	sprite.animation = "open"

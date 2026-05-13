@@ -72,7 +72,7 @@ func get_default_data() -> Dictionary:
 		"player": {
 			"score": 0,
 			"lives": 3,
-			"max_lives": 5
+			"max_lives": 100
 		},
 		"level": {
 			"scene_number": 1,
@@ -82,7 +82,8 @@ func get_default_data() -> Dictionary:
 			"flags_collected": 0,
 			"flags_collected_coordinates_level": [],
 			"coins_collected_coordinates_level": [],
-			"chests_collected_coordinates_level": []
+			"chests_collected_coordinates_level": [],
+			"lives_collected_coordinates_level": []
 		}
 	}
 #endregion

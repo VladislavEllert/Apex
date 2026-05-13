@@ -22,6 +22,9 @@ signal COLLECTING_COINS(sprite)
 signal OPEN_THE_CHEST(sprite)
 
 @warning_ignore("unused_signal")
+signal HEALING(sprite)
+
+@warning_ignore("unused_signal")
 signal OPEN_THE_DOOR(sprite)
 
 @warning_ignore("unused_signal")

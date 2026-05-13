@@ -1,10 +1,11 @@
-[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://dyb1hqxfcbwpp"]
+[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://dyb1hqxfcbwpp"]
 
 [ext_resource type="Texture2D" uid="uid://bso83qn71x37e" path="res://assets/1 Tiles/Tileset.png" id="1_rsvke"]
 [ext_resource type="PackedScene" uid="uid://1x48vwrviwfc" path="res://scenes_and_scripts/templates/chest/chest.tscn" id="3_mcoy0"]
 [ext_resource type="PackedScene" uid="uid://dc7amg4m2ekmn" path="res://scenes_and_scripts/templates/coin/coins.tscn" id="4_71ey1"]
 [ext_resource type="PackedScene" uid="uid://cjhirk6d6gl4n" path="res://scenes_and_scripts/templates/door/left_door.tscn" id="5_mnt7d"]
 [ext_resource type="PackedScene" uid="uid://bxcym800wfi20" path="res://scenes_and_scripts/templates/flag/flags.tscn" id="6_7y6xf"]
+[ext_resource type="PackedScene" uid="uid://b3oen4xrtlywc" path="res://scenes_and_scripts/templates/life/life.tscn" id="7_b3w0x"]
 [ext_resource type="PackedScene" uid="uid://bjrhudvlhxqe1" path="res://scenes_and_scripts/templates/spike/spikes.tscn" id="7_nhh8o"]
 [ext_resource type="PackedScene" uid="uid://y5ire2d0yjpc" path="res://scenes_and_scripts/templates/door/right_door.tscn" id="8_b3w0x"]
 
@@ -466,6 +467,7 @@ scenes/3/scene = ExtResource("5_mnt7d")
 scenes/4/scene = ExtResource("6_7y6xf")
 scenes/5/scene = ExtResource("7_nhh8o")
 scenes/7/scene = ExtResource("8_b3w0x")
+scenes/8/scene = ExtResource("7_b3w0x")
 
 [resource]
 physics_layer_0/collision_layer = 1
