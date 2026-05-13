@@ -201,6 +201,7 @@ func _on_rich_text_label_meta_clicked(meta) -> void:
 
 func _on_liderboard_button_pressed() -> void:
 	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
+	_refresh_liderboard()
 	_liderboard_color_rect.modulate.a = 0.0
 	_liderboard_board.modulate.a = 0.0
 	_liderboard_window.visible = true
@@ -208,6 +209,37 @@ func _on_liderboard_button_pressed() -> void:
 	tween.set_parallel(true)
 	tween.tween_property(_liderboard_color_rect, "modulate:a", 1.0, 0.3)
 	tween.tween_property(_liderboard_board, "modulate:a", 1.0, 0.3)
+
+func _refresh_liderboard() -> void:
+	var rows_container = $LiderBoard/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/Rows
+	var line_template = rows_container.get_node("Line")
+	
+	# Очищаем старые строки, кроме шаблона
+	for child in rows_container.get_children():
+		if child != line_template:
+			child.queue_free()
+	
+	var leaderboard_data = SaveManager.get_leaderboard()
+	
+	if leaderboard_data.is_empty():
+		line_template.visible = true
+		line_template.get_node("MarginContainer/HBoxContainer/Position/Label").text = "-"
+		line_template.get_node("MarginContainer/HBoxContainer/Name/Label").text = "Нет рекордов"
+		line_template.get_node("MarginContainer/HBoxContainer/Score/Label").text = "0"
+		return
+
+	line_template.visible = false # Скрываем шаблон
+	
+	for i in range(leaderboard_data.size()):
+		var entry = leaderboard_data[i]
+		var new_line = line_template.duplicate()
+		new_line.visible = true
+		rows_container.add_child(new_line)
+		
+		new_line.get_node("MarginContainer/HBoxContainer/Position/Label").text = str(i + 1)
+		new_line.get_node("MarginContainer/HBoxContainer/Name/Label").text = entry["name"]
+		new_line.get_node("MarginContainer/HBoxContainer/Score/Label").text = str(entry["score"])
+
 
 func _on_close_liderboard_pressed() -> void:
 	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)

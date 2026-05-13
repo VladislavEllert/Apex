@@ -97,6 +97,9 @@ func get_default_settings() -> Dictionary:
 	}
 #endregion
 
+const LEADERBOARD_SECTION = "leaderboard"
+const MAX_LEADERBOARD_ENTRIES = 10
+
 #region Функции для работы настроек
 func save_settings(data: Dictionary) -> void:
 	var config = ConfigFile.new()
@@ -121,3 +124,34 @@ func load_settings() -> Dictionary:
 
 	return defaults
 #endregion
+
+#region Функции для работы таблицы лидеров
+func save_score(player_name: String, score: int) -> void:
+	var config = ConfigFile.new()
+	config.load(SAVE_PATH)
+	
+	var leaderboard = []
+	if config.has_section(LEADERBOARD_SECTION):
+		leaderboard = config.get_value(LEADERBOARD_SECTION, "entries", [])
+	
+	leaderboard.append({"name": player_name, "score": score})
+	
+	# Сортировка по убыванию очков
+	leaderboard.sort_custom(func(a, b): return a["score"] > b["score"])
+	
+	# Ограничение количества записей
+	if leaderboard.size() > MAX_LEADERBOARD_ENTRIES:
+		leaderboard.resize(MAX_LEADERBOARD_ENTRIES)
+	
+	config.set_value(LEADERBOARD_SECTION, "entries", leaderboard)
+	config.save(SAVE_PATH)
+	print("SaveManager: результат сохранен в таблицу лидеров")
+
+func get_leaderboard() -> Array:
+	var config = ConfigFile.new()
+	if config.load(SAVE_PATH) != OK:
+		return []
+	
+	return config.get_value(LEADERBOARD_SECTION, "entries", [])
+#endregion
+

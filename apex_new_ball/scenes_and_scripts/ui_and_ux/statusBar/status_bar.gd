@@ -84,14 +84,15 @@ func _on_quit_menu_pressed() -> void:
 	_hide_modal()
 		
 	if GameManager.local_save["player"]["lives"] < 1:
+		var final_score = GameManager.local_save["player"]["score"]
 		SaveManager.delete()
 		GameManager.local_save = SaveManager.get_default_data()
-		print("Сейв удален (0 жизней)")
+		print("Сейв удален (0 жизней), предложение записать результат")
+		Events.SHOW_LEADERBOARD_SUBMIT.emit(final_score)
 	else:
 		SaveManager.save(GameManager.local_save) #Сохраняю то что было сделано за ввремя игры в удаленный сейв.
+		get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/main_menu.tscn")
 
-	
-	get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/main_menu.tscn")
 
 func _sync_music_button() -> void:
 	music_btn.set_pressed_no_signal(GameManager.music_volume_percent <= 0)

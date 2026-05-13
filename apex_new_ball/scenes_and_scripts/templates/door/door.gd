@@ -23,11 +23,12 @@ func _on_body_entered(_body: Node2D) -> void:
 		loads["level"]["current_scene"] = "res://scenes_and_scripts/levels/level_%d.tscn" % loads["level"]["scene_number"]
 		SaveManager.save(GameManager.local_save)
 		if loads["level"]["scene_number"] > 5:
-			get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/main_menu.tscn") 
+			Events.SHOW_LEADERBOARD_SUBMIT.emit(loads["player"]["score"])
 		else:
 			if ResourceLoader.exists(loads["level"]["current_scene"]):
 				get_tree().change_scene_to_file(loads["level"]["current_scene"])
 			else:
-				get_tree().change_scene_to_file("res://scenes_and_scripts/ui_and_ux/menu/main_menu.tscn")
+				Events.SHOW_LEADERBOARD_SUBMIT.emit(loads["player"]["score"])
+
 		flag = true
 	pass

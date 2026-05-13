@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8n6x1y2m3u4v"]
+
+[ext_resource type="Script" path="res://scenes_and_scripts/ui_and_ux/menu/leaderboard_submit.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://biuswxqwiljk1" path="res://assets/UI/for_menu/lider_board.png" id="2_board"]
+[ext_resource type="Texture2D" uid="uid://bncd738pqwb7h" path="res://assets/UI/for_menu/buttons/save.png" id="3_pnyau"]
+[ext_resource type="Texture2D" uid="uid://cub8tkm566ek0" path="res://assets/UI/for_menu/buttons/save_click.png" id="4_txgeh"]
+[ext_resource type="Texture2D" uid="uid://ctbm6jycfjqbn" path="res://assets/UI/for_menu/buttons/skip.png" id="5_a2gww"]
+[ext_resource type="Texture2D" uid="uid://uqn730qm3bqj" path="res://assets/UI/for_menu/buttons/skip_click.png" id="6_8h5nr"]
+
+[node name="LeaderboardSubmit" type="CanvasLayer"]
+process_mode = 3
+layer = 10
+script = ExtResource("1_script")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.52549)
+
+[node name="ModalCenter" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundBoard" type="TextureRect" parent="ModalCenter"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -376.0
+offset_top = -324.0
+offset_right = 377.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_board")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="ModalCenter/BackgroundBoard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 180
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ModalCenter/BackgroundBoard/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="ModalCenter/BackgroundBoard/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.882353, 0.796078, 0.635294, 1)
+theme_override_font_sizes/font_size = 35
+text = "Запишем в таблицу!!!"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="ModalCenter/BackgroundBoard/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Ваш результат: 0"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="ModalCenter/BackgroundBoard/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+placeholder_text = "Введите ваше имя..."
+alignment = 1
+max_length = 15
+
+[node name="Spacer" type="Control" parent="ModalCenter/BackgroundBoard/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SaveButton" type="TextureButton" parent="ModalCenter/BackgroundBoard/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_pnyau")
+texture_pressed = ExtResource("4_txgeh")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="SkipButton" type="TextureButton" parent="ModalCenter/BackgroundBoard/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("5_a2gww")
+texture_pressed = ExtResource("6_8h5nr")
+ignore_texture_size = true
+stretch_mode = 5

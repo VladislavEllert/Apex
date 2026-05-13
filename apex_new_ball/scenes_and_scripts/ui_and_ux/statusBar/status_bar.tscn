@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://lt0osl61h21d"]
+[gd_scene load_steps=19 format=3 uid="uid://lt0osl61h21d"]
 
 [ext_resource type="Script" uid="uid://caee2fqwfq75c" path="res://scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd" id="1_6g5nr"]
 [ext_resource type="FontFile" uid="uid://biq6mam8hcyyb" path="res://assets/Fonts/PlaypenSans-Bold.ttf" id="1_kp5lr"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bby1ty3sckx75" path="res://assets/UI/for_menu/buttons/music_on.png" id="12_obskt"]
 [ext_resource type="Texture2D" uid="uid://c3owe6vfdaxo7" path="res://assets/UI/for_menu/buttons/play_icon.png" id="13_ewi2b"]
 [ext_resource type="Texture2D" uid="uid://bskegpujkpv72" path="res://assets/UI/for_menu/buttons/play_icons_click.png" id="14_wh5kk"]
+[ext_resource type="PackedScene" uid="uid://c8n6x1y2m3u4v" path="res://scenes_and_scripts/ui_and_ux/menu/leaderboard_submit.tscn" id="15_leaderboard"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jprh4"]
 content_margin_left = 10.0
@@ -201,5 +202,7 @@ texture_normal = ExtResource("13_ewi2b")
 texture_pressed = ExtResource("14_wh5kk")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="LeaderboardSubmit" parent="." instance=ExtResource("15_leaderboard")]
 
 [connection signal="pressed" from="HBoxContainer3/PanelContainer3/MarginContainer/HBoxContainer/Pause" to="." method="_on_pause_pressed"]
