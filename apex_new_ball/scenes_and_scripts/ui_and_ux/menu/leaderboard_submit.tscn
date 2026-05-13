@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c8n6x1y2m3u4v"]
 
-[ext_resource type="Script" path="res://scenes_and_scripts/ui_and_ux/menu/leaderboard_submit.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://r3m8q83djppp" path="res://scenes_and_scripts/ui_and_ux/menu/leaderboard_submit.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://biuswxqwiljk1" path="res://assets/UI/for_menu/lider_board.png" id="2_board"]
 [ext_resource type="Texture2D" uid="uid://bncd738pqwb7h" path="res://assets/UI/for_menu/buttons/save.png" id="3_pnyau"]
 [ext_resource type="Texture2D" uid="uid://cub8tkm566ek0" path="res://assets/UI/for_menu/buttons/save_click.png" id="4_txgeh"]
