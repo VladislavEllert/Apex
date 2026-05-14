@@ -19,7 +19,7 @@ func _ready() -> void:
 			return
 	#endregion
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(_body: Node2D) -> void:
 	# Проверяем, что предмет еще не собран
 	if flag == false:
 		var current_lives = GameManager.local_save["player"]["lives"]
@@ -30,12 +30,6 @@ func _on_body_entered(body: Node2D) -> void:
 			# Воспроизводим звук (пока используем звук монетки как плейсхолдер)
 			SFXManager.play_sfx(SFXManager.COIN, SFXManager.COIN_VOLUME)
 			
-			# Эмитим сигнал с передачей спрайта для скрытия
-			var sprite = get_node_or_null("AnimatedSprite2D")
-			if not sprite:
-				sprite = get_node_or_null("Sprite2D")
-			Events.HEALING.emit(sprite)
-			
 			# Добавляем жизнь
 			GameManager.local_save["player"]["lives"] += 1
 			
@@ -45,6 +39,12 @@ func _on_body_entered(body: Node2D) -> void:
 					"x": position.x,
 					"y": position.y
 				})
+			
+			# Эмитим сигнал с передачей спрайта для скрытия
+			var sprite = get_node_or_null("AnimatedSprite2D")
+			if not sprite:
+				sprite = get_node_or_null("Sprite2D")
+			Events.HEALING.emit(sprite)
 			
 			flag = true
 			queue_free() # Удаляем объект со сцены, чтобы он 100% исчез

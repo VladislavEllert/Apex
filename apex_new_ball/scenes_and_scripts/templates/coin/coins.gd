@@ -17,11 +17,11 @@ func _on_body_entered(_body: Node2D) -> void:
 	#region При срабатывании сигнала собирает монету, записывает инофрмацию в сейв
 	if flag == false:
 		SFXManager.play_sfx(SFXManager.COIN, SFXManager.COIN_VOLUME)
-		Events.COLLECTING_COINS.emit($AnimatedSprite2D)
 		GameManager.local_save["player"]["score"] = GameManager.local_save["player"]["score"] + 10
 		GameManager.local_save["level"]["coins_collected_coordinates_level"].append({
 			"x": position.x,
 			"y": position.y
 		})
+		Events.COLLECTING_COINS.emit($AnimatedSprite2D)
 		flag = true
 	#endregion

@@ -36,3 +36,12 @@ signal CONTROL_SENSITIVITY_CHANGED(value)
 @warning_ignore("unused_signal")
 signal SHOW_LEADERBOARD_SUBMIT(score)
 
+# Сигналы для обновления UI (вместо polling в _process)
+@warning_ignore("unused_signal")
+signal UI_SCORE_UPDATED
+
+@warning_ignore("unused_signal")
+signal UI_FLAGS_UPDATED
+
+@warning_ignore("unused_signal")
+signal UI_LIVES_UPDATED

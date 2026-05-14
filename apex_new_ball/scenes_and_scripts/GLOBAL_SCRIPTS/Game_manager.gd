@@ -1,9 +1,5 @@
 extends Node
 
-var coin = 0
-var flag = 0
-var live = 0
-var resp = 0
 var pause_scene
 var music_volume_percent: float = 75.0
 var sfx_volume_percent: float = 100.0
@@ -77,24 +73,24 @@ func _schedule_save_user_settings() -> void:
 #region Флаги для изменений в сейв
 func _touch(sprite):
 	sprite.animation = "flag"
-	flag += 1
+	Events.UI_FLAGS_UPDATED.emit()
 
 func _respa():
-	resp += 1
+	pass
 
 func _collect(sprite):
 	sprite.modulate.a = 0
-	coin += 1
+	Events.UI_SCORE_UPDATED.emit()
 
 func _chest(sprite):
 	sprite.animation = "chest"
-	coin += 1
+	Events.UI_SCORE_UPDATED.emit()
 
 func _heal(sprite):
 	if sprite:
 		sprite.modulate.a = 0
-	live += 1
 	SaveManager.save(local_save)
+	Events.UI_LIVES_UPDATED.emit()
 
 func _door(sprite):
 	sprite.animation = "open"

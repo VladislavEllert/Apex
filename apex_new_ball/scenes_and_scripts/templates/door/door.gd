@@ -6,10 +6,15 @@ func _ready() -> void:
 	$AnimatedSprite2D.play()
 
 func _on_body_entered(_body: Node2D) -> void:
+	# Блокируем повторный вход сразу, до await, чтобы не было двойной смены сцены
+	if flag:
+		return
+	
 	var loads = GameManager.local_save
 	var total = loads["level"]["flags_total"]
 	var collected = loads["level"]["flags_collected"]
 	if int(total) == int(collected):
+		flag = true  # ставим до await, иначе мяч может войти ещё раз за 0.5с
 		SFXManager.play_sfx(SFXManager.DOOR, SFXManager.DOOR_VOLUME)
 		Events.OPEN_THE_DOOR.emit($AnimatedSprite2D)
 		await get_tree().create_timer(0.5).timeout
@@ -29,6 +34,3 @@ func _on_body_entered(_body: Node2D) -> void:
 				get_tree().change_scene_to_file(loads["level"]["current_scene"])
 			else:
 				Events.SHOW_LEADERBOARD_SUBMIT.emit(loads["player"]["score"])
-
-		flag = true
-	pass

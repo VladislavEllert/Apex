@@ -6,8 +6,6 @@ func _ready() -> void:
 func _on_body_entered(_body: Node2D) -> void:
 	SFXManager.play_sfx(SFXManager.DAMAGE, SFXManager.DAMAGE_VOLUME)
 	GameManager.local_save["player"]["lives"] -= 1
-	SaveManager.save(GameManager.local_save)
+	# Сохранение НЕ вызываем здесь — это блокирующая запись на диск прямо во время игры.
+	# Данные сохранятся автоматически через SaveManager._commit_cache() при паузе или выходе.
 	Events.GAME_ON_LOSE.emit()
-	GameManager.live += 1
-	if GameManager.local_save["player"]["lives"] < 0:
-		print("проиграл")

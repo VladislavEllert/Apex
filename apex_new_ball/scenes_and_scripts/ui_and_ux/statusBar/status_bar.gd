@@ -10,7 +10,6 @@ extends Node
 @onready var music_btn = $modalWindow2/RowsButtons/ToggleMusic
 @onready var play_btn = $modalWindow2/RowsButtons/Continue
 
-var flag = false
 
 func _ready() -> void:
 	#region Добавляем в статус бар информацию взятую из конфига о жизнях, флагах, и очках
@@ -40,31 +39,21 @@ func _ready() -> void:
 	Events.SHOW_PAUSE_MODAL.connect(_show_modal)
 	Events.GAME_ON_LOSE.connect(_lose_modal)
 	Events.HIDE_PAUSE_MODAL.connect(_hide_modal)
+	# Обновляем UI только по сигналам — нет нагрузки в _process
+	Events.UI_SCORE_UPDATED.connect(_update_score)
+	Events.UI_FLAGS_UPDATED.connect(_update_flags)
+	Events.UI_LIVES_UPDATED.connect(_update_lives)
+	# Первоначальное заполнение (flags_total приходит после _ready, поэтому call_deferred)
+	call_deferred("_update_flags")
 
-func _process(_delta: float) -> void:
-	#region Добавляем информацию о флагах в статус бар так как _ready() срабатывает быстрее прочтения .json 
-	if flag == false:
-		label2.text = str(GameManager.local_save["level"]["flags_collected"]) + "/" + str(GameManager.local_save["level"]["flags_total"])
-		flag = true
-	#endregion
-	
-	#region Обновляем очки счета каждый раз при срабатывании сигнала сбора
-	if GameManager.coin > 0:
-		label3.text = str(GameManager.local_save["player"]["score"])
-		GameManager.coin -= 1
-	#endregion
-	
-	#region
-	if GameManager.flag > 0:
-		label2.text = str(GameManager.local_save["level"]["flags_collected"]) + "/" + str(GameManager.local_save["level"]["flags_total"])
-		GameManager.flag -= 1
-	#endregion
-	
-	#region
-	if GameManager.live > 0:
-		label1.text = "x " + str(GameManager.local_save["player"]["lives"])
-		GameManager.live -= 1
-	#endregion
+func _update_score() -> void:
+	label3.text = str(GameManager.local_save["player"]["score"])
+
+func _update_flags() -> void:
+	label2.text = str(GameManager.local_save["level"]["flags_collected"]) + "/" + str(GameManager.local_save["level"]["flags_total"])
+
+func _update_lives() -> void:
+	label1.text = "x " + str(GameManager.local_save["player"]["lives"])
 
 func _on_pause_pressed() -> void:
 	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
@@ -109,7 +98,8 @@ func _lose_modal() -> void:
 	get_tree().paused = true
 	MusicManager.set_paused(true)
 	play_btn.visible = false
-	GameManager.local_save = SaveManager.load()
+	# local_save уже актуален (spike.gd уже вычел жизнь), лишнее чтение с диска убрано
+	_update_lives()
 	if GameManager.local_save["player"]["lives"] < 1:
 		reload_btn.visible = false
 	else:

@@ -16,7 +16,6 @@ func _ready() -> void:
 func _on_body_entered(_body: Node2D) -> void:
 	#region При срабатывании сигнала активирует флаг, записывает инофрмацию в сейв и ставит чекпоинт на последнем собранном флаге
 	if  flag == false:
-		Events.TOUCHING_THE_FLAG.emit($AnimatedSprite2D)
 		GameManager.local_save["level"]["flags_collected"] = GameManager.local_save["level"]["flags_collected"] + 1
 		GameManager.local_save["level"]["flags_collected_coordinates_level"].append({
 			"x": position.x,
@@ -26,5 +25,6 @@ func _on_body_entered(_body: Node2D) -> void:
 			"x": position.x,
 			"y": position.y
 		}
+		Events.TOUCHING_THE_FLAG.emit($AnimatedSprite2D)
 		flag = true
 	#endregion
