@@ -37,7 +37,7 @@ func _ready() -> void:
 	music_btn.set_pressed_no_signal(GameManager.music_volume_percent <= 0)
 	
 	_apply_adaptive_layout()
-	get_viewport().size_changed.connect(_apply_adaptive_layout)
+	# Убрано постоянное прослушивание size_changed для экономии ресурсов
 	
 	Events.SHOW_PAUSE_MODAL.connect(_show_modal)
 	Events.GAME_ON_LOSE.connect(_lose_modal)
