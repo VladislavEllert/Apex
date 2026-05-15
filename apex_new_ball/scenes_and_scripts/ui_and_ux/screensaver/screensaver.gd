@@ -42,9 +42,9 @@ func _apply_layout() -> void:
 		return
 	var center: Vector2 = r.position + r.size * 0.5
 
-	# Заливка на весь видимый прямоугольник (1×1 CanvasTexture масштабируем).
-	$black_canvas.position = center
-	$black_canvas.scale = Vector2(r.size.x, r.size.y)
+	# Заливка на весь видимый прямоугольник (теперь это ColorRect)
+	$black_canvas.position = r.position
+	$black_canvas.size = r.size
 
 	# Фоновая картинка: режим «cover», чтобы не было полос по бокам.
 	var tex_size: Vector2 = $screen.texture.get_size()
