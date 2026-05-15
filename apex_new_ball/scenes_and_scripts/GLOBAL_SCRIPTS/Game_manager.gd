@@ -4,6 +4,10 @@ var pause_scene
 var music_volume_percent: float = 75.0
 var sfx_volume_percent: float = 100.0
 var control_sensitivity: float = 5.0
+var vsync_enabled: bool = true
+var max_fps: int = 90
+var physics_ticks: int = 180
+var show_fps: bool = true
 var local_save: Dictionary
 
 func _ready() -> void:
@@ -43,21 +47,57 @@ func set_control_sensitivity(value: float) -> void:
 	Events.CONTROL_SENSITIVITY_CHANGED.emit(control_sensitivity)
 	_schedule_save_user_settings()
 
+func set_vsync(enabled: bool) -> void:
+	vsync_enabled = enabled
+	_apply_vsync()
+	_schedule_save_user_settings()
+
+func _apply_vsync() -> void:
+	if vsync_enabled:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	else:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+
+func set_max_fps(value: int) -> void:
+	max_fps = value
+	Engine.max_fps = max_fps
+	_schedule_save_user_settings()
+
+func set_physics_ticks(value: int) -> void:
+	physics_ticks = clamp(value, 30, 300)
+	Engine.physics_ticks_per_second = physics_ticks
+	_schedule_save_user_settings()
+
+func set_show_fps(enabled: bool) -> void:
+	show_fps = enabled
+	_schedule_save_user_settings()
+
 func _load_user_settings() -> void:
 	var settings := SaveManager.load_settings()
 	music_volume_percent = float(settings.get("music_volume", music_volume_percent))
 	sfx_volume_percent = float(settings.get("sfx_volume", sfx_volume_percent))
 	control_sensitivity = float(settings.get("control_sensitivity", control_sensitivity))
+	vsync_enabled = bool(settings.get("vsync_enabled", vsync_enabled))
+	max_fps = int(settings.get("max_fps", max_fps))
+	physics_ticks = int(settings.get("physics_ticks", physics_ticks))
+	show_fps = bool(settings.get("show_fps", show_fps))
 
 func _apply_user_settings() -> void:
 	MusicManager.set_volume_percent(music_volume_percent)
 	SFXManager.set_volume_percent(sfx_volume_percent)
+	_apply_vsync()
+	Engine.max_fps = max_fps
+	Engine.physics_ticks_per_second = physics_ticks
 
 func _save_user_settings() -> void:
 	SaveManager.save_settings({
 		"music_volume": music_volume_percent,
 		"sfx_volume": sfx_volume_percent,
-		"control_sensitivity": control_sensitivity
+		"control_sensitivity": control_sensitivity,
+		"vsync_enabled": vsync_enabled,
+		"max_fps": max_fps,
+		"physics_ticks": physics_ticks,
+		"show_fps": show_fps
 	})
 #endregion
 

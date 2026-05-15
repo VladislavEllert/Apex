@@ -61,10 +61,17 @@ func _ready() -> void:
 	call_deferred("_update_flags")
 
 func _process(delta: float) -> void:
+	if not GameManager.show_fps:
+		if _fps_label and _fps_label.visible:
+			_fps_label.visible = false
+		return
+		
 	_fps_timer += delta
 	if _fps_timer >= 0.5:
 		_fps_timer = 0.0
 		if _fps_label:
+			if not _fps_label.visible:
+				_fps_label.visible = true
 			_fps_label.text = "FPS: " + str(Engine.get_frames_per_second())
 
 func _update_score() -> void:

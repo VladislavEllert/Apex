@@ -93,7 +93,11 @@ func get_default_settings() -> Dictionary:
 	return {
 		"music_volume": 75.0,
 		"sfx_volume": 100.0,
-		"control_sensitivity": 5.0
+		"control_sensitivity": 5.0,
+		"vsync_enabled": true,
+		"max_fps": 90,
+		"physics_ticks": 180,
+		"show_fps": true
 	}
 #endregion
 
@@ -109,7 +113,6 @@ func save_settings(data: Dictionary) -> void:
 		config.set_value(SETTINGS_SECTION, key, data[key])
 
 	config.save(SAVE_PATH)
-	push_warning("SaveManager: настройки сохранены")
 
 
 func load_settings() -> Dictionary:

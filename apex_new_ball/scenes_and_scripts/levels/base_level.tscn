@@ -35,7 +35,7 @@ tile_set = ExtResource("3_twijq")
 position = Vector2(640, 376)
 
 [node name="Camera2D" type="Camera2D" parent="phisics_ball"]
-zoom = Vector2(1.9, 1.9)
+zoom = Vector2(1.6, 1.6)
 process_callback = 0
 limit_left = 0
 limit_top = -2000

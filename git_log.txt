@@ -1,0 +1,1178 @@
+﻿commit 977834575810ee70b84d5b535527308d977671eb
+Author: Kontorin <egor.kontorin567@gmail.com>
+Date:   Fri May 15 13:46:30 2026 +0600
+
+    pref: ╤В╨╡╨┐╨╡╤А╤М ╤А╨░╨╖╤А╨╡╤И╨╡╨╜╨╕╨╡ ╨┐╤А╨╛╤Б╤З╨╕╤В╤Л╨▓╨░╨╡╤В╤Б╤П ╤В╨╛╨╗╤М╨║╨╛ ╨┐╤А╨╕ ╨╛╤В╨║╤А╤Л╤В╨╕╨╕ ╨┐╤А╨╕╨╗╨╛╨╢╨╡╨╜╨╕╨╡, ╨╜╨╡╤В╤Г ╨╝╨╛╨╜╨╕╤В╨╛╤А╨╕╨╜╨│╨░ ╨╕╨╖╨╝╨╡╨╜╨╡╨╜╨╕╤П ╤А╨░╨╖╤А╨╡╤И╨╡╨╜╨╕╤П ╤Н╨║╤А╨░╨╜╨░
+
+diff --git a/apex_new_ball/export_presets.cfg b/apex_new_ball/export_presets.cfg
+index e0031df..63b403c 100644
+--- a/apex_new_ball/export_presets.cfg
++++ b/apex_new_ball/export_presets.cfg
+@@ -9,7 +9,7 @@ custom_features=""
+ export_filter="all_resources"
+ include_filter=""
+ exclude_filter=""
+-export_path="../built/AnvantureBallFixScroll.apk"
++export_path="../built/AnvanturePref.apk"
+ patches=PackedStringArray()
+ encryption_include_filters=""
+ encryption_exclude_filters=""
+@@ -34,7 +34,7 @@ architectures/arm64-v8a=true
+ architectures/x86=false
+ architectures/x86_64=false
+ version/code=1
+-version/name=""
++version/name="AdvantureBall"
+ package/unique_name="com.example.$genname"
+ package/name=""
+ package/signed=true
+diff --git a/apex_new_ball/project.godot b/apex_new_ball/project.godot
+index d241901..15d76f5 100644
+--- a/apex_new_ball/project.godot
++++ b/apex_new_ball/project.godot
+@@ -30,6 +30,7 @@ window/size/viewport_width=1088
+ window/size/viewport_height=800
+ window/stretch/mode="viewport"
+ window/stretch/aspect="expand"
++window/handheld/orientation=4
+ 
+ [editor]
+ 
+diff --git a/apex_new_ball/scenes_and_scripts/player/rigid_body_2d.gd b/apex_new_ball/scenes_and_scripts/player/rigid_body_2d.gd
+index dff34fd..a6528f6 100644
+--- a/apex_new_ball/scenes_and_scripts/player/rigid_body_2d.gd
++++ b/apex_new_ball/scenes_and_scripts/player/rigid_body_2d.gd
+@@ -44,7 +44,7 @@ func _ready():
+ 		global_position = Vector2(values["x"], values["y"])
+ 	$Camera2D.reset_smoothing()
+ 	_apply_adaptive_touch_ui()
+-	get_viewport().size_changed.connect(_apply_adaptive_touch_ui)
++	# ╨г╨▒╤А╨░╨╜╨╛ ╨┐╨╛╤Б╤В╨╛╤П╨╜╨╜╨╛╨╡ ╨┐╤А╨╛╤Б╨╗╤Г╤И╨╕╨▓╨░╨╜╨╕╨╡ size_changed ╨┤╨╗╤П ╤Н╨║╨╛╨╜╨╛╨╝╨╕╨╕ ╤А╨╡╤Б╤Г╤А╤Б╨╛╨▓
+ 	Events.PLAYER_RESPAWN.connect(_respawn_checkpoint)
+ 	Events.CONTROL_SENSITIVITY_CHANGED.connect(_on_control_sensitivity_changed)
+ 
+diff --git a/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd b/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd
+index 17fbcb9..a079a1c 100644
+--- a/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd
++++ b/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd
+@@ -37,7 +37,7 @@ func _ready() -> void:
+ 	music_btn.set_pressed_no_signal(GameManager.music_volume_percent <= 0)
+ 	
+ 	_apply_adaptive_layout()
+-	get_viewport().size_changed.connect(_apply_adaptive_layout)
++	# ╨г╨▒╤А╨░╨╜╨╛ ╨┐╨╛╤Б╤В╨╛╤П╨╜╨╜╨╛╨╡ ╨┐╤А╨╛╤Б╨╗╤Г╤И╨╕╨▓╨░╨╜╨╕╨╡ size_changed ╨┤╨╗╤П ╤Н╨║╨╛╨╜╨╛╨╝╨╕╨╕ ╤А╨╡╤Б╤Г╤А╤Б╨╛╨▓
+ 	
+ 	Events.SHOW_PAUSE_MODAL.connect(_show_modal)
+ 	Events.GAME_ON_LOSE.connect(_lose_modal)
+
+commit 6bf5f35fe042e9f5c9c0eb08c51e92e071085549
+Author: Kontorin <egor.kontorin567@gmail.com>
+Date:   Fri May 15 13:31:10 2026 +0600
+
+    pref: ╤Б╨╛╨╖╨┤╨░╨╜╨╕╨╡ ╨┐╤Г╨╗╨░ ╨╛╨▒╤К╨╡╨║╤В╨╛╨▓ ╨░╤Г╨┤╨╕╨╛╨┐╨╗╨╡╨╡╤А╨░ (╨┤╨╛╨╗╨╢╨╜╨╛ ╤Г╨▒╤А╨░╤В╤М ╤Д╤А╨╕╨╖╤Л ╨┐╤А╨╕ ╤Б╨▒╨╛╤А╨╡ ╨╝╨╛╨╜╨╡╤В)
+
+diff --git a/apex_new_ball/project.godot b/apex_new_ball/project.godot
+index 85213a4..d241901 100644
+--- a/apex_new_ball/project.godot
++++ b/apex_new_ball/project.godot
+@@ -70,10 +70,10 @@ pointing/emulate_touch_from_mouse=true
+ 
+ [physics]
+ 
+-physics/2d/run_on_separate_thread=true
++common/physics_ticks_per_second=180
+ 2d/physics_engine="GodotPhysics"
+ common/physics_interpolation=true
+-common/physics_ticks_per_second=180
++physics/2d/run_on_separate_thread=true
+ textures/vram_compression/import_etc2_astc=true
+ 
+ [rendering]
+diff --git a/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd b/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd
+index 8a68f0c..13c243b 100644
+--- a/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd
++++ b/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd
+@@ -28,8 +28,21 @@ var sfx_volume_db: float = 0.0
+ # ╨Ъ╤Н╤И: ╨╖╨░╨│╤А╤Г╨╢╨░╨╡╨╝ ╨▓╤Б╨╡ ╨╖╨▓╤Г╨║╨╕ ╨╛╨┤╨╕╨╜ ╤А╨░╨╖ ╨┐╤А╨╕ ╤Б╤В╨░╤А╤В╨╡, ╤З╤В╨╛╨▒╤Л ╨╜╨╡ ╤З╨╕╤В╨░╤В╤М ╨┤╨╕╤Б╨║ ╨▓╨╛ ╨▓╤А╨╡╨╝╤П ╨╕╨│╤А╤Л
+ var _cache: Dictionary = {}
+ 
++# ╨Я╤Г╨╗ ╨╖╨▓╤Г╨║╨╛╨▓: ╨╖╨░╤А╨░╨╜╨╡╨╡ ╤Б╨╛╨╖╨┤╨░╨╜╨╜╤Л╨╡ ╤Г╨╖╨╗╤Л
++const POOL_SIZE = 8
++var _pool: Array[AudioStreamPlayer] = []
++var _pool_index: int = 0
++
+ func _ready() -> void:
+ 	_preload_all()
++	
++	# ╨б╨╛╨╖╨┤╨░╨╡╨╝ ╨┐╤Г╨╗ ╨┐╨╗╨╡╨╡╤А╨╛╨▓ ╨╛╨┤╨╕╨╜ ╤А╨░╨╖
++	for i in range(POOL_SIZE):
++		var p = AudioStreamPlayer.new()
++		p.bus = "Master"
++		p.process_mode = Node.PROCESS_MODE_ALWAYS
++		add_child(p)
++		_pool.append(p)
+ 
+ func _preload_all() -> void:
+ 	for path in [CLICK, COIN, BOUNCE, DAMAGE, JUMP, DOOR]:
+@@ -45,20 +58,19 @@ func get_volume_percent() -> float:
+ 	return _db_to_percent(sfx_volume_db)
+ 
+ func play_sfx(path: String, volume: float = 0.0) -> void:
+-	# ╨С╨╡╤А╤С╨╝ ╨┐╨╛╤В╨╛╨║ ╨╕╨╖ ╨║╤Н╤И╨░ тАФ ╨╜╨╡╤В ╤З╤В╨╡╨╜╨╕╤П ╤Б ╨┤╨╕╤Б╨║╨░, ╨╜╨╡╤В ╤Д╤А╨╕╨╖╨░
++	# ╨С╨╡╤А╤С╨╝ ╨┐╨╛╤В╨╛╨║ ╨╕╨╖ ╨║╤Н╤И╨░
+ 	var stream = _cache.get(path)
+ 	if not stream:
+ 		push_warning("SFXManager: ╨╖╨▓╤Г╨║ ╨╜╨╡ ╨▓ ╨║╤Н╤И╨╡ -> " + path)
+ 		return
+ 
+-	var sfx_player = AudioStreamPlayer.new()
+-	add_child(sfx_player)
+-	sfx_player.stream = stream
+-	sfx_player.volume_db = volume + sfx_volume_db
+-	sfx_player.bus = "Master"
+-	sfx_player.process_mode = Node.PROCESS_MODE_ALWAYS
+-	sfx_player.play()
+-	sfx_player.finished.connect(sfx_player.queue_free)
++	# ╨С╨╡╤А╨╡╨╝ ╨┐╨╗╨╡╨╡╤А ╨╕╨╖ ╨┐╤Г╨╗╨░ ╨┐╨╛ ╨║╤А╤Г╨│╤Г
++	var player = _pool[_pool_index]
++	_pool_index = (_pool_index + 1) % POOL_SIZE
++
++	player.stream = stream
++	player.volume_db = volume + sfx_volume_db
++	player.play()
+ 
+ func _percent_to_db(percent: float) -> float:
+ 	var clamped_percent := clampf(percent, 0.0, 100.0)
+
+commit f0bb7a8e2ba9e869f469f9e49361661597ba5d31
+Author: Kontorin <egor.kontorin567@gmail.com>
+Date:   Fri May 15 13:21:55 2026 +0600
+
+    fix: ╨╖╨░╨╝╨╡╨╜╨░ print ╨╜╨░ push_warning, ╨╛╨│╤А╨░╨╜╨╕╤З╨╡╨╜╨╕╨╡ ╤В╨╕╨║╨╛╨▓ ╤Д╨╕╨╖╨╕╨║╤В 180, ╨╛╨│╤А╨░╨╜╨╕╤З╨╡╨╜╨╕╨╡ fps 90, ╨г╨▒╤А╨░╨╜ ╨┐╨╛╤Б╨╗╨╡╨┤╨╜╨╕╨╣ ╨▒╨╗╨╛╨║╨╕╤А╤Г╤О╤Й╨╕╨╣ load() ╨▓ ╨┐╤А╨╛╨╡╨║╤В╨╡
+
+diff --git a/apex_new_ball/project.godot b/apex_new_ball/project.godot
+index 975e8a1..85213a4 100644
+--- a/apex_new_ball/project.godot
++++ b/apex_new_ball/project.godot
+@@ -13,7 +13,7 @@ config_version=5
+ config/name="Apex_New_ball"
+ run/main_scene="res://scenes_and_scripts/ui_and_ux/screensaver/screensaver.tscn"
+ config/features=PackedStringArray("4.4", "GL Compatibility")
+-run/max_fps=60
++run/max_fps=90
+ boot_splash/show_image=false
+ 
+ [autoload]
+@@ -70,8 +70,10 @@ pointing/emulate_touch_from_mouse=true
+ 
+ [physics]
+ 
++physics/2d/run_on_separate_thread=true
+ 2d/physics_engine="GodotPhysics"
+ common/physics_interpolation=true
++common/physics_ticks_per_second=180
+ textures/vram_compression/import_etc2_astc=true
+ 
+ [rendering]
+diff --git a/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/MusicManager.gd b/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/MusicManager.gd
+index 872a840..6f35e58 100644
+--- a/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/MusicManager.gd
++++ b/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/MusicManager.gd
+@@ -56,9 +56,11 @@ func play_track(path: String, volume: float = INF):
+ 		fade_tween.tween_property(current_player, "volume_db", target_volume, 0.5)
+ 		return
+ 
+-	var new_stream = load(path)
++	# ╨Р╤Б╨╕╨╜╤Е╤А╨╛╨╜╨╜╨░╤П ╨╖╨░╨│╤А╤Г╨╖╨║╨░: ╨╖╨░╨┐╤А╨░╤И╨╕╨▓╨░╨╡╨╝ ╤Д╨╛╨╜╨╛╨▓╤Г╤О ╨╖╨░╨│╤А╤Г╨╖╨║╤Г
++	ResourceLoader.load_threaded_request(path)
++	var new_stream = ResourceLoader.load_threaded_get(path)
+ 	if not new_stream:
+-		print("MusicManager: ╨Ю╤И╨╕╨▒╨║╨░ ╨╖╨░╨│╤А╤Г╨╖╨║╨╕ -> ", path)
++		push_warning("MusicManager: ╨Ю╤И╨╕╨▒╨║╨░ ╨╖╨░╨│╤А╤Г╨╖╨║╨╕ -> ", path)
+ 		return
+ 
+ 	if new_stream is AudioStreamOggVorbis:
+diff --git a/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/SAVE_manager.gd b/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/SAVE_manager.gd
+index f5178e9..c2142be 100644
+--- a/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/SAVE_manager.gd
++++ b/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/SAVE_manager.gd
+@@ -109,7 +109,7 @@ func save_settings(data: Dictionary) -> void:
+ 		config.set_value(SETTINGS_SECTION, key, data[key])
+ 
+ 	config.save(SAVE_PATH)
+-	print("SaveManager: ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╤Б╨╛╤Е╤А╨░╨╜╨╡╨╜╤Л")
++	push_warning("SaveManager: ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ ╤Б╨╛╤Е╤А╨░╨╜╨╡╨╜╤Л")
+ 
+ 
+ func load_settings() -> Dictionary:
+@@ -145,7 +145,7 @@ func save_score(player_name: String, score: int) -> void:
+ 	
+ 	config.set_value(LEADERBOARD_SECTION, "entries", leaderboard)
+ 	config.save(SAVE_PATH)
+-	print("SaveManager: ╤А╨╡╨╖╤Г╨╗╤М╤В╨░╤В ╤Б╨╛╤Е╤А╨░╨╜╨╡╨╜ ╨▓ ╤В╨░╨▒╨╗╨╕╤Ж╤Г ╨╗╨╕╨┤╨╡╤А╨╛╨▓")
++	push_warning("SaveManager: ╤А╨╡╨╖╤Г╨╗╤М╤В╨░╤В ╤Б╨╛╤Е╤А╨░╨╜╨╡╨╜ ╨▓ ╤В╨░╨▒╨╗╨╕╤Ж╤Г ╨╗╨╕╨┤╨╡╤А╨╛╨▓")
+ 
+ func get_leaderboard() -> Array:
+ 	var config = ConfigFile.new()
+diff --git a/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd b/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd
+index 837a58f..17fbcb9 100644
+--- a/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd
++++ b/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd
+@@ -97,7 +97,6 @@ func _on_quit_menu_pressed() -> void:
+ 		var final_score = GameManager.local_save["player"]["score"]
+ 		SaveManager.delete()
+ 		GameManager.local_save = SaveManager.get_default_data()
+-		print("╨б╨╡╨╣╨▓ ╤Г╨┤╨░╨╗╨╡╨╜ (0 ╨╢╨╕╨╖╨╜╨╡╨╣), ╨┐╤А╨╡╨┤╨╗╨╛╨╢╨╡╨╜╨╕╨╡ ╨╖╨░╨┐╨╕╤Б╨░╤В╤М ╤А╨╡╨╖╤Г╨╗╤М╤В╨░╤В")
+ 		Events.SHOW_LEADERBOARD_SUBMIT.emit(final_score)
+ 	else:
+ 		SaveManager.save(GameManager.local_save) #╨б╨╛╤Е╤А╨░╨╜╤П╤О ╤В╨╛ ╤З╤В╨╛ ╨▒╤Л╨╗╨╛ ╤Б╨┤╨╡╨╗╨░╨╜╨╛ ╨╖╨░ ╨▓╨▓╤А╨╡╨╝╤П ╨╕╨│╤А╤Л ╨▓ ╤Г╨┤╨░╨╗╨╡╨╜╨╜╤Л╨╣ ╤Б╨╡╨╣╨▓.
+
+commit 65543f573904908307beca285d057b029a0526ad
+Author: Kontorin <egor.kontorin567@gmail.com>
+Date:   Fri May 15 12:41:33 2026 +0600
+
+    feat: ╨┤╨╛╨▒╨░╨▓╨╗╨╡╨╜ ╤Б╤З╨╡╤В╤З╨╕╨║ fps
+
+diff --git a/apex_new_ball/project.godot b/apex_new_ball/project.godot
+index 9abcd0e..975e8a1 100644
+--- a/apex_new_ball/project.godot
++++ b/apex_new_ball/project.godot
+@@ -80,5 +80,3 @@ textures/canvas_textures/default_texture_filter=0
+ renderer/rendering_method="gl_compatibility"
+ renderer/rendering_method.mobile="gl_compatibility"
+ textures/vram_compression/import_etc2_astc=true
+-2d/snap/snap_2d_transforms_to_pixel=false
+-2d/snap/snap_2d_vertices_to_pixel=false
+diff --git a/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd b/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd
+index 9c2c8f5..837a58f 100644
+--- a/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd
++++ b/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd
+@@ -10,6 +10,9 @@ extends Node
+ @onready var music_btn = $modalWindow2/RowsButtons/ToggleMusic
+ @onready var play_btn = $modalWindow2/RowsButtons/Continue
+ 
++var _fps_label: Label
++var _fps_timer: float = 0.0
++
+ 
+ func _ready() -> void:
+ 	#region ╨Ф╨╛╨▒╨░╨▓╨╗╤П╨╡╨╝ ╨▓ ╤Б╤В╨░╤В╤Г╤Б ╨▒╨░╤А ╨╕╨╜╤Д╨╛╤А╨╝╨░╤Ж╨╕╤О ╨▓╨╖╤П╤В╤Г╤О ╨╕╨╖ ╨║╨╛╨╜╤Д╨╕╨│╨░ ╨╛ ╨╢╨╕╨╖╨╜╤П╤Е, ╤Д╨╗╨░╨│╨░╤Е, ╨╕ ╨╛╤З╨║╨░╤Е
+@@ -38,14 +41,32 @@ func _ready() -> void:
+ 	
+ 	Events.SHOW_PAUSE_MODAL.connect(_show_modal)
+ 	Events.GAME_ON_LOSE.connect(_lose_modal)
+-	Events.HIDE_PAUSE_MODAL.connect(_hide_modal)
+-	# ╨Ю╨▒╨╜╨╛╨▓╨╗╤П╨╡╨╝ UI ╤В╨╛╨╗╤М╨║╨╛ ╨┐╨╛ ╤Б╨╕╨│╨╜╨░╨╗╨░╨╝ тАФ ╨╜╨╡╤В ╨╜╨░╨│╤А╤Г╨╖╨║╨╕ ╨▓ _process
++	
++	# ╨Я╨╛╨┤╨║╨╗╤О╤З╨░╨╡╨╝ ╤Б╨╕╨│╨╜╨░╨╗╤Л ╨╛╨▒╨╜╨╛╨▓╨╗╨╡╨╜╨╕╤П UI
+ 	Events.UI_SCORE_UPDATED.connect(_update_score)
+ 	Events.UI_FLAGS_UPDATED.connect(_update_flags)
+ 	Events.UI_LIVES_UPDATED.connect(_update_lives)
+-	# ╨Я╨╡╤А╨▓╨╛╨╜╨░╤З╨░╨╗╤М╨╜╨╛╨╡ ╨╖╨░╨┐╨╛╨╗╨╜╨╡╨╜╨╕╨╡ (flags_total ╨┐╤А╨╕╤Е╨╛╨┤╨╕╤В ╨┐╨╛╤Б╨╗╨╡ _ready, ╨┐╨╛╤Н╤В╨╛╨╝╤Г call_deferred)
++
++	# ╨б╨╛╨╖╨┤╨░╨╡╨╝ Label ╨┤╨╗╤П FPS
++	_fps_label = Label.new()
++	_fps_label.name = "FPSLabel"
++	_fps_label.add_theme_font_size_override("font_size", 24)
++	_fps_label.modulate = Color(1, 1, 1, 0.7)
++	add_child(_fps_label)
++	_fps_label.position = Vector2(20, 80) # ╨Я╨╛╨╖╨╕╤Ж╨╕╤П ╨┐╨╛╨┤ ╤Б╤В╨░╤В╤Г╤Б-╨▒╨░╤А╨╛╨╝
++
++	Events.HIDE_PAUSE_MODAL.connect(_hide_modal)
++	
++	# ╨Я╨╡╤А╨▓╨╛╨╜╨░╤З╨░╨╗╤М╨╜╨╛╨╡ ╨╖╨░╨┐╨╛╨╗╨╜╨╡╨╜╨╕╨╡ (flags_total ╨╝╨╛╨╢╨╡╤В ╨┐╤А╨╕╨╣╤В╨╕ ╤З╤Г╤В╤М ╨┐╨╛╨╖╨╢╨╡)
+ 	call_deferred("_update_flags")
+ 
++func _process(delta: float) -> void:
++	_fps_timer += delta
++	if _fps_timer >= 0.5:
++		_fps_timer = 0.0
++		if _fps_label:
++			_fps_label.text = "FPS: " + str(Engine.get_frames_per_second())
++
+ func _update_score() -> void:
+ 	label3.text = str(GameManager.local_save["player"]["score"])
+ 
+
+commit 129ef60f9805cc1f8fbf27810ef0e520d566d31b
+Author: Kontorin <egor.kontorin567@gmail.com>
+Date:   Fri May 15 12:37:53 2026 +0600
+
+    fix: ╨╛╤В╨╗╤О╤З╤С╨╜ Pixel Snap
+
+diff --git a/apex_new_ball/project.godot b/apex_new_ball/project.godot
+index 2ca816a..9abcd0e 100644
+--- a/apex_new_ball/project.godot
++++ b/apex_new_ball/project.godot
+@@ -80,5 +80,5 @@ textures/canvas_textures/default_texture_filter=0
+ renderer/rendering_method="gl_compatibility"
+ renderer/rendering_method.mobile="gl_compatibility"
+ textures/vram_compression/import_etc2_astc=true
+-2d/snap/snap_2d_transforms_to_pixel=true
+-2d/snap/snap_2d_vertices_to_pixel=true
++2d/snap/snap_2d_transforms_to_pixel=false
++2d/snap/snap_2d_vertices_to_pixel=false
+
+commit 1b20abd65a7b715ef502096b3131c679f07a13f4
+Author: Kontorin <egor.kontorin567@gmail.com>
+Date:   Fri May 15 12:00:25 2026 +0600
+
+    fix: ╤Г╨▒╤А╨░╨╜╨╛ ╨╛╨│╤А╨░╨╜╨╕╤З╨╡╨╜╨╕╨╡ ╨▓ 30 ╤В╨╕╨║╨╛╨▓ ╨┤╨╗╤П ╤Д╨╕╨╖╨╕╨║╨╕, ╨╕╨╖╨╝╨╡╨╜╨╡╨╜╨╛ ╤А╨░╨╖╤А╨╡╤И╨╡╨╜╨╕╨╡ ╨╜╨░ ╨▓ 2 ╤А╨░╨╖╨░ ╨╝╨║╨╡╨╜╤М╤И╨╡╨╡ ╤З╨╡╨╝ ╤Г ╨┐╨╗╨░╨╜╤И╨╡╤В╨░
+
+diff --git a/apex_new_ball/project.godot b/apex_new_ball/project.godot
+index 0bfb769..2ca816a 100644
+--- a/apex_new_ball/project.godot
++++ b/apex_new_ball/project.godot
+@@ -26,8 +26,8 @@ SFXManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd"
+ 
+ [display]
+ 
+-window/size/viewport_width=1280
+-window/size/viewport_height=720
++window/size/viewport_width=1088
++window/size/viewport_height=800
+ window/stretch/mode="viewport"
+ window/stretch/aspect="expand"
+ 
+@@ -72,7 +72,6 @@ pointing/emulate_touch_from_mouse=true
+ 
+ 2d/physics_engine="GodotPhysics"
+ common/physics_interpolation=true
+-common/physics_ticks_per_second=30
+ textures/vram_compression/import_etc2_astc=true
+ 
+ [rendering]
+
+commit 6638438965e5ea6bcb3f10ff24d8d85c5f16857d
+Author: Kontorin <egor.kontorin567@gmail.com>
+Date:   Fri May 15 11:42:28 2026 +0600
+
+    pref: ╨╕╨╖╨╝╨╡╨╜╨╡╨╜╨╕╨╡ ╤А╨╡╨╜╨┤╨╡╤А╨░ ╨╜╨░ viewport ╨╕ ╨╛╨│╤А╨░╨╜╨╕╨▓╨╡╨╜╨╕╨╡ physics_ticks = 30 fps
+
+diff --git a/apex_new_ball/project.godot b/apex_new_ball/project.godot
+index d91aa68..0bfb769 100644
+--- a/apex_new_ball/project.godot
++++ b/apex_new_ball/project.godot
+@@ -28,7 +28,7 @@ SFXManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd"
+ 
+ window/size/viewport_width=1280
+ window/size/viewport_height=720
+-window/stretch/mode="canvas_items"
++window/stretch/mode="viewport"
+ window/stretch/aspect="expand"
+ 
+ [editor]
+@@ -72,6 +72,7 @@ pointing/emulate_touch_from_mouse=true
+ 
+ 2d/physics_engine="GodotPhysics"
+ common/physics_interpolation=true
++common/physics_ticks_per_second=30
+ textures/vram_compression/import_etc2_astc=true
+ 
+ [rendering]
+
+commit c429fd5a0e2b9716265dd10ed868242556815db2
+Author: Kontorin <egor.kontorin567@gmail.com>
+Date:   Fri May 15 11:29:12 2026 +0600
+
+    fix: ╨▓╤Л╨┐╨╛╨╗╨╜╨╡╨╜╨╛ ╨▓╤Л╤А╨░╨╜╨╜╨╕╨▓╨░╨╜╨╕╨╡ ╨┐╨╛ ╨▓╨╛╤А╤В╨╕╨║╨░╨╗╨╕ ╨┐╨╛ ╤Ж╨╡╨╜╤В╤А╤Г ╨▓ ╤Б╤Ж╨╡╨╜╨╡ main_menu
+
+diff --git a/apex_new_ball/project.godot b/apex_new_ball/project.godot
+index 3cd10f7..d91aa68 100644
+--- a/apex_new_ball/project.godot
++++ b/apex_new_ball/project.godot
+@@ -24,10 +24,6 @@ SaveManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/SAVE_manager.gd"
+ MusicManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/MusicManager.gd"
+ SFXManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd"
+ 
+-[debug]
+-
+-settings/stdout/print_fps=false
+-
+ [display]
+ 
+ window/size/viewport_width=1280
+diff --git a/apex_new_ball/scenes_and_scripts/ui_and_ux/menu/main_menu.tscn b/apex_new_ball/scenes_and_scripts/ui_and_ux/menu/main_menu.tscn
+index e43f428..56ee08a 100644
+--- a/apex_new_ball/scenes_and_scripts/ui_and_ux/menu/main_menu.tscn
++++ b/apex_new_ball/scenes_and_scripts/ui_and_ux/menu/main_menu.tscn
+@@ -51,6 +51,7 @@ theme_override_constants/margin_bottom = 10
+ 
+ [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+ layout_mode = 2
++size_flags_vertical = 4
+ 
+ [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+ custom_minimum_size = Vector2(820, 280)
+
+commit 07fdb788c2163a8193118f49ab804cf88bfb041b
+Author: Kontorin <egor.kontorin567@gmail.com>
+Date:   Fri May 15 11:03:30 2026 +0600
+
+    fix: ╨╖╨░╨╝╨╡╨╜╨░ ╤Г╨╖╨╗╨░ CanvasTexture ╨╜╨░ ColorRect ╨▓ screensaver.tcsn
+
+diff --git a/apex_new_ball/scenes_and_scripts/levels/level_5.tscn b/apex_new_ball/scenes_and_scripts/levels/level_5.tscn
+index 49528e0..28c33c7 100644
+--- a/apex_new_ball/scenes_and_scripts/levels/level_5.tscn
++++ b/apex_new_ball/scenes_and_scripts/levels/level_5.tscn
+@@ -19,61 +19,3 @@ metadata/_edit_group_ = true
+ 
+ [node name="Camera2D" parent="phisics_ball" index="3"]
+ limit_right = 5632
+-
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/leftDoor" to="World/GroundAndSceneTile0/leftDoor" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/Flags" to="World/GroundAndSceneTile0/Flags" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/chest" to="World/GroundAndSceneTile0/chest" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21735" to="World/GroundAndSceneTile0/@Area2D@21735" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21736" to="World/GroundAndSceneTile0/@Area2D@21736" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/Spikes" to="World/GroundAndSceneTile0/Spikes" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21737" to="World/GroundAndSceneTile0/@Area2D@21737" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/Coins" to="World/GroundAndSceneTile0/Coins" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21738" to="World/GroundAndSceneTile0/@Area2D@21738" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21739" to="World/GroundAndSceneTile0/@Area2D@21739" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21740" to="World/GroundAndSceneTile0/@Area2D@21740" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21741" to="World/GroundAndSceneTile0/@Area2D@21741" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21742" to="World/GroundAndSceneTile0/@Area2D@21742" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21743" to="World/GroundAndSceneTile0/@Area2D@21743" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21744" to="World/GroundAndSceneTile0/@Area2D@21744" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21745" to="World/GroundAndSceneTile0/@Area2D@21745" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21746" to="World/GroundAndSceneTile0/@Area2D@21746" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21747" to="World/GroundAndSceneTile0/@Area2D@21747" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21748" to="World/GroundAndSceneTile0/@Area2D@21748" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21749" to="World/GroundAndSceneTile0/@Area2D@21749" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21750" to="World/GroundAndSceneTile0/@Area2D@21750" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21751" to="World/GroundAndSceneTile0/@Area2D@21751" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21752" to="World/GroundAndSceneTile0/@Area2D@21752" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21753" to="World/GroundAndSceneTile0/@Area2D@21753" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21754" to="World/GroundAndSceneTile0/@Area2D@21754" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21755" to="World/GroundAndSceneTile0/@Area2D@21755" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21756" to="World/GroundAndSceneTile0/@Area2D@21756" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21757" to="World/GroundAndSceneTile0/@Area2D@21757" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21758" to="World/GroundAndSceneTile0/@Area2D@21758" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21759" to="World/GroundAndSceneTile0/@Area2D@21759" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21760" to="World/GroundAndSceneTile0/@Area2D@21760" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21761" to="World/GroundAndSceneTile0/@Area2D@21761" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21762" to="World/GroundAndSceneTile0/@Area2D@21762" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21763" to="World/GroundAndSceneTile0/@Area2D@21763" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21764" to="World/GroundAndSceneTile0/@Area2D@21764" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21765" to="World/GroundAndSceneTile0/@Area2D@21765" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21766" to="World/GroundAndSceneTile0/@Area2D@21766" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21767" to="World/GroundAndSceneTile0/@Area2D@21767" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21768" to="World/GroundAndSceneTile0/@Area2D@21768" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21769" to="World/GroundAndSceneTile0/@Area2D@21769" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21770" to="World/GroundAndSceneTile0/@Area2D@21770" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21771" to="World/GroundAndSceneTile0/@Area2D@21771" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21772" to="World/GroundAndSceneTile0/@Area2D@21772" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21773" to="World/GroundAndSceneTile0/@Area2D@21773" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21774" to="World/GroundAndSceneTile0/@Area2D@21774" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21775" to="World/GroundAndSceneTile0/@Area2D@21775" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21776" to="World/GroundAndSceneTile0/@Area2D@21776" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21778" to="World/GroundAndSceneTile0/@Area2D@21778" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21779" to="World/GroundAndSceneTile0/@Area2D@21779" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21780" to="World/GroundAndSceneTile0/@Area2D@21780" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21781" to="World/GroundAndSceneTile0/@Area2D@21781" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21782" to="World/GroundAndSceneTile0/@Area2D@21782" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21783" to="World/GroundAndSceneTile0/@Area2D@21783" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21784" to="World/GroundAndSceneTile0/@Area2D@21784" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21785" to="World/GroundAndSceneTile0/@Area2D@21785" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21786" to="World/GroundAndSceneTile0/@Area2D@21786" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21787" to="World/GroundAndSceneTile0/@Area2D@21787" method="_on_body_entered"]
+diff --git a/apex_new_ball/scenes_and_scripts/ui_and_ux/screensaver/screensaver.gd b/apex_new_ball/scenes_and_scripts/ui_and_ux/screensaver/screensaver.gd
+index 93ef58c..b8d8613 100644
+--- a/apex_new_ball/scenes_and_scripts/ui_and_ux/screensaver/screensaver.gd
++++ b/apex_new_ball/scenes_and_scripts/ui_and_ux/screensaver/screensaver.gd
+@@ -42,9 +42,9 @@ func _apply_layout() -> void:
+ 		return
+ 	var center: Vector2 = r.position + r.size * 0.5
+ 
+-	# ╨Ч╨░╨╗╨╕╨▓╨║╨░ ╨╜╨░ ╨▓╨╡╤Б╤М ╨▓╨╕╨┤╨╕╨╝╤Л╨╣ ╨┐╤А╤П╨╝╨╛╤Г╨│╨╛╨╗╤М╨╜╨╕╨║ (1├Ч1 CanvasTexture ╨╝╨░╤Б╤И╤В╨░╨▒╨╕╤А╤Г╨╡╨╝).
+-	$black_canvas.position = center
+-	$black_canvas.scale = Vector2(r.size.x, r.size.y)
++	# ╨Ч╨░╨╗╨╕╨▓╨║╨░ ╨╜╨░ ╨▓╨╡╤Б╤М ╨▓╨╕╨┤╨╕╨╝╤Л╨╣ ╨┐╤А╤П╨╝╨╛╤Г╨│╨╛╨╗╤М╨╜╨╕╨║ (╤В╨╡╨┐╨╡╤А╤М ╤Н╤В╨╛ ColorRect)
++	$black_canvas.position = r.position
++	$black_canvas.size = r.size
+ 
+ 	# ╨д╨╛╨╜╨╛╨▓╨░╤П ╨║╨░╤А╤В╨╕╨╜╨║╨░: ╤А╨╡╨╢╨╕╨╝ ┬лcover┬╗, ╤З╤В╨╛╨▒╤Л ╨╜╨╡ ╨▒╤Л╨╗╨╛ ╨┐╨╛╨╗╨╛╤Б ╨┐╨╛ ╨▒╨╛╨║╨░╨╝.
+ 	var tex_size: Vector2 = $screen.texture.get_size()
+diff --git a/apex_new_ball/scenes_and_scripts/ui_and_ux/screensaver/screensaver.tscn b/apex_new_ball/scenes_and_scripts/ui_and_ux/screensaver/screensaver.tscn
+index 08af24e..a023d1e 100644
+--- a/apex_new_ball/scenes_and_scripts/ui_and_ux/screensaver/screensaver.tscn
++++ b/apex_new_ball/scenes_and_scripts/ui_and_ux/screensaver/screensaver.tscn
+@@ -1,11 +1,9 @@
+-[gd_scene load_steps=7 format=3 uid="uid://dtxlptjo3ssy8"]
++[gd_scene load_steps=6 format=3 uid="uid://dtxlptjo3ssy8"]
+ 
+ [ext_resource type="Script" uid="uid://bhjq7opnfexm5" path="res://scenes_and_scripts/ui_and_ux/screensaver/screensaver.gd" id="1_gng5f"]
+ [ext_resource type="Texture2D" uid="uid://cnad6d5w35lph" path="res://assets/icon/Gemini_Generated_Image_qgld4rqgld4rqgld.png" id="1_xgeda"]
+ [ext_resource type="FontFile" uid="uid://dltrvw7q05hl2" path="res://assets/Fonts/PlaypenSans-SemiBold.ttf" id="3_p4ky1"]
+ 
+-[sub_resource type="CanvasTexture" id="CanvasTexture_p4ky1"]
+-
+ [sub_resource type="RectangleShape2D" id="RectangleShape2D_gng5f"]
+ size = Vector2(1152, 648)
+ 
+@@ -20,10 +18,10 @@ position = Vector2(576, 324)
+ scale = Vector2(0.818182, 0.861702)
+ texture = ExtResource("1_xgeda")
+ 
+-[node name="black_canvas" type="Sprite2D" parent="."]
+-position = Vector2(576, 324)
+-scale = Vector2(1152, 648)
+-texture = SubResource("CanvasTexture_p4ky1")
++[node name="black_canvas" type="ColorRect" parent="."]
++offset_right = 1280.0
++offset_bottom = 720.0
++color = Color(0, 0, 0, 1)
+ 
+ [node name="button" type="TouchScreenButton" parent="."]
+ shape = SubResource("RectangleShape2D_gng5f")
+
+commit 2db6a3d1932653ad95b4857aa3958b39a6724137
+Author: Kontorin <egor.kontorin567@gmail.com>
+Date:   Fri May 15 10:56:02 2026 +0600
+
+    feat: ╨▓╨║╨╗╤О╤З╨╡╨╜╤Л ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ Physics Interpolation ╨╕ Pixel Snap, ╤Г╨┤╨░╨╗╨╕╨╜╤Л ╨╗╨╕╤И╨╜╨╕╨╡ print() ╨╕╨╖ ╨╛╤Б╨╜╨╛╨▓╨╜╨╛╨│╨╛ ╤Ж╨╕╨║╨╗╨░ ╨╕╨│╤А╨╛╨║╨░, ╤Г╨▒╤А╨░╨╜ ╨║╨╛╤Б╤В╤Л╨╗╤М ╨┤╨╗╤П ╤А╨╡╤И╨╡╨╜╨╕╨╡ ╨┐╤А╨╛╨▒╨╗╨╡╨╝╤Л ╤Б ╨╛╤В╤А╨╕╤Б╨╛╨▓╨║╨╛╨╣ ╨┐╨░╤А╨░╨╗╨░╨║╤Б╨░ ╨╜╨░ ╤И╨╕╤А╨╛╨║╨╕╤Е ╤Н╨║╤А╨░╨╜╨░╤Е
+
+diff --git a/apex_new_ball/project.godot b/apex_new_ball/project.godot
+index 636a8bc..3cd10f7 100644
+--- a/apex_new_ball/project.godot
++++ b/apex_new_ball/project.godot
+@@ -13,6 +13,7 @@ config_version=5
+ config/name="Apex_New_ball"
+ run/main_scene="res://scenes_and_scripts/ui_and_ux/screensaver/screensaver.tscn"
+ config/features=PackedStringArray("4.4", "GL Compatibility")
++run/max_fps=60
+ boot_splash/show_image=false
+ 
+ [autoload]
+@@ -23,6 +24,10 @@ SaveManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/SAVE_manager.gd"
+ MusicManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/MusicManager.gd"
+ SFXManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd"
+ 
++[debug]
++
++settings/stdout/print_fps=false
++
+ [display]
+ 
+ window/size/viewport_width=1280
+@@ -67,9 +72,17 @@ pointing/emulate_touch_from_mouse=true
+ 2d_physics/layer_2="signals"
+ 2d_physics/layer_3="player"
+ 
++[physics]
++
++2d/physics_engine="GodotPhysics"
++common/physics_interpolation=true
++textures/vram_compression/import_etc2_astc=true
++
+ [rendering]
+ 
+ textures/canvas_textures/default_texture_filter=0
+ renderer/rendering_method="gl_compatibility"
+ renderer/rendering_method.mobile="gl_compatibility"
+ textures/vram_compression/import_etc2_astc=true
++2d/snap/snap_2d_transforms_to_pixel=true
++2d/snap/snap_2d_vertices_to_pixel=true
+diff --git a/apex_new_ball/scenes_and_scripts/levels/level_1.tscn b/apex_new_ball/scenes_and_scripts/levels/level_1.tscn
+index bcb6b4e..e49b877 100644
+--- a/apex_new_ball/scenes_and_scripts/levels/level_1.tscn
++++ b/apex_new_ball/scenes_and_scripts/levels/level_1.tscn
+@@ -18,34 +18,3 @@ position = Vector2(336, 440)
+ 
+ [node name="Camera2D" parent="phisics_ball" index="3"]
+ limit_right = 4096
+-
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/Flags" to="World/GroundAndSceneTile0/Flags" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/Spikes" to="World/GroundAndSceneTile0/Spikes" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/Coins" to="World/GroundAndSceneTile0/Coins" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24575" to="World/GroundAndSceneTile0/@Area2D@24575" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24576" to="World/GroundAndSceneTile0/@Area2D@24576" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24577" to="World/GroundAndSceneTile0/@Area2D@24577" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24578" to="World/GroundAndSceneTile0/@Area2D@24578" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24579" to="World/GroundAndSceneTile0/@Area2D@24579" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24580" to="World/GroundAndSceneTile0/@Area2D@24580" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24581" to="World/GroundAndSceneTile0/@Area2D@24581" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24582" to="World/GroundAndSceneTile0/@Area2D@24582" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24583" to="World/GroundAndSceneTile0/@Area2D@24583" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24584" to="World/GroundAndSceneTile0/@Area2D@24584" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24585" to="World/GroundAndSceneTile0/@Area2D@24585" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24586" to="World/GroundAndSceneTile0/@Area2D@24586" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24587" to="World/GroundAndSceneTile0/@Area2D@24587" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24588" to="World/GroundAndSceneTile0/@Area2D@24588" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24589" to="World/GroundAndSceneTile0/@Area2D@24589" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24590" to="World/GroundAndSceneTile0/@Area2D@24590" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24591" to="World/GroundAndSceneTile0/@Area2D@24591" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24592" to="World/GroundAndSceneTile0/@Area2D@24592" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24593" to="World/GroundAndSceneTile0/@Area2D@24593" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24594" to="World/GroundAndSceneTile0/@Area2D@24594" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24595" to="World/GroundAndSceneTile0/@Area2D@24595" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24596" to="World/GroundAndSceneTile0/@Area2D@24596" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/leftDoor" to="World/GroundAndSceneTile0/leftDoor" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24597" to="World/GroundAndSceneTile0/@Area2D@24597" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24598" to="World/GroundAndSceneTile0/@Area2D@24598" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24599" to="World/GroundAndSceneTile0/@Area2D@24599" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24600" to="World/GroundAndSceneTile0/@Area2D@24600" method="_on_body_entered"]
+diff --git a/apex_new_ball/scenes_and_scripts/levels/level_5.tscn b/apex_new_ball/scenes_and_scripts/levels/level_5.tscn
+index 28c33c7..49528e0 100644
+--- a/apex_new_ball/scenes_and_scripts/levels/level_5.tscn
++++ b/apex_new_ball/scenes_and_scripts/levels/level_5.tscn
+@@ -19,3 +19,61 @@ metadata/_edit_group_ = true
+ 
+ [node name="Camera2D" parent="phisics_ball" index="3"]
+ limit_right = 5632
++
++[connection signal="body_entered" from="World/GroundAndSceneTile0/leftDoor" to="World/GroundAndSceneTile0/leftDoor" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/Flags" to="World/GroundAndSceneTile0/Flags" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/chest" to="World/GroundAndSceneTile0/chest" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21735" to="World/GroundAndSceneTile0/@Area2D@21735" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21736" to="World/GroundAndSceneTile0/@Area2D@21736" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/Spikes" to="World/GroundAndSceneTile0/Spikes" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21737" to="World/GroundAndSceneTile0/@Area2D@21737" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/Coins" to="World/GroundAndSceneTile0/Coins" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21738" to="World/GroundAndSceneTile0/@Area2D@21738" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21739" to="World/GroundAndSceneTile0/@Area2D@21739" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21740" to="World/GroundAndSceneTile0/@Area2D@21740" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21741" to="World/GroundAndSceneTile0/@Area2D@21741" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21742" to="World/GroundAndSceneTile0/@Area2D@21742" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21743" to="World/GroundAndSceneTile0/@Area2D@21743" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21744" to="World/GroundAndSceneTile0/@Area2D@21744" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21745" to="World/GroundAndSceneTile0/@Area2D@21745" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21746" to="World/GroundAndSceneTile0/@Area2D@21746" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21747" to="World/GroundAndSceneTile0/@Area2D@21747" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21748" to="World/GroundAndSceneTile0/@Area2D@21748" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21749" to="World/GroundAndSceneTile0/@Area2D@21749" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21750" to="World/GroundAndSceneTile0/@Area2D@21750" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21751" to="World/GroundAndSceneTile0/@Area2D@21751" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21752" to="World/GroundAndSceneTile0/@Area2D@21752" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21753" to="World/GroundAndSceneTile0/@Area2D@21753" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21754" to="World/GroundAndSceneTile0/@Area2D@21754" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21755" to="World/GroundAndSceneTile0/@Area2D@21755" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21756" to="World/GroundAndSceneTile0/@Area2D@21756" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21757" to="World/GroundAndSceneTile0/@Area2D@21757" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21758" to="World/GroundAndSceneTile0/@Area2D@21758" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21759" to="World/GroundAndSceneTile0/@Area2D@21759" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21760" to="World/GroundAndSceneTile0/@Area2D@21760" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21761" to="World/GroundAndSceneTile0/@Area2D@21761" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21762" to="World/GroundAndSceneTile0/@Area2D@21762" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21763" to="World/GroundAndSceneTile0/@Area2D@21763" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21764" to="World/GroundAndSceneTile0/@Area2D@21764" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21765" to="World/GroundAndSceneTile0/@Area2D@21765" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21766" to="World/GroundAndSceneTile0/@Area2D@21766" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21767" to="World/GroundAndSceneTile0/@Area2D@21767" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21768" to="World/GroundAndSceneTile0/@Area2D@21768" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21769" to="World/GroundAndSceneTile0/@Area2D@21769" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21770" to="World/GroundAndSceneTile0/@Area2D@21770" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21771" to="World/GroundAndSceneTile0/@Area2D@21771" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21772" to="World/GroundAndSceneTile0/@Area2D@21772" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21773" to="World/GroundAndSceneTile0/@Area2D@21773" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21774" to="World/GroundAndSceneTile0/@Area2D@21774" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21775" to="World/GroundAndSceneTile0/@Area2D@21775" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21776" to="World/GroundAndSceneTile0/@Area2D@21776" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21778" to="World/GroundAndSceneTile0/@Area2D@21778" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21779" to="World/GroundAndSceneTile0/@Area2D@21779" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21780" to="World/GroundAndSceneTile0/@Area2D@21780" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21781" to="World/GroundAndSceneTile0/@Area2D@21781" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21782" to="World/GroundAndSceneTile0/@Area2D@21782" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21783" to="World/GroundAndSceneTile0/@Area2D@21783" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21784" to="World/GroundAndSceneTile0/@Area2D@21784" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21785" to="World/GroundAndSceneTile0/@Area2D@21785" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21786" to="World/GroundAndSceneTile0/@Area2D@21786" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@21787" to="World/GroundAndSceneTile0/@Area2D@21787" method="_on_body_entered"]
+diff --git a/apex_new_ball/scenes_and_scripts/player/rigid_body_2d.gd b/apex_new_ball/scenes_and_scripts/player/rigid_body_2d.gd
+index 965df31..dff34fd 100644
+--- a/apex_new_ball/scenes_and_scripts/player/rigid_body_2d.gd
++++ b/apex_new_ball/scenes_and_scripts/player/rigid_body_2d.gd
+@@ -39,7 +39,6 @@ func _ready():
+ 	acceleration_speed = GameManager.control_sensitivity
+ 	spawn_position = global_position
+ 	$AnimatedSprite2D.play()
+-	print(global_position)
+ 	if GameManager.local_save["level"]["checkpoint_position"]["x"] !=0 or GameManager.local_save["level"]["checkpoint_position"]["y"] !=0:
+ 		var values = GameManager.local_save["level"]["checkpoint_position"]
+ 		global_position = Vector2(values["x"], values["y"])
+diff --git a/apex_new_ball/scenes_and_scripts/ui_and_ux/parallax/parallax.gd b/apex_new_ball/scenes_and_scripts/ui_and_ux/parallax/parallax.gd
+index 5b6c1ce..5aa650a 100644
+--- a/apex_new_ball/scenes_and_scripts/ui_and_ux/parallax/parallax.gd
++++ b/apex_new_ball/scenes_and_scripts/ui_and_ux/parallax/parallax.gd
+@@ -13,7 +13,8 @@ func get_anchor_bottom_extent() -> float:
+ 
+ func _ready() -> void:
+ 	_update_autoscroll()
+-	_add_extra_parallax_repeat_coverage()
++	_update_dynamic_repeat()
++	get_tree().root.size_changed.connect(_update_dynamic_repeat)
+ 
+ func _update_autoscroll() -> void:
+ 	var s = 1.0 if autoscroll_surfaces else 0.0
+@@ -29,17 +30,16 @@ func _update_autoscroll() -> void:
+ 	if has_node("Surface4"): $Surface4.autoscroll = Vector2(-40, 0) * s
+ 	if has_node("Surface5"): $Surface5.autoscroll = Vector2(-50, 0) * s
+ 
+-func _add_extra_parallax_repeat_coverage() -> void:
+-	if extra_repeat_tiles <= 0: return
++func _update_dynamic_repeat() -> void:
++	var viewport_width = get_viewport().get_visible_rect().size.x
++	
+ 	for layer in get_children():
+ 		if not layer is Parallax2D: continue
++		
+ 		var rs = layer.repeat_size
+ 		if rs.x <= 0: continue
+-		var spr = []
+-		for c in layer.get_children():
+-			if c is Sprite2D: spr.append(c)
+-		for s in spr:
+-			for i in range(1, extra_repeat_tiles + 1):
+-				var copy = s.duplicate()
+-				copy.position = s.position + Vector2(rs.x * i, 0)
+-				layer.add_child(copy)
++		
++		# ╨Т╤Л╤Б╤З╨╕╤В╤Л╨▓╨░╨╡╨╝ ╤Б╨║╨╛╨╗╤М╨║╨╛ ╤А╨░╨╖ ╨╜╤Г╨╢╨╜╨╛ ╨┐╨╛╨▓╤В╨╛╤А╨╕╤В╤М ╤В╨╡╨║╤Б╤В╤Г╤А╤Г, ╤З╤В╨╛╨▒╤Л ╨╖╨░╨║╤А╤Л╤В╤М ╨▓╨╡╤Б╤М ╤Н╨║╤А╨░╨╜
++		# ╨Я╨╗╤О╤Б 2 ╨┤╨╗╤П ╨╖╨░╨┐╨░╤Б╨░ ╨┐╤А╨╕ ╨┐╤А╨╛╨║╤А╤Г╤В╨║╨╡
++		var needed_repeats = int(ceil(viewport_width / rs.x)) + 2
++		layer.repeat_times = max(1, needed_repeats)
+
+commit 0fd06eb9448c9f3301655e000ab12e1eb8ddce76
+Author: Kontorin <egor.kontorin567@gmail.com>
+Date:   Thu May 14 22:53:34 2026 +0600
+
+    feat: ╨┤╨╛╨▒╨░╨▓╨╗╨╡╨╜╨╛ ╨║╨╡╤И╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╨╖╨▓╤Г╨║╨╛╨▓ ╨┤╨╗╤П ╨╛╨┐╤В╨╕╨╝╨╕╨╖╨░╤Ж╨╕╨╕ ╨▓╨╛╤Б╨┐╤А╨╛╨╕╨╖╨▓╨╡╨┤╨╡╨╜╨╕╤П
+
+diff --git a/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/Events.gd b/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/Events.gd
+index 1ea407c..6b0db1d 100644
+--- a/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/Events.gd
++++ b/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/Events.gd
+@@ -36,3 +36,12 @@ signal CONTROL_SENSITIVITY_CHANGED(value)
+ @warning_ignore("unused_signal")
+ signal SHOW_LEADERBOARD_SUBMIT(score)
+ 
++# ╨б╨╕╨│╨╜╨░╨╗╤Л ╨┤╨╗╤П ╨╛╨▒╨╜╨╛╨▓╨╗╨╡╨╜╨╕╤П UI (╨▓╨╝╨╡╤Б╤В╨╛ polling ╨▓ _process)
++@warning_ignore("unused_signal")
++signal UI_SCORE_UPDATED
++
++@warning_ignore("unused_signal")
++signal UI_FLAGS_UPDATED
++
++@warning_ignore("unused_signal")
++signal UI_LIVES_UPDATED
+diff --git a/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/Game_manager.gd b/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/Game_manager.gd
+index 0eb2a0e..5590c47 100644
+--- a/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/Game_manager.gd
++++ b/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/Game_manager.gd
+@@ -1,9 +1,5 @@
+ extends Node
+ 
+-var coin = 0
+-var flag = 0
+-var live = 0
+-var resp = 0
+ var pause_scene
+ var music_volume_percent: float = 75.0
+ var sfx_volume_percent: float = 100.0
+@@ -77,24 +73,24 @@ func _schedule_save_user_settings() -> void:
+ #region ╨д╨╗╨░╨│╨╕ ╨┤╨╗╤П ╨╕╨╖╨╝╨╡╨╜╨╡╨╜╨╕╨╣ ╨▓ ╤Б╨╡╨╣╨▓
+ func _touch(sprite):
+ 	sprite.animation = "flag"
+-	flag += 1
++	Events.UI_FLAGS_UPDATED.emit()
+ 
+ func _respa():
+-	resp += 1
++	pass
+ 
+ func _collect(sprite):
+ 	sprite.modulate.a = 0
+-	coin += 1
++	Events.UI_SCORE_UPDATED.emit()
+ 
+ func _chest(sprite):
+ 	sprite.animation = "chest"
+-	coin += 1
++	Events.UI_SCORE_UPDATED.emit()
+ 
+ func _heal(sprite):
+ 	if sprite:
+ 		sprite.modulate.a = 0
+-	live += 1
+ 	SaveManager.save(local_save)
++	Events.UI_LIVES_UPDATED.emit()
+ 
+ func _door(sprite):
+ 	sprite.animation = "open"
+diff --git a/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd b/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd
+index ed7dc47..8a68f0c 100644
+--- a/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd
++++ b/apex_new_ball/scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd
+@@ -1,8 +1,8 @@
+ extends Node
+ 
+ # ╨г╨╜╨╕╨▓╨╡╤А╤Б╨░╨╗╤М╨╜╨░╤П ╤Д╤Г╨╜╨║╤Ж╨╕╤П ╨┤╨╗╤П ╨┐╤А╨╛╨╕╨│╤А╤Л╨▓╨░╨╜╨╕╤П ╨╖╨▓╤Г╨║╨╛╨▓╤Л╤Е ╤Н╤Д╤Д╨╡╨║╤В╨╛╨▓.
+-# ╨Т╤Л╨╖╤Л╨▓╨░╨╡╤В╤Б╤П ╨▓╤А╤Г╤З╨╜╤Г╤О: SFXManager.play_sfx("res://path/to/sound.wav")
+-# path: ╨┐╤Г╤В╤М ╨║ ╨░╤Г╨┤╨╕╨╛╤Д╨░╨╣╨╗╤Г
++# ╨Т╤Л╨╖╤Л╨▓╨░╨╡╤В╤Б╤П ╨▓╤А╤Г╤З╨╜╤Г╤О: SFXManager.play_sfx(SFXManager.JUMP, SFXManager.JUMP_VOLUME)
++# path: ╨║╨╛╨╜╤Б╤В╨░╨╜╤В╨░ ╨┐╤Г╤В╨╕ ╨║ ╨░╤Г╨┤╨╕╨╛╤Д╨░╨╣╨╗╤Г
+ # volume: ╨│╤А╨╛╨╝╨║╨╛╤Б╤В╤М ╨▓ ╨┤╨╡╤Ж╨╕╨▒╨╡╨╗╨░╤Е (0.0 - ╨╜╨╛╤А╨╝╨░)
+ 
+ # ╨Ъ╨░╤В╨░╨╗╨╛╨│ ╨╖╨▓╤Г╨║╨╛╨▓
+@@ -14,7 +14,8 @@ const JUMP = "res://assets/sound/jump.wav"
+ const DOOR = "res://assets/sound/door.ogg"
+ 
+ const CLICK_VOLUME = 5.0
+-const JUPM_VOLUME = -20.0
++const JUMP_VOLUME = -20.0
++const JUPM_VOLUME = -20.0  # ╤Г╤Б╤В╨░╤А╨╡╨▓╤И╨╕╨╣ ╨░╨╗╨╕╨░╤Б, ╨╛╤Б╤В╨░╨▓╨╗╨╡╨╜ ╨┤╨╗╤П ╨╛╨▒╤А╨░╤В╨╜╨╛╨╣ ╤Б╨╛╨▓╨╝╨╡╤Б╤В╨╕╨╝╨╛╤Б╤В╨╕
+ const COIN_VOLUME = -10.0
+ const DAMAGE_VOLUME = 2.0
+ const DOOR_VOLUME = 0.0
+@@ -24,32 +25,39 @@ const MUTED_VOLUME_DB := -80.0
+ 
+ var sfx_volume_db: float = 0.0
+ 
++# ╨Ъ╤Н╤И: ╨╖╨░╨│╤А╤Г╨╢╨░╨╡╨╝ ╨▓╤Б╨╡ ╨╖╨▓╤Г╨║╨╕ ╨╛╨┤╨╕╨╜ ╤А╨░╨╖ ╨┐╤А╨╕ ╤Б╤В╨░╤А╤В╨╡, ╤З╤В╨╛╨▒╤Л ╨╜╨╡ ╤З╨╕╤В╨░╤В╤М ╨┤╨╕╤Б╨║ ╨▓╨╛ ╨▓╤А╨╡╨╝╤П ╨╕╨│╤А╤Л
++var _cache: Dictionary = {}
++
++func _ready() -> void:
++	_preload_all()
++
++func _preload_all() -> void:
++	for path in [CLICK, COIN, BOUNCE, DAMAGE, JUMP, DOOR]:
++		if ResourceLoader.exists(path):
++			_cache[path] = load(path)
++		else:
++			push_warning("SFXManager: ╤Д╨░╨╣╨╗ ╨╜╨╡ ╨╜╨░╨╣╨┤╨╡╨╜ ╨┐╤А╨╕ ╨┐╤А╨╡╨┤╨╖╨░╨│╤А╤Г╨╖╨║╨╡ -> " + path)
++
+ func set_volume_percent(percent: float) -> void:
+ 	sfx_volume_db = _percent_to_db(percent)
+ 
+ func get_volume_percent() -> float:
+ 	return _db_to_percent(sfx_volume_db)
+ 
+-func play_sfx(path: String, volume: float = 0.0):
+-	if not ResourceLoader.exists(path):
+-		print("SFXManager: ╨д╨░╨╣╨╗ ╨╜╨╡ ╨╜╨░╨╣╨┤╨╡╨╜ -> ", path)
+-		return
+-
+-	var stream = load(path)
++func play_sfx(path: String, volume: float = 0.0) -> void:
++	# ╨С╨╡╤А╤С╨╝ ╨┐╨╛╤В╨╛╨║ ╨╕╨╖ ╨║╤Н╤И╨░ тАФ ╨╜╨╡╤В ╤З╤В╨╡╨╜╨╕╤П ╤Б ╨┤╨╕╤Б╨║╨░, ╨╜╨╡╤В ╤Д╤А╨╕╨╖╨░
++	var stream = _cache.get(path)
+ 	if not stream:
++		push_warning("SFXManager: ╨╖╨▓╤Г╨║ ╨╜╨╡ ╨▓ ╨║╤Н╤И╨╡ -> " + path)
+ 		return
+ 
+ 	var sfx_player = AudioStreamPlayer.new()
+ 	add_child(sfx_player)
+-
+ 	sfx_player.stream = stream
+ 	sfx_player.volume_db = volume + sfx_volume_db
+ 	sfx_player.bus = "Master"
+-
+ 	sfx_player.process_mode = Node.PROCESS_MODE_ALWAYS
+-
+ 	sfx_player.play()
+-
+ 	sfx_player.finished.connect(sfx_player.queue_free)
+ 
+ func _percent_to_db(percent: float) -> float:
+diff --git a/apex_new_ball/scenes_and_scripts/levels/level_1.tscn b/apex_new_ball/scenes_and_scripts/levels/level_1.tscn
+index e49b877..bcb6b4e 100644
+--- a/apex_new_ball/scenes_and_scripts/levels/level_1.tscn
++++ b/apex_new_ball/scenes_and_scripts/levels/level_1.tscn
+@@ -18,3 +18,34 @@ position = Vector2(336, 440)
+ 
+ [node name="Camera2D" parent="phisics_ball" index="3"]
+ limit_right = 4096
++
++[connection signal="body_entered" from="World/GroundAndSceneTile0/Flags" to="World/GroundAndSceneTile0/Flags" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/Spikes" to="World/GroundAndSceneTile0/Spikes" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/Coins" to="World/GroundAndSceneTile0/Coins" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24575" to="World/GroundAndSceneTile0/@Area2D@24575" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24576" to="World/GroundAndSceneTile0/@Area2D@24576" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24577" to="World/GroundAndSceneTile0/@Area2D@24577" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24578" to="World/GroundAndSceneTile0/@Area2D@24578" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24579" to="World/GroundAndSceneTile0/@Area2D@24579" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24580" to="World/GroundAndSceneTile0/@Area2D@24580" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24581" to="World/GroundAndSceneTile0/@Area2D@24581" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24582" to="World/GroundAndSceneTile0/@Area2D@24582" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24583" to="World/GroundAndSceneTile0/@Area2D@24583" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24584" to="World/GroundAndSceneTile0/@Area2D@24584" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24585" to="World/GroundAndSceneTile0/@Area2D@24585" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24586" to="World/GroundAndSceneTile0/@Area2D@24586" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24587" to="World/GroundAndSceneTile0/@Area2D@24587" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24588" to="World/GroundAndSceneTile0/@Area2D@24588" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24589" to="World/GroundAndSceneTile0/@Area2D@24589" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24590" to="World/GroundAndSceneTile0/@Area2D@24590" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24591" to="World/GroundAndSceneTile0/@Area2D@24591" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24592" to="World/GroundAndSceneTile0/@Area2D@24592" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24593" to="World/GroundAndSceneTile0/@Area2D@24593" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24594" to="World/GroundAndSceneTile0/@Area2D@24594" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24595" to="World/GroundAndSceneTile0/@Area2D@24595" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24596" to="World/GroundAndSceneTile0/@Area2D@24596" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/leftDoor" to="World/GroundAndSceneTile0/leftDoor" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24597" to="World/GroundAndSceneTile0/@Area2D@24597" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24598" to="World/GroundAndSceneTile0/@Area2D@24598" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24599" to="World/GroundAndSceneTile0/@Area2D@24599" method="_on_body_entered"]
++[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@24600" to="World/GroundAndSceneTile0/@Area2D@24600" method="_on_body_entered"]
+diff --git a/apex_new_ball/scenes_and_scripts/levels/level_5.tscn b/apex_new_ball/scenes_and_scripts/levels/level_5.tscn
+index 0950fea..28c33c7 100644
+--- a/apex_new_ball/scenes_and_scripts/levels/level_5.tscn
++++ b/apex_new_ball/scenes_and_scripts/levels/level_5.tscn
+@@ -19,61 +19,3 @@ metadata/_edit_group_ = true
+ 
+ [node name="Camera2D" parent="phisics_ball" index="3"]
+ limit_right = 5632
+-
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/leftDoor" to="World/GroundAndSceneTile0/leftDoor" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/Flags" to="World/GroundAndSceneTile0/Flags" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/chest" to="World/GroundAndSceneTile0/chest" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129867" to="World/GroundAndSceneTile0/@Area2D@129867" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129868" to="World/GroundAndSceneTile0/@Area2D@129868" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/Spikes" to="World/GroundAndSceneTile0/Spikes" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129869" to="World/GroundAndSceneTile0/@Area2D@129869" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/Coins" to="World/GroundAndSceneTile0/Coins" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129870" to="World/GroundAndSceneTile0/@Area2D@129870" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129871" to="World/GroundAndSceneTile0/@Area2D@129871" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129872" to="World/GroundAndSceneTile0/@Area2D@129872" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129873" to="World/GroundAndSceneTile0/@Area2D@129873" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129874" to="World/GroundAndSceneTile0/@Area2D@129874" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129875" to="World/GroundAndSceneTile0/@Area2D@129875" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129876" to="World/GroundAndSceneTile0/@Area2D@129876" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129877" to="World/GroundAndSceneTile0/@Area2D@129877" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129878" to="World/GroundAndSceneTile0/@Area2D@129878" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129879" to="World/GroundAndSceneTile0/@Area2D@129879" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129880" to="World/GroundAndSceneTile0/@Area2D@129880" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129881" to="World/GroundAndSceneTile0/@Area2D@129881" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129882" to="World/GroundAndSceneTile0/@Area2D@129882" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129883" to="World/GroundAndSceneTile0/@Area2D@129883" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129884" to="World/GroundAndSceneTile0/@Area2D@129884" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129885" to="World/GroundAndSceneTile0/@Area2D@129885" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129886" to="World/GroundAndSceneTile0/@Area2D@129886" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129887" to="World/GroundAndSceneTile0/@Area2D@129887" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129888" to="World/GroundAndSceneTile0/@Area2D@129888" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129889" to="World/GroundAndSceneTile0/@Area2D@129889" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129890" to="World/GroundAndSceneTile0/@Area2D@129890" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129891" to="World/GroundAndSceneTile0/@Area2D@129891" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129892" to="World/GroundAndSceneTile0/@Area2D@129892" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129893" to="World/GroundAndSceneTile0/@Area2D@129893" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129894" to="World/GroundAndSceneTile0/@Area2D@129894" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129895" to="World/GroundAndSceneTile0/@Area2D@129895" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129896" to="World/GroundAndSceneTile0/@Area2D@129896" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129897" to="World/GroundAndSceneTile0/@Area2D@129897" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129898" to="World/GroundAndSceneTile0/@Area2D@129898" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129899" to="World/GroundAndSceneTile0/@Area2D@129899" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129900" to="World/GroundAndSceneTile0/@Area2D@129900" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129901" to="World/GroundAndSceneTile0/@Area2D@129901" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129902" to="World/GroundAndSceneTile0/@Area2D@129902" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129903" to="World/GroundAndSceneTile0/@Area2D@129903" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129904" to="World/GroundAndSceneTile0/@Area2D@129904" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129905" to="World/GroundAndSceneTile0/@Area2D@129905" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129906" to="World/GroundAndSceneTile0/@Area2D@129906" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129907" to="World/GroundAndSceneTile0/@Area2D@129907" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129908" to="World/GroundAndSceneTile0/@Area2D@129908" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129910" to="World/GroundAndSceneTile0/@Area2D@129910" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129911" to="World/GroundAndSceneTile0/@Area2D@129911" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129912" to="World/GroundAndSceneTile0/@Area2D@129912" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129913" to="World/GroundAndSceneTile0/@Area2D@129913" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129914" to="World/GroundAndSceneTile0/@Area2D@129914" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129915" to="World/GroundAndSceneTile0/@Area2D@129915" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129916" to="World/GroundAndSceneTile0/@Area2D@129916" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@129917" to="World/GroundAndSceneTile0/@Area2D@129917" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@131271" to="World/GroundAndSceneTile0/@Area2D@131271" method="_on_body_entered"]
+-[connection signal="body_entered" from="World/GroundAndSceneTile0/@Area2D@131272" to="World/GroundAndSceneTile0/@Area2D@131272" method="_on_body_entered"]
+diff --git a/apex_new_ball/scenes_and_scripts/templates/coin/coins.gd b/apex_new_ball/scenes_and_scripts/templates/coin/coins.gd
+index 7e1bfbd..938e7a4 100644
+--- a/apex_new_ball/scenes_and_scripts/templates/coin/coins.gd
++++ b/apex_new_ball/scenes_and_scripts/templates/coin/coins.gd
+@@ -17,11 +17,11 @@ func _on_body_entered(_body: Node2D) -> void:
+ 	#region ╨Я╤А╨╕ ╤Б╤А╨░╨▒╨░╤В╤Л╨▓╨░╨╜╨╕╨╕ ╤Б╨╕╨│╨╜╨░╨╗╨░ ╤Б╨╛╨▒╨╕╤А╨░╨╡╤В ╨╝╨╛╨╜╨╡╤В╤Г, ╨╖╨░╨┐╨╕╤Б╤Л╨▓╨░╨╡╤В ╨╕╨╜╨╛╤Д╤А╨╝╨░╤Ж╨╕╤О ╨▓ ╤Б╨╡╨╣╨▓
+ 	if flag == false:
+ 		SFXManager.play_sfx(SFXManager.COIN, SFXManager.COIN_VOLUME)
+-		Events.COLLECTING_COINS.emit($AnimatedSprite2D)
+ 		GameManager.local_save["player"]["score"] = GameManager.local_save["player"]["score"] + 10
+ 		GameManager.local_save["level"]["coins_collected_coordinates_level"].append({
+ 			"x": position.x,
+ 			"y": position.y
+ 		})
++		Events.COLLECTING_COINS.emit($AnimatedSprite2D)
+ 		flag = true
+ 	#endregion
+diff --git a/apex_new_ball/scenes_and_scripts/templates/door/door.gd b/apex_new_ball/scenes_and_scripts/templates/door/door.gd
+index d14c842..e9ec0d6 100644
+--- a/apex_new_ball/scenes_and_scripts/templates/door/door.gd
++++ b/apex_new_ball/scenes_and_scripts/templates/door/door.gd
+@@ -6,10 +6,15 @@ func _ready() -> void:
+ 	$AnimatedSprite2D.play()
+ 
+ func _on_body_entered(_body: Node2D) -> void:
++	# ╨С╨╗╨╛╨║╨╕╤А╤Г╨╡╨╝ ╨┐╨╛╨▓╤В╨╛╤А╨╜╤Л╨╣ ╨▓╤Е╨╛╨┤ ╤Б╤А╨░╨╖╤Г, ╨┤╨╛ await, ╤З╤В╨╛╨▒╤Л ╨╜╨╡ ╨▒╤Л╨╗╨╛ ╨┤╨▓╨╛╨╣╨╜╨╛╨╣ ╤Б╨╝╨╡╨╜╤Л ╤Б╤Ж╨╡╨╜╤Л
++	if flag:
++		return
++	
+ 	var loads = GameManager.local_save
+ 	var total = loads["level"]["flags_total"]
+ 	var collected = loads["level"]["flags_collected"]
+ 	if int(total) == int(collected):
++		flag = true  # ╤Б╤В╨░╨▓╨╕╨╝ ╨┤╨╛ await, ╨╕╨╜╨░╤З╨╡ ╨╝╤П╤З ╨╝╨╛╨╢╨╡╤В ╨▓╨╛╨╣╤В╨╕ ╨╡╤Й╤С ╤А╨░╨╖ ╨╖╨░ 0.5╤Б
+ 		SFXManager.play_sfx(SFXManager.DOOR, SFXManager.DOOR_VOLUME)
+ 		Events.OPEN_THE_DOOR.emit($AnimatedSprite2D)
+ 		await get_tree().create_timer(0.5).timeout
+@@ -29,6 +34,3 @@ func _on_body_entered(_body: Node2D) -> void:
+ 				get_tree().change_scene_to_file(loads["level"]["current_scene"])
+ 			else:
+ 				Events.SHOW_LEADERBOARD_SUBMIT.emit(loads["player"]["score"])
+-
+-		flag = true
+-	pass
+diff --git a/apex_new_ball/scenes_and_scripts/templates/flag/flag.gd b/apex_new_ball/scenes_and_scripts/templates/flag/flag.gd
+index 7430c37..7058811 100644
+--- a/apex_new_ball/scenes_and_scripts/templates/flag/flag.gd
++++ b/apex_new_ball/scenes_and_scripts/templates/flag/flag.gd
+@@ -16,7 +16,6 @@ func _ready() -> void:
+ func _on_body_entered(_body: Node2D) -> void:
+ 	#region ╨Я╤А╨╕ ╤Б╤А╨░╨▒╨░╤В╤Л╨▓╨░╨╜╨╕╨╕ ╤Б╨╕╨│╨╜╨░╨╗╨░ ╨░╨║╤В╨╕╨▓╨╕╤А╤Г╨╡╤В ╤Д╨╗╨░╨│, ╨╖╨░╨┐╨╕╤Б╤Л╨▓╨░╨╡╤В ╨╕╨╜╨╛╤Д╤А╨╝╨░╤Ж╨╕╤О ╨▓ ╤Б╨╡╨╣╨▓ ╨╕ ╤Б╤В╨░╨▓╨╕╤В ╤З╨╡╨║╨┐╨╛╨╕╨╜╤В ╨╜╨░ ╨┐╨╛╤Б╨╗╨╡╨┤╨╜╨╡╨╝ ╤Б╨╛╨▒╤А╨░╨╜╨╜╨╛╨╝ ╤Д╨╗╨░╨│╨╡
+ 	if  flag == false:
+-		Events.TOUCHING_THE_FLAG.emit($AnimatedSprite2D)
+ 		GameManager.local_save["level"]["flags_collected"] = GameManager.local_save["level"]["flags_collected"] + 1
+ 		GameManager.local_save["level"]["flags_collected_coordinates_level"].append({
+ 			"x": position.x,
+@@ -26,5 +25,6 @@ func _on_body_entered(_body: Node2D) -> void:
+ 			"x": position.x,
+ 			"y": position.y
+ 		}
++		Events.TOUCHING_THE_FLAG.emit($AnimatedSprite2D)
+ 		flag = true
+ 	#endregion
+diff --git a/apex_new_ball/scenes_and_scripts/templates/life/life.gd b/apex_new_ball/scenes_and_scripts/templates/life/life.gd
+index 2737ad2..769e4d1 100644
+--- a/apex_new_ball/scenes_and_scripts/templates/life/life.gd
++++ b/apex_new_ball/scenes_and_scripts/templates/life/life.gd
+@@ -19,7 +19,7 @@ func _ready() -> void:
+ 			return
+ 	#endregion
+ 
+-func _on_body_entered(body: Node2D) -> void:
++func _on_body_entered(_body: Node2D) -> void:
+ 	# ╨Я╤А╨╛╨▓╨╡╤А╤П╨╡╨╝, ╤З╤В╨╛ ╨┐╤А╨╡╨┤╨╝╨╡╤В ╨╡╤Й╨╡ ╨╜╨╡ ╤Б╨╛╨▒╤А╨░╨╜
+ 	if flag == false:
+ 		var current_lives = GameManager.local_save["player"]["lives"]
+@@ -30,12 +30,6 @@ func _on_body_entered(body: Node2D) -> void:
+ 			# ╨Т╨╛╤Б╨┐╤А╨╛╨╕╨╖╨▓╨╛╨┤╨╕╨╝ ╨╖╨▓╤Г╨║ (╨┐╨╛╨║╨░ ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╨╝ ╨╖╨▓╤Г╨║ ╨╝╨╛╨╜╨╡╤В╨║╨╕ ╨║╨░╨║ ╨┐╨╗╨╡╨╣╤Б╤Е╨╛╨╗╨┤╨╡╤А)
+ 			SFXManager.play_sfx(SFXManager.COIN, SFXManager.COIN_VOLUME)
+ 			
+-			# ╨н╨╝╨╕╤В╨╕╨╝ ╤Б╨╕╨│╨╜╨░╨╗ ╤Б ╨┐╨╡╤А╨╡╨┤╨░╤З╨╡╨╣ ╤Б╨┐╤А╨░╨╣╤В╨░ ╨┤╨╗╤П ╤Б╨║╤А╤Л╤В╨╕╤П
+-			var sprite = get_node_or_null("AnimatedSprite2D")
+-			if not sprite:
+-				sprite = get_node_or_null("Sprite2D")
+-			Events.HEALING.emit(sprite)
+-			
+ 			# ╨Ф╨╛╨▒╨░╨▓╨╗╤П╨╡╨╝ ╨╢╨╕╨╖╨╜╤М
+ 			GameManager.local_save["player"]["lives"] += 1
+ 			
+@@ -46,5 +40,11 @@ func _on_body_entered(body: Node2D) -> void:
+ 					"y": position.y
+ 				})
+ 			
++			# ╨н╨╝╨╕╤В╨╕╨╝ ╤Б╨╕╨│╨╜╨░╨╗ ╤Б ╨┐╨╡╤А╨╡╨┤╨░╤З╨╡╨╣ ╤Б╨┐╤А╨░╨╣╤В╨░ ╨┤╨╗╤П ╤Б╨║╤А╤Л╤В╨╕╤П
++			var sprite = get_node_or_null("AnimatedSprite2D")
++			if not sprite:
++				sprite = get_node_or_null("Sprite2D")
++			Events.HEALING.emit(sprite)
++			
+ 			flag = true
+ 			queue_free() # ╨г╨┤╨░╨╗╤П╨╡╨╝ ╨╛╨▒╤К╨╡╨║╤В ╤Б╨╛ ╤Б╤Ж╨╡╨╜╤Л, ╤З╤В╨╛╨▒╤Л ╨╛╨╜ 100% ╨╕╤Б╤З╨╡╨╖
+diff --git a/apex_new_ball/scenes_and_scripts/templates/spike/spike.gd b/apex_new_ball/scenes_and_scripts/templates/spike/spike.gd
+index 09a6b14..1b1aa4f 100644
+--- a/apex_new_ball/scenes_and_scripts/templates/spike/spike.gd
++++ b/apex_new_ball/scenes_and_scripts/templates/spike/spike.gd
+@@ -6,8 +6,6 @@ func _ready() -> void:
+ func _on_body_entered(_body: Node2D) -> void:
+ 	SFXManager.play_sfx(SFXManager.DAMAGE, SFXManager.DAMAGE_VOLUME)
+ 	GameManager.local_save["player"]["lives"] -= 1
+-	SaveManager.save(GameManager.local_save)
++	# ╨б╨╛╤Е╤А╨░╨╜╨╡╨╜╨╕╨╡ ╨Э╨Х ╨▓╤Л╨╖╤Л╨▓╨░╨╡╨╝ ╨╖╨┤╨╡╤Б╤М тАФ ╤Н╤В╨╛ ╨▒╨╗╨╛╨║╨╕╤А╤Г╤О╤Й╨░╤П ╨╖╨░╨┐╨╕╤Б╤М ╨╜╨░ ╨┤╨╕╤Б╨║ ╨┐╤А╤П╨╝╨╛ ╨▓╨╛ ╨▓╤А╨╡╨╝╤П ╨╕╨│╤А╤Л.
++	# ╨Ф╨░╨╜╨╜╤Л╨╡ ╤Б╨╛╤Е╤А╨░╨╜╤П╤В╤Б╤П ╨░╨▓╤В╨╛╨╝╨░╤В╨╕╤З╨╡╤Б╨║╨╕ ╤З╨╡╤А╨╡╨╖ SaveManager._commit_cache() ╨┐╤А╨╕ ╨┐╨░╤Г╨╖╨╡ ╨╕╨╗╨╕ ╨▓╤Л╤Е╨╛╨┤╨╡.
+ 	Events.GAME_ON_LOSE.emit()
+-	GameManager.live += 1
+-	if GameManager.local_save["player"]["lives"] < 0:
+-		print("╨┐╤А╨╛╨╕╨│╤А╨░╨╗")
+diff --git a/apex_new_ball/scenes_and_scripts/ui_and_ux/menu/leaderboard_submit.tscn b/apex_new_ball/scenes_and_scripts/ui_and_ux/menu/leaderboard_submit.tscn
+index 810cc0a..142af35 100644
+--- a/apex_new_ball/scenes_and_scripts/ui_and_ux/menu/leaderboard_submit.tscn
++++ b/apex_new_ball/scenes_and_scripts/ui_and_ux/menu/leaderboard_submit.tscn
+@@ -1,6 +1,6 @@
+ [gd_scene load_steps=7 format=3 uid="uid://c8n6x1y2m3u4v"]
+ 
+-[ext_resource type="Script" uid="uid://r3m8q83djppp" path="res://scenes_and_scripts/ui_and_ux/menu/leaderboard_submit.gd" id="1_script"]
++[ext_resource type="Script" path="res://scenes_and_scripts/ui_and_ux/menu/leaderboard_submit.gd" id="1_script"]
+ [ext_resource type="Texture2D" uid="uid://biuswxqwiljk1" path="res://assets/UI/for_menu/lider_board.png" id="2_board"]
+ [ext_resource type="Texture2D" uid="uid://bncd738pqwb7h" path="res://assets/UI/for_menu/buttons/save.png" id="3_pnyau"]
+ [ext_resource type="Texture2D" uid="uid://cub8tkm566ek0" path="res://assets/UI/for_menu/buttons/save_click.png" id="4_txgeh"]
+diff --git a/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd b/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd
+index 2b3afce..9c2c8f5 100644
+--- a/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd
++++ b/apex_new_ball/scenes_and_scripts/ui_and_ux/statusBar/status_bar.gd
+@@ -10,7 +10,6 @@ extends Node
+ @onready var music_btn = $modalWindow2/RowsButtons/ToggleMusic
+ @onready var play_btn = $modalWindow2/RowsButtons/Continue
+ 
+-var flag = false
+ 
+ func _ready() -> void:
+ 	#region ╨Ф╨╛╨▒╨░╨▓╨╗╤П╨╡╨╝ ╨▓ ╤Б╤В╨░╤В╤Г╤Б ╨▒╨░╤А ╨╕╨╜╤Д╨╛╤А╨╝╨░╤Ж╨╕╤О ╨▓╨╖╤П╤В╤Г╤О ╨╕╨╖ ╨║╨╛╨╜╤Д╨╕╨│╨░ ╨╛ ╨╢╨╕╨╖╨╜╤П╤Е, ╤Д╨╗╨░╨│╨░╤Е, ╨╕ ╨╛╤З╨║╨░╤Е
+@@ -40,31 +39,21 @@ func _ready() -> void:
+ 	Events.SHOW_PAUSE_MODAL.connect(_show_modal)
+ 	Events.GAME_ON_LOSE.connect(_lose_modal)
+ 	Events.HIDE_PAUSE_MODAL.connect(_hide_modal)
++	# ╨Ю╨▒╨╜╨╛╨▓╨╗╤П╨╡╨╝ UI ╤В╨╛╨╗╤М╨║╨╛ ╨┐╨╛ ╤Б╨╕╨│╨╜╨░╨╗╨░╨╝ тАФ ╨╜╨╡╤В ╨╜╨░╨│╤А╤Г╨╖╨║╨╕ ╨▓ _process
++	Events.UI_SCORE_UPDATED.connect(_update_score)
++	Events.UI_FLAGS_UPDATED.connect(_update_flags)
++	Events.UI_LIVES_UPDATED.connect(_update_lives)
++	# ╨Я╨╡╤А╨▓╨╛╨╜╨░╤З╨░╨╗╤М╨╜╨╛╨╡ ╨╖╨░╨┐╨╛╨╗╨╜╨╡╨╜╨╕╨╡ (flags_total ╨┐╤А╨╕╤Е╨╛╨┤╨╕╤В ╨┐╨╛╤Б╨╗╨╡ _ready, ╨┐╨╛╤Н╤В╨╛╨╝╤Г call_deferred)
++	call_deferred("_update_flags")
++
++func _update_score() -> void:
++	label3.text = str(GameManager.local_save["player"]["score"])
+ 
+-func _process(_delta: float) -> void:
+-	#region ╨Ф╨╛╨▒╨░╨▓╨╗╤П╨╡╨╝ ╨╕╨╜╤Д╨╛╤А╨╝╨░╤Ж╨╕╤О ╨╛ ╤Д╨╗╨░╨│╨░╤Е ╨▓ ╤Б╤В╨░╤В╤Г╤Б ╨▒╨░╤А ╤В╨░╨║ ╨║╨░╨║ _ready() ╤Б╤А╨░╨▒╨░╤В╤Л╨▓╨░╨╡╤В ╨▒╤Л╤Б╤В╤А╨╡╨╡ ╨┐╤А╨╛╤З╤В╨╡╨╜╨╕╤П .json 
+-	if flag == false:
+-		label2.text = str(GameManager.local_save["level"]["flags_collected"]) + "/" + str(GameManager.local_save["level"]["flags_total"])
+-		flag = true
+-	#endregion
+-	
+-	#region ╨Ю╨▒╨╜╨╛╨▓╨╗╤П╨╡╨╝ ╨╛╤З╨║╨╕ ╤Б╤З╨╡╤В╨░ ╨║╨░╨╢╨┤╤Л╨╣ ╤А╨░╨╖ ╨┐╤А╨╕ ╤Б╤А╨░╨▒╨░╤В╤Л╨▓╨░╨╜╨╕╨╕ ╤Б╨╕╨│╨╜╨░╨╗╨░ ╤Б╨▒╨╛╤А╨░
+-	if GameManager.coin > 0:
+-		label3.text = str(GameManager.local_save["player"]["score"])
+-		GameManager.coin -= 1
+-	#endregion
+-	
+-	#region
+-	if GameManager.flag > 0:
+-		label2.text = str(GameManager.local_save["level"]["flags_collected"]) + "/" + str(GameManager.local_save["level"]["flags_total"])
+-		GameManager.flag -= 1
+-	#endregion
+-	
+-	#region
+-	if GameManager.live > 0:
+-		label1.text = "x " + str(GameManager.local_save["player"]["lives"])
+-		GameManager.live -= 1
+-	#endregion
++func _update_flags() -> void:
++	label2.text = str(GameManager.local_save["level"]["flags_collected"]) + "/" + str(GameManager.local_save["level"]["flags_total"])
++
++func _update_lives() -> void:
++	label1.text = "x " + str(GameManager.local_save["player"]["lives"])
+ 
+ func _on_pause_pressed() -> void:
+ 	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
+@@ -109,7 +98,8 @@ func _lose_modal() -> void:
+ 	get_tree().paused = true
+ 	MusicManager.set_paused(true)
+ 	play_btn.visible = false
+-	GameManager.local_save = SaveManager.load()
++	# local_save ╤Г╨╢╨╡ ╨░╨║╤В╤Г╨░╨╗╨╡╨╜ (spike.gd ╤Г╨╢╨╡ ╨▓╤Л╤З╨╡╨╗ ╨╢╨╕╨╖╨╜╤М), ╨╗╨╕╤И╨╜╨╡╨╡ ╤З╤В╨╡╨╜╨╕╨╡ ╤Б ╨┤╨╕╤Б╨║╨░ ╤Г╨▒╤А╨░╨╜╨╛
++	_update_lives()
+ 	if GameManager.local_save["player"]["lives"] < 1:
+ 		reload_btn.visible = false
+ 	else:
