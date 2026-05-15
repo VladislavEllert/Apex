@@ -26,8 +26,8 @@ SFXManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1088
+window/size/viewport_height=800
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
@@ -72,7 +72,6 @@ pointing/emulate_touch_from_mouse=true
 
 2d/physics_engine="GodotPhysics"
 common/physics_interpolation=true
-common/physics_ticks_per_second=30
 textures/vram_compression/import_etc2_astc=true
 
 [rendering]
