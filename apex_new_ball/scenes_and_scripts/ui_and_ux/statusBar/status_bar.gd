@@ -10,6 +10,9 @@ extends Node
 @onready var music_btn = $modalWindow2/RowsButtons/ToggleMusic
 @onready var play_btn = $modalWindow2/RowsButtons/Continue
 
+var _fps_label: Label
+var _fps_timer: float = 0.0
+
 
 func _ready() -> void:
 	#region Добавляем в статус бар информацию взятую из конфига о жизнях, флагах, и очках
@@ -38,13 +41,31 @@ func _ready() -> void:
 	
 	Events.SHOW_PAUSE_MODAL.connect(_show_modal)
 	Events.GAME_ON_LOSE.connect(_lose_modal)
-	Events.HIDE_PAUSE_MODAL.connect(_hide_modal)
-	# Обновляем UI только по сигналам — нет нагрузки в _process
+	
+	# Подключаем сигналы обновления UI
 	Events.UI_SCORE_UPDATED.connect(_update_score)
 	Events.UI_FLAGS_UPDATED.connect(_update_flags)
 	Events.UI_LIVES_UPDATED.connect(_update_lives)
-	# Первоначальное заполнение (flags_total приходит после _ready, поэтому call_deferred)
+
+	# Создаем Label для FPS
+	_fps_label = Label.new()
+	_fps_label.name = "FPSLabel"
+	_fps_label.add_theme_font_size_override("font_size", 24)
+	_fps_label.modulate = Color(1, 1, 1, 0.7)
+	add_child(_fps_label)
+	_fps_label.position = Vector2(20, 80) # Позиция под статус-баром
+
+	Events.HIDE_PAUSE_MODAL.connect(_hide_modal)
+	
+	# Первоначальное заполнение (flags_total может прийти чуть позже)
 	call_deferred("_update_flags")
+
+func _process(delta: float) -> void:
+	_fps_timer += delta
+	if _fps_timer >= 0.5:
+		_fps_timer = 0.0
+		if _fps_label:
+			_fps_label.text = "FPS: " + str(Engine.get_frames_per_second())
 
 func _update_score() -> void:
 	label3.text = str(GameManager.local_save["player"]["score"])
