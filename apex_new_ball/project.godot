@@ -24,10 +24,6 @@ SaveManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/SAVE_manager.gd"
 MusicManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/MusicManager.gd"
 SFXManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd"
 
-[debug]
-
-settings/stdout/print_fps=false
-
 [display]
 
 window/size/viewport_width=1280
