@@ -13,6 +13,7 @@ config_version=5
 config/name="Apex_New_ball"
 run/main_scene="res://scenes_and_scripts/ui_and_ux/screensaver/screensaver.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+run/max_fps=60
 boot_splash/show_image=false
 
 [autoload]
@@ -22,6 +23,10 @@ GameManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/Game_manager.gd"
 SaveManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/SAVE_manager.gd"
 MusicManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/MusicManager.gd"
 SFXManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd"
+
+[debug]
+
+settings/stdout/print_fps=false
 
 [display]
 
@@ -67,9 +72,17 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_2="signals"
 2d_physics/layer_3="player"
 
+[physics]
+
+2d/physics_engine="GodotPhysics"
+common/physics_interpolation=true
+textures/vram_compression/import_etc2_astc=true
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

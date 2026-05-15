@@ -13,7 +13,8 @@ func get_anchor_bottom_extent() -> float:
 
 func _ready() -> void:
 	_update_autoscroll()
-	_add_extra_parallax_repeat_coverage()
+	_update_dynamic_repeat()
+	get_tree().root.size_changed.connect(_update_dynamic_repeat)
 
 func _update_autoscroll() -> void:
 	var s = 1.0 if autoscroll_surfaces else 0.0
@@ -29,17 +30,16 @@ func _update_autoscroll() -> void:
 	if has_node("Surface4"): $Surface4.autoscroll = Vector2(-40, 0) * s
 	if has_node("Surface5"): $Surface5.autoscroll = Vector2(-50, 0) * s
 
-func _add_extra_parallax_repeat_coverage() -> void:
-	if extra_repeat_tiles <= 0: return
+func _update_dynamic_repeat() -> void:
+	var viewport_width = get_viewport().get_visible_rect().size.x
+	
 	for layer in get_children():
 		if not layer is Parallax2D: continue
+		
 		var rs = layer.repeat_size
 		if rs.x <= 0: continue
-		var spr = []
-		for c in layer.get_children():
-			if c is Sprite2D: spr.append(c)
-		for s in spr:
-			for i in range(1, extra_repeat_tiles + 1):
-				var copy = s.duplicate()
-				copy.position = s.position + Vector2(rs.x * i, 0)
-				layer.add_child(copy)
+		
+		# Высчитываем сколько раз нужно повторить текстуру, чтобы закрыть весь экран
+		# Плюс 2 для запаса при прокрутке
+		var needed_repeats = int(ceil(viewport_width / rs.x)) + 2
+		layer.repeat_times = max(1, needed_repeats)

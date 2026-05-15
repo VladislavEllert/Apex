@@ -39,7 +39,6 @@ func _ready():
 	acceleration_speed = GameManager.control_sensitivity
 	spawn_position = global_position
 	$AnimatedSprite2D.play()
-	print(global_position)
 	if GameManager.local_save["level"]["checkpoint_position"]["x"] !=0 or GameManager.local_save["level"]["checkpoint_position"]["y"] !=0:
 		var values = GameManager.local_save["level"]["checkpoint_position"]
 		global_position = Vector2(values["x"], values["y"])
