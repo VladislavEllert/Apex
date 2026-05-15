@@ -28,8 +28,21 @@ var sfx_volume_db: float = 0.0
 # Кэш: загружаем все звуки один раз при старте, чтобы не читать диск во время игры
 var _cache: Dictionary = {}
 
+# Пул звуков: заранее созданные узлы
+const POOL_SIZE = 8
+var _pool: Array[AudioStreamPlayer] = []
+var _pool_index: int = 0
+
 func _ready() -> void:
 	_preload_all()
+	
+	# Создаем пул плееров один раз
+	for i in range(POOL_SIZE):
+		var p = AudioStreamPlayer.new()
+		p.bus = "Master"
+		p.process_mode = Node.PROCESS_MODE_ALWAYS
+		add_child(p)
+		_pool.append(p)
 
 func _preload_all() -> void:
 	for path in [CLICK, COIN, BOUNCE, DAMAGE, JUMP, DOOR]:
@@ -45,20 +58,19 @@ func get_volume_percent() -> float:
 	return _db_to_percent(sfx_volume_db)
 
 func play_sfx(path: String, volume: float = 0.0) -> void:
-	# Берём поток из кэша — нет чтения с диска, нет фриза
+	# Берём поток из кэша
 	var stream = _cache.get(path)
 	if not stream:
 		push_warning("SFXManager: звук не в кэше -> " + path)
 		return
 
-	var sfx_player = AudioStreamPlayer.new()
-	add_child(sfx_player)
-	sfx_player.stream = stream
-	sfx_player.volume_db = volume + sfx_volume_db
-	sfx_player.bus = "Master"
-	sfx_player.process_mode = Node.PROCESS_MODE_ALWAYS
-	sfx_player.play()
-	sfx_player.finished.connect(sfx_player.queue_free)
+	# Берем плеер из пула по кругу
+	var player = _pool[_pool_index]
+	_pool_index = (_pool_index + 1) % POOL_SIZE
+
+	player.stream = stream
+	player.volume_db = volume + sfx_volume_db
+	player.play()
 
 func _percent_to_db(percent: float) -> float:
 	var clamped_percent := clampf(percent, 0.0, 100.0)

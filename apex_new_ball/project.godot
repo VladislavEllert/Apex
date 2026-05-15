@@ -70,10 +70,10 @@ pointing/emulate_touch_from_mouse=true
 
 [physics]
 
-physics/2d/run_on_separate_thread=true
+common/physics_ticks_per_second=180
 2d/physics_engine="GodotPhysics"
 common/physics_interpolation=true
-common/physics_ticks_per_second=180
+physics/2d/run_on_separate_thread=true
 textures/vram_compression/import_etc2_astc=true
 
 [rendering]
