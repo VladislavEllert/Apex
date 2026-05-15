@@ -97,7 +97,6 @@ func _on_quit_menu_pressed() -> void:
 		var final_score = GameManager.local_save["player"]["score"]
 		SaveManager.delete()
 		GameManager.local_save = SaveManager.get_default_data()
-		print("Сейв удален (0 жизней), предложение записать результат")
 		Events.SHOW_LEADERBOARD_SUBMIT.emit(final_score)
 	else:
 		SaveManager.save(GameManager.local_save) #Сохраняю то что было сделано за ввремя игры в удаленный сейв.

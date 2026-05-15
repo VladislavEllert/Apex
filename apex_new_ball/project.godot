@@ -13,7 +13,7 @@ config_version=5
 config/name="Apex_New_ball"
 run/main_scene="res://scenes_and_scripts/ui_and_ux/screensaver/screensaver.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-run/max_fps=60
+run/max_fps=90
 boot_splash/show_image=false
 
 [autoload]
@@ -70,8 +70,10 @@ pointing/emulate_touch_from_mouse=true
 
 [physics]
 
+physics/2d/run_on_separate_thread=true
 2d/physics_engine="GodotPhysics"
 common/physics_interpolation=true
+common/physics_ticks_per_second=180
 textures/vram_compression/import_etc2_astc=true
 
 [rendering]
