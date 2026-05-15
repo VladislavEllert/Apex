@@ -56,9 +56,11 @@ func play_track(path: String, volume: float = INF):
 		fade_tween.tween_property(current_player, "volume_db", target_volume, 0.5)
 		return
 
-	var new_stream = load(path)
+	# Асинхронная загрузка: запрашиваем фоновую загрузку
+	ResourceLoader.load_threaded_request(path)
+	var new_stream = ResourceLoader.load_threaded_get(path)
 	if not new_stream:
-		print("MusicManager: Ошибка загрузки -> ", path)
+		push_warning("MusicManager: Ошибка загрузки -> ", path)
 		return
 
 	if new_stream is AudioStreamOggVorbis:

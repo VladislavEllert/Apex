@@ -13,7 +13,7 @@ config_version=5
 config/name="Apex_New_ball"
 run/main_scene="res://scenes_and_scripts/ui_and_ux/screensaver/screensaver.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-run/max_fps=60
+run/max_fps=90
 boot_splash/show_image=false
 
 [autoload]
@@ -24,16 +24,13 @@ SaveManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/SAVE_manager.gd"
 MusicManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/MusicManager.gd"
 SFXManager="*res://scenes_and_scripts/GLOBAL_SCRIPTS/SFXManager.gd"
 
-[debug]
-
-settings/stdout/print_fps=false
-
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
-window/stretch/mode="canvas_items"
+window/size/viewport_width=1088
+window/size/viewport_height=800
+window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+window/handheld/orientation=4
 
 [editor]
 
@@ -74,8 +71,10 @@ pointing/emulate_touch_from_mouse=true
 
 [physics]
 
+common/physics_ticks_per_second=180
 2d/physics_engine="GodotPhysics"
 common/physics_interpolation=true
+physics/2d/run_on_separate_thread=true
 textures/vram_compression/import_etc2_astc=true
 
 [rendering]
@@ -84,5 +83,3 @@ textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
-2d/snap/snap_2d_transforms_to_pixel=true
-2d/snap/snap_2d_vertices_to_pixel=true

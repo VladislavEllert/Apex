@@ -44,7 +44,7 @@ func _ready():
 		global_position = Vector2(values["x"], values["y"])
 	$Camera2D.reset_smoothing()
 	_apply_adaptive_touch_ui()
-	get_viewport().size_changed.connect(_apply_adaptive_touch_ui)
+	# Убрано постоянное прослушивание size_changed для экономии ресурсов
 	Events.PLAYER_RESPAWN.connect(_respawn_checkpoint)
 	Events.CONTROL_SENSITIVITY_CHANGED.connect(_on_control_sensitivity_changed)
 

@@ -37,6 +37,12 @@ const _REF_H := 720.0
 @onready var _sfx_value_label: Label = $SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer/SfxRow/Controls/SfxValue
 @onready var _sensitivity_slider: HSlider = $SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer/SensitivityRow/Controls/SensitivitySlider
 @onready var _sensitivity_value_label: Label = $SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer/SensitivityRow/Controls/SensitivityValue
+@onready var _vsync_button: CheckButton = $SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer/VsyncRow/Controls/VsyncButton
+@onready var _show_fps_button: CheckButton = $SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer/ShowFpsRow/Controls/ShowFpsButton
+@onready var _fps_slider: HSlider = $SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer/FpsRow/Controls/FpsSlider
+@onready var _fps_value_label: Label = $SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer/FpsRow/Controls/FpsValue
+@onready var _physics_slider: HSlider = $SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer/PhysicsRow/Controls/PhysicsSlider
+@onready var _physics_value_label: Label = $SettingWindow/ModalCenter/BackgroundBoard/MarginContainer/ScrollContainer/VBoxContainer/PhysicsRow/Controls/PhysicsValue
 
 func _ready() -> void:
 	get_tree().paused = false
@@ -70,6 +76,10 @@ func _ready() -> void:
 	_music_slider.value_changed.connect(_on_music_slider_value_changed)
 	_sfx_slider.value_changed.connect(_on_sfx_slider_value_changed)
 	_sensitivity_slider.value_changed.connect(_on_sensitivity_slider_value_changed)
+	_vsync_button.toggled.connect(_on_vsync_toggled)
+	_show_fps_button.toggled.connect(_on_show_fps_toggled)
+	_fps_slider.value_changed.connect(_on_fps_slider_value_changed)
+	_physics_slider.value_changed.connect(_on_physics_slider_value_changed)
 	_settings_window.visible = false
 	
 	# Инициализируем слайдеры текущими значениями из GameManager
@@ -79,6 +89,18 @@ func _ready() -> void:
 	_music_value_label.text = str(int(round(GameManager.music_volume_percent)))
 	_sfx_value_label.text = str(int(round(GameManager.sfx_volume_percent)))
 	_sensitivity_value_label.text = String.num(GameManager.control_sensitivity, 1)
+	
+	_vsync_button.set_pressed_no_signal(GameManager.vsync_enabled)
+	_update_vsync_button_text(GameManager.vsync_enabled)
+	
+	_show_fps_button.set_pressed_no_signal(GameManager.show_fps)
+	_update_show_fps_button_text(GameManager.show_fps)
+	
+	_fps_slider.set_value_no_signal(GameManager.max_fps)
+	_fps_value_label.text = str(GameManager.max_fps)
+	
+	_physics_slider.set_value_no_signal(GameManager.physics_ticks)
+	_physics_value_label.text = str(GameManager.physics_ticks)
 	
 	_music_button.set_pressed_no_signal(GameManager.music_volume_percent <= 0)
 
@@ -274,3 +296,35 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 func _on_sensitivity_slider_value_changed(value: float) -> void:
 	GameManager.set_control_sensitivity(value)
 	_sensitivity_value_label.text = String.num(value, 1)
+
+func _on_vsync_toggled(toggled_on: bool) -> void:
+	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
+	GameManager.set_vsync(toggled_on)
+	_update_vsync_button_text(toggled_on)
+
+func _update_vsync_button_text(enabled: bool) -> void:
+	if enabled:
+		_vsync_button.text = "Включено"
+	else:
+		_vsync_button.text = "Выключено"
+
+func _on_show_fps_toggled(toggled_on: bool) -> void:
+	SFXManager.play_sfx(SFXManager.CLICK, SFXManager.CLICK_VOLUME)
+	GameManager.set_show_fps(toggled_on)
+	_update_show_fps_button_text(toggled_on)
+
+func _update_show_fps_button_text(enabled: bool) -> void:
+	if enabled:
+		_show_fps_button.text = "Включено"
+	else:
+		_show_fps_button.text = "Выключено"
+
+func _on_fps_slider_value_changed(value: float) -> void:
+	var fps = int(value)
+	GameManager.set_max_fps(fps)
+	_fps_value_label.text = str(fps)
+
+func _on_physics_slider_value_changed(value: float) -> void:
+	var ticks = int(value)
+	GameManager.set_physics_ticks(ticks)
+	_physics_value_label.text = str(ticks)
