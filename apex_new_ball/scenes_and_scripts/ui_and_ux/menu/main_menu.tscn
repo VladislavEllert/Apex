@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dm4kk2btrcy5u" path="res://scenes_and_scripts/ui_and_ux/menu/main_menu.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://r3ggk8bsk8qe" path="res://scenes_and_scripts/ui_and_ux/parallax/parallax.tscn" id="2_parallax"]
-[ext_resource type="Texture2D" uid="uid://deqblapn064j2" path="res://assets/UI/for_menu/game_name.png" id="3_as74d"]
+[ext_resource type="Texture2D" uid="uid://ckjq0syg83he" path="res://assets/UI/for_menu/title_wood_ball.png" id="3_i37wa"]
 [ext_resource type="Texture2D" uid="uid://b5pixbl6q64uo" path="res://assets/UI/for_menu/buttons/new_game_ru.png" id="4_2sa8q"]
 [ext_resource type="Texture2D" uid="uid://c3rjnqvg6nias" path="res://assets/UI/for_menu/buttons/new_game_click_ru.png" id="5_h8p65"]
 [ext_resource type="Texture2D" uid="uid://dpgx2keavvy0u" path="res://assets/UI/for_menu/buttons/continue_ru.png" id="6_2sa8q"]
@@ -57,7 +57,7 @@ size_flags_vertical = 4
 custom_minimum_size = Vector2(820, 280)
 layout_mode = 2
 size_flags_horizontal = 6
-texture = ExtResource("3_as74d")
+texture = ExtResource("3_i37wa")
 expand_mode = 1
 
 [node name="Buttons" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -277,6 +277,7 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="SettingWindow" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="SettingWindow"]
 anchors_preset = 15
